@@ -1,4 +1,4 @@
 CatPHP
 ======
 
-CatPHP is a simple php MVC framework
+CatPHP is a simple PHP MVC framework
