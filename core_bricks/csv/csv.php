@@ -116,12 +116,12 @@ class csv
 
 
 
-$a=array(
-0=>array(1,'afsdf',59,'汉字',"fdf'\",\"'df,df'fdf\"lkk")
-	);
+// $a=array(
+// 0=>array(1,'afsdf',59,'汉字',"fdf'\",\"'df,df'fdf\"lkk")
+// 	);
 
-$c = new csv('tmp_orders.csv','r');
-$c->set_delimiter('	');
+// $c = new csv('tmp_orders.csv','r');
+// $c->set_delimiter('	');
 
 // $c->write_all($a);
 // $c->write_line($a[0]);
@@ -130,6 +130,6 @@ $c->set_delimiter('	');
 // $c->write_line($a[0]);
 // $c->write_line($a[0]);
 
-print_r($c->read_all());
+// print_r($c->read_all());
 
 
