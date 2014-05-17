@@ -8,6 +8,9 @@
  * 
  * */
 
+define('CLASSPATH', dirname(__FILE__));
+
+require CLASSPATH.'/DbFactory.php';
 class Db{
 
 	private $db_name;
@@ -20,12 +23,11 @@ class Db{
 	 * @param str $dbname
 	 * 数据库描述符，就是在配置文件中写的数据库配置的键名
 	 */
-	public function __construct($dbname='default')
+	function __construct($db_config)
 	{
-			$this->db  =  DbFactory::getDb($dbname);
-			$this->db_name = $dbname;
-			$this->db_type = Conf::$dbconfig[$dbname]['type'];
-			$this->db_schema_name = Conf::$dbconfig[$dbname]['dbname'];
+			$this->config = $db_config;
+			$this->db     = DbFactory::getDb($db_config);
+			$this->conn   = $this->db->getConnection();
 	}
 
 
@@ -36,15 +38,21 @@ class Db{
 	
 	 /**
 	 * 执行查询，select形式的查询，返回关联数组
-	 * 
+	 * model 0 关联数组 1 数字数组
 	 */
-	public function query($sql,$model=null)
+	public function getData($sql,$model=0)
 	{
-		if (Conf::$DEBUG)echo $sql;
-		// 2013.07.11修改，增加查询模式，默认是关联数组，可指定为数字索引了
-		if($model!=null)
-		return $this->db->query($sql,$model);
-		else return $this->db->query($sql);
+		return $this->db->getData($sql,$model);
+	}
+
+	public function query($sql)
+	{
+		return $this->db->query($sql);
+	}
+
+	public function fetch($rs,$model=0)
+	{
+		return $this->db->fetch_array($rs,$model);
 	}
 
 	/**
@@ -126,45 +134,45 @@ class Db{
 	 *数据
 	 *@uses 例如：$data['username'] = 'luyu'; $data['age'] = 23;add('user',$data);
 	 */
-	public function add(&$data,$table)
-    {
-    	$colums = '';
-		$values = '';
-		foreach ($data as $key => $value) {
-			$colums .= $key.",";
-			$values .= $this->type_change($value).",";
-		}
-		$colums = rtrim($colums,',');
-		$values = rtrim($values,',');
-		$sql = "insert into $table ($colums) values($values)";
-		if (Conf::$DEBUG)
-			echo $sql;
-    	return $this->execute($sql);
-    }
+	// public function add(&$data,$table)
+ //    {
+ //    	$colums = '';
+	// 	$values = '';
+	// 	foreach ($data as $key => $value) {
+	// 		$colums .= $key.",";
+	// 		$values .= $this->type_change($value).",";
+	// 	}
+	// 	$colums = rtrim($colums,',');
+	// 	$values = rtrim($values,',');
+	// 	$sql = "insert into $table ($colums) values($values)";
+	// 	if (Conf::$DEBUG)
+	// 		echo $sql;
+ //    	return $this->execute($sql);
+ //    }
     
-    private function type_change(&$value)
-	{
-		if (is_numeric($value) || preg_match('#^[\w\d_]*\(.*\)#' , $value)) {
-			if(preg_match('#^0\d+#' , $value))
-			{
-				return "'$value'";
-			}else
-			{
-				return $value;
-			}
-		}
-		else if ($value=='' || $value==null) {
-			return 'NULL';
-		}
-		else if(stripos($value, '.nextval')){
-			return $value;
-		}
-		else
-		{
-			return "'$value'";
-		}
+ //    private function type_change(&$value)
+	// {
+	// 	if (is_numeric($value) || preg_match('#^[\w\d_]*\(.*\)#' , $value)) {
+	// 		if(preg_match('#^0\d+#' , $value))
+	// 		{
+	// 			return "'$value'";
+	// 		}else
+	// 		{
+	// 			return $value;
+	// 		}
+	// 	}
+	// 	else if ($value=='' || $value==null) {
+	// 		return 'NULL';
+	// 	}
+	// 	else if(stripos($value, '.nextval')){
+	// 		return $value;
+	// 	}
+	// 	else
+	// 	{
+	// 		return "'$value'";
+	// 	}
 		 
-	}
+	// }
 
     /**
 	 *更新数据
@@ -176,20 +184,20 @@ class Db{
 	 *条件
 	 *@uses 例如：$data['username'] = 'luyu'; $data['age'] = 23;add('user',$data);
 	 */
-    public function update($table,$data,$where)
-    {
+    // public function update($table,$data,$where)
+    // {
 
-    	$sql = "UPDATE $table SET ";
+    // 	$sql = "UPDATE $table SET ";
 
-    	foreach ($data as $key => $value) {
-    		$sql.= "$key = ".$this->type_change($value).",";
-    	}
+    // 	foreach ($data as $key => $value) {
+    // 		$sql.= "$key = ".$this->type_change($value).",";
+    // 	}
 
-    	$sql = rtrim($sql,',');
-    	$sql.=" WHERE ".$where;
-    	if (Conf::$DEBUG)
-    		echo $sql;
-    	return $this->execute($sql);
-    }
+    // 	$sql = rtrim($sql,',');
+    // 	$sql.=" WHERE ".$where;
+    // 	if (Conf::$DEBUG)
+    // 		echo $sql;
+    // 	return $this->execute($sql);
+    // }
 	
 }

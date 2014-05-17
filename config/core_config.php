@@ -4,9 +4,12 @@ return  array
 (
 	'core_class_path'=>array
 	(
-		'select'=>'/core_bricks/sql/select.php',
-		'dml'=>'/core_bricks/sql/dml.php',
-		'csv'=>'/core_bricks/csv/csv.php',
+		'MvcWeb'=>'/core_bricks/mvc/mvc_web.php',
+		'Controller'=>'/core_bricks/mvc/controller.php',
+		'Select'=>'/core_bricks/sql/select.php',
+		'Dml'=>'/core_bricks/sql/dml.php',
+		'Csv'=>'/core_bricks/csv/csv.php',
+		'Db'=>'/core_bricks/db/db.php',
 	),
 
 
