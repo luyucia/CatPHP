@@ -1,7 +1,7 @@
 CatPHP
 ======
 
-CatPHP is a simple PHP MVC framework
+CatPHP is a simple modularity PHP framework
 CatPHP的理念
 
 - 1、彻底的开源,思想层面上的开源<br>
