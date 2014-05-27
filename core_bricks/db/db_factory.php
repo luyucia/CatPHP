@@ -11,37 +11,37 @@
 
 class DbFactory{
 
-	/**
-	 * 
-	 * 根据数据库描述符生成相应的数据库对象
-	 * @param str $dbname
-	 */
-	static public function getDb($config)
-	{
-		$db_type = strtolower($config['type']);
+    /**
+     * 
+     * 根据数据库描述符生成相应的数据库对象
+     * @param str $dbname
+     */
+    static public function getDb($config)
+    {
+        $db_type = strtolower($config['type']);
 
-		if($db_type=='mysql')
-		{
-			require_once CLASSPATH.'/MysqlDriver.php';
-			return new MysqlDriver($config);
-		}
-		else if($db_type=='oracle')
-		{
-			require_once CLASSPATH.'/Oracle.php';
-			return Oracle::getInstance($config);
-		}
-		else if($db_type=='postgre')
-		{
-			require_once CLASSPATH.'/Pgsql.php';
-			return Pgsql::getInstance($config);
-		}
-		else 
-		{
-			echo "The type $db_type is not support by catPHP yet,sorry ^_^";
-			return null;
-		}
-		
-	}
+        if($db_type=='mysql')
+        {
+            require_once CLASSPATH.'/MysqlDriver.php';
+            return new MysqlDriver($config);
+        }
+        else if($db_type=='oracle')
+        {
+            require_once CLASSPATH.'/Oracle.php';
+            return Oracle::getInstance($config);
+        }
+        else if($db_type=='postgre')
+        {
+            require_once CLASSPATH.'/Pgsql.php';
+            return Pgsql::getInstance($config);
+        }
+        else 
+        {
+            echo "The type $db_type is not support by catPHP yet,sorry ^_^";
+            return null;
+        }
+        
+    }
 
-	
+    
 }

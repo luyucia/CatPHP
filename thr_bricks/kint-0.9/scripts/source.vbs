@@ -40,9 +40,9 @@ debug = False
 '***************
 
 Select Case WScript.Arguments.Count
-	Case 0
-		WScript.Echo "Wrong source link"
-		WScript.Quit
+    Case 0
+        WScript.Echo "Wrong source link"
+        WScript.Quit
 End Select
 
 Dim link, split, file, line, found, strArgs
@@ -54,27 +54,27 @@ line = Mid(link, split + 1)
 
 found = False
 For Each serverPath In dirmap
-	Set regexp = New RegExp
-	regexp.Pattern = serverPath
-	If regexp.Test(file) Then
-		found = True
-		Exit For
-	End If
+    Set regexp = New RegExp
+    regexp.Pattern = serverPath
+    If regexp.Test(file) Then
+        found = True
+        Exit For
+    End If
 Next
 If Not found Then
-	WScript.Echo "don't know where to find " & file & " locally"
-	WScript.Quit
+    WScript.Echo "don't know where to find " & file & " locally"
+    WScript.Quit
 End If
 file = regexp.Replace(file, dirmap.Item(serverPath))
 if change_slashes Then
-	file = Replace(file, "/", "\")
+    file = Replace(file, "/", "\")
 End If
 
 strArgs = command
 strArgs = Replace(strArgs, "%l", line)
 strArgs = Replace(strArgs, "%f", file)
 If debug Then
-	WScript.Echo strArgs
+    WScript.Echo strArgs
 End If
 Set oShell = CreateObject ("Wscript.Shell") 
 oShell.Run strArgs, 0, false

@@ -6,26 +6,26 @@
 */
 class Controller
 {
-	
-	function __construct($rout)
-	{
-		$this->rout = $rout;
-	}
+    
+    function __construct($rout)
+    {
+        $this->rout = $rout;
+    }
 
-	protected function getRequest()
-	{
+    protected function getRequest()
+    {
 
-	}
+    }
 
-	protected function getRoutRequest($key)
-	{
-		return $this->rout[$key];
-	}
+    protected function getRoutRequest($key)
+    {
+        return $this->rout[$key];
+    }
 
-	// public function 
+    // public function 
 
 
-	
+    
 }
 
 ?>

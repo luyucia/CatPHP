@@ -14,88 +14,88 @@ require 'catphp.php';
 // 连接测试
 // 1、连接主数据库，配置正确
 $dbconfig = array(
-	'type'=>'mysql',
-	'host'=>'127.0.0.1',
-	'username'=>'root',
-	'password'=>'',
-	'database'=>'pet',
-	'port'=>'3306',
-	'encoding'=>'utf8'
-	);
+    'type'=>'mysql',
+    'host'=>'127.0.0.1',
+    'username'=>'root',
+    'password'=>'',
+    'database'=>'pet',
+    'port'=>'3306',
+    'encoding'=>'utf8'
+    );
 
 $db = new Db($dbconfig);
 $data = $db->getData('select * from users');
 if($data)
 {
-	echo 'ok';
+    echo 'ok';
 }
 // 2、连接主数据库，配置错误
 // $dbconfig = array(
-// 	'type'=>'mysql',
-// 	'host'=>'127.0.0.1',
-// 	'username'=>'root2',
-// 	'password'=>'',
-// 	'database'=>'pet',
-// 	'port'=>'3306',
-// 	'encoding'=>'utf8'
-// 	);
+//     'type'=>'mysql',
+//     'host'=>'127.0.0.1',
+//     'username'=>'root2',
+//     'password'=>'',
+//     'database'=>'pet',
+//     'port'=>'3306',
+//     'encoding'=>'utf8'
+//     );
 // try {
 // $db = new Db($dbconfig);
 // $data = $db->query('select * from users');
 // if($data)
 // {
-// 	echo 'ok';
+//     echo 'ok';
 // }
 // } catch (Exception $e) {
-// 	echo $e;
+//     echo $e;
 // }
 
 // 3、连接主数据库失败，连接从数据库
 // $backdb = array(
-// 	'type'=>'mysql',
-// 	'host'=>'127.0.0.1',
-// 	'username'=>'root',
-// 	'password'=>'',
-// 	'database'=>'pet',
-// 	'port'=>'3306',
-// 	'encoding'=>'utf8'
-// 	);
+//     'type'=>'mysql',
+//     'host'=>'127.0.0.1',
+//     'username'=>'root',
+//     'password'=>'',
+//     'database'=>'pet',
+//     'port'=>'3306',
+//     'encoding'=>'utf8'
+//     );
 // $dbconfig = array(
-// 	'type'=>'mysql',
-// 	'host'=>'127.0.0.1',
-// 	'username'=>'root2',
-// 	'password'=>'',
-// 	'database'=>'pet',
-// 	'port'=>'3306',
-// 	'encoding'=>'utf8',
-// 	'backnode'=>$backdb 
-// 	);
+//     'type'=>'mysql',
+//     'host'=>'127.0.0.1',
+//     'username'=>'root2',
+//     'password'=>'',
+//     'database'=>'pet',
+//     'port'=>'3306',
+//     'encoding'=>'utf8',
+//     'backnode'=>$backdb 
+//     );
 
 // $db = new Db($dbconfig);
 // $data = $db->query('select * from users');
 // if($data)
 // {
-// 	echo 'ok';
+//     echo 'ok';
 // }
 // 4、同时连接两个数据库，并查询
 $dbconfig = array(
-	'type'=>'mysql',
-	'host'=>'127.0.0.1',
-	'username'=>'root',
-	'password'=>'',
-	'database'=>'pet',
-	'port'=>'3306',
-	'encoding'=>'utf8'
-	);
+    'type'=>'mysql',
+    'host'=>'127.0.0.1',
+    'username'=>'root',
+    'password'=>'',
+    'database'=>'pet',
+    'port'=>'3306',
+    'encoding'=>'utf8'
+    );
 $dbconfig2 = array(
-	'type'=>'mysql',
-	'host'=>'127.0.0.1',
-	'username'=>'root',
-	'password'=>'',
-	'database'=>'pet2',
-	'port'=>'3306',
-	'encoding'=>'utf8'
-	);
+    'type'=>'mysql',
+    'host'=>'127.0.0.1',
+    'username'=>'root',
+    'password'=>'',
+    'database'=>'pet2',
+    'port'=>'3306',
+    'encoding'=>'utf8'
+    );
 $db1 = new Db($dbconfig);
 $data = $db1->getData('select * from users');
 // var_dump($data);
@@ -117,7 +117,7 @@ $data = $db->getData('select * from users',1);
 $rs = $db->query('select * from users');
 
 while ($row = $db->fetch($rs)) {
-	echo $row['id'];
+    echo $row['id'];
 }
 // 3、插入操作
 // 4、大量插入操作
