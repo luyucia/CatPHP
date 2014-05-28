@@ -34,6 +34,7 @@ if (!-e $request_filename)
     rewrite ^/(.*)$ /webtest/index.php last;
 }
 `
+
 原理：将url请求解析到index.php，由框架中的路由解析功能，解析请求后加载指定的类
 
 

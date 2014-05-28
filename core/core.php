@@ -1,5 +1,6 @@
 <?php
 
+// 路径都用绝对路径，因为节省系统调用，比相对路径效率高
 
 // 加载核心配置文件
 $config     = require CAT_BASE.'/config/core_config.php';
@@ -7,11 +8,11 @@ $config     = require CAT_BASE.'/config/core_config.php';
 $thr_config = require CAT_BASE.'/config/thr_class_config.php';
 
 // 注册catphp核心模块自动加载函数
+// 不直接用autoload是因为要兼容其他框架
 spl_autoload_register('cat_core_bricks_autoload');
 
 function cat_core_bricks_autoload($classname)
 {
-    
     global $config;
     global $thr_config;
 
@@ -23,9 +24,5 @@ function cat_core_bricks_autoload($classname)
     {
         require CAT_BASE.$thr_config[$classname];
     }
-
-    
-    
-
 }
 

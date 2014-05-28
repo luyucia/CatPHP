@@ -39,12 +39,15 @@ class MvcWeb
         
         $class = $rout['c'].'Controller';
         $methd = $rout['a'].'Action';
+        // 将url中解析后的内容传给$_GET
+        $_GET  = array_merge($_GET,$rout);
         $controller = new $class($rout);
         $controller->$methd();
 
     }
 
     // 路由解析
+    // 测试 10万次执行时间<1s
     private static function routerParse()
     {
         $rtn = array(
@@ -74,7 +77,7 @@ class MvcWeb
                 }
                 for ($i=2; $i < $l; $i+=2) 
                 {
-                    $rtn[$r[$i]] = $r[$i];
+                    $rtn[$r[$i]] = $r[$i+1];
                 }
             }
             return $rtn;

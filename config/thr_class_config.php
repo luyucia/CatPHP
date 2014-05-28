@@ -3,9 +3,9 @@
 return  array
 (
     
-    'Kint'=>'/thr_bricks/kint-0.9/Kint.class.php',
-    'Parsedown'=>'/thr_bricks/Parsedown.php',
-    'Tenjin_Engine'=>'/thr_bricks/templates/Tenjin.php',
+    'Kint'=>'/bricks-v/kint-0.9/Kint.class.php',
+    'Parsedown'=>'/bricks-v/Parsedown.php',
+    'Tenjin_Engine'=>'/bricks-v/templates/Tenjin.php',
 
 
 );
