@@ -21,14 +21,11 @@ class IndexController extends Controller {
 ---------
 EOT;
         $result = Parsedown::instance()->parse($text);
-        echo $result;
-        // $engine = new Tenjin_Engine();
-        // $context = array(
-        //     'title'=>'Bordered Table Example',
-        //     'items'=>array('<AAA>', 'B&B', '"CCC"')
-        //     ,'result'=>$result
-        //          );
-        // $output = $engine->render('table.phtml', $context);
-        // echo $output;
+        // echo $result;
+
+        $this->assign('result',$result);
+        $this->assign('items',array('<AAA>', 'B&B', '"CCC"'));
+        $this->assign('title','hello');
+        echo $this->render('views/table.phtml');
     }
 }
