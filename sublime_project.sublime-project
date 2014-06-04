@@ -1,0 +1,12 @@
+{
+    "folders":
+    [
+        {
+            "path": "/D/environment/php/nginx-1.0.9/html/webtest"
+        }
+    ],
+  "settings": {
+    "translate_tabs_to_spaces": true,
+    "tab_size": 4
+  }
+}

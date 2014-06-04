@@ -49,11 +49,13 @@ nginx设置：
 ```
 if (!-e $request_filename) 
 {
-    rewrite ^/$ /webtest/index.php last;
+    rewrite ^.*$ /webtest/index.php last;
 }
 ```
 - 注意，要放在location ~ \.php${............}后面
 --rewrite ^/(.*)$ /webtest/index.php last;
+rewrite p1 p2 flag
+将url中，匹配正则表达式p1的地方，替换成p2进行访问。
 原理：将url请求解析到index.php，由框架中的路由解析功能，解析请求后加载指定的类
 
 

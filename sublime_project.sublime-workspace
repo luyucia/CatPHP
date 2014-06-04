@@ -1,0 +1,1157 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"for",
+				"foreach	foreach …"
+			],
+			[
+				"de",
+				"def	define(…, …)"
+			],
+			[
+				"im",
+				"img_url"
+			],
+			[
+				"exp",
+				"explode"
+			],
+			[
+				"strp",
+				"strpos"
+			],
+			[
+				"unse",
+				"unset"
+			],
+			[
+				"json",
+				"json_decode"
+			],
+			[
+				"find",
+				"findAll"
+			],
+			[
+				"base",
+				"base64_decode"
+			],
+			[
+				"stri",
+				"stripos"
+			],
+			[
+				"bas",
+				"base64_encode"
+			],
+			[
+				"EO",
+				"EOL2"
+			],
+			[
+				"b",
+				"bytewritten"
+			],
+			[
+				"s",
+				"select"
+			],
+			[
+				"conn",
+				"connections"
+			],
+			[
+				"even",
+				"event"
+			],
+			[
+				"re",
+				"requests"
+			],
+			[
+				"con",
+				"connections"
+			],
+			[
+				"sock",
+				"serversocket"
+			],
+			[
+				"tr",
+				"try	Try/Except"
+			],
+			[
+				"so",
+				"serversocket"
+			],
+			[
+				"M",
+				"MyDialog"
+			],
+			[
+				"fo",
+				"for	for …"
+			],
+			[
+				"db",
+				"db_config"
+			],
+			[
+				"me",
+				"measure"
+			],
+			[
+				"in",
+				"input"
+			],
+			[
+				"url",
+				"url_form"
+			],
+			[
+				"l",
+				"label	Tag"
+			],
+			[
+				"li",
+				"li	Tag"
+			],
+			[
+				"pad",
+				"padding-left"
+			],
+			[
+				"he",
+				"height"
+			],
+			[
+				"fon",
+				"font-size"
+			],
+			[
+				"y",
+				"yAxis"
+			],
+			[
+				"select",
+				"selectAll"
+			],
+			[
+				"f",
+				"fun	function …"
+			],
+			[
+				"p",
+				"print"
+			],
+			[
+				"or",
+				"original_id"
+			],
+			[
+				"order",
+				"order_id"
+			],
+			[
+				"utf",
+				"utf8_encode"
+			],
+			[
+				"mb",
+				"mb_check_encoding"
+			],
+			[
+				"ut",
+				"utf8_decode"
+			],
+			[
+				"mb_c",
+				"mb_convert_encoding"
+			],
+			[
+				"t",
+				"tab_box"
+			],
+			[
+				"print",
+				"print_r"
+			],
+			[
+				"back",
+				"background-color"
+			],
+			[
+				"red",
+				"ready	$(document).ready"
+			],
+			[
+				"r",
+				"ready	$(document).ready"
+			],
+			[
+				"m",
+				"meta	Tag"
+			],
+			[
+				"th",
+				"thead	Tag"
+			],
+			[
+				"opt",
+				"option	Tag"
+			],
+			[
+				"defi",
+				"defined"
+			],
+			[
+				"h",
+				"h1	Tag"
+			],
+			[
+				"op",
+				"options"
+			],
+			[
+				"c",
+				"catSelect"
+			],
+			[
+				"se",
+				"search"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "catphp/test.php",
+			"settings":
+			{
+				"buffer_size": 2495,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "catphp/config/config.php",
+			"settings":
+			{
+				"buffer_size": 133,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/D/environment/php/nginx-1.0.9/html/test/test2.html",
+			"settings":
+			{
+				"buffer_size": 2227,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/D/environment/php/nginx-1.0.9/html/test/flare.json",
+			"settings":
+			{
+				"buffer_size": 11413,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/D/environment/php/nginx-1.0.9/html/test/miserables.json",
+			"settings":
+			{
+				"buffer_size": 283,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/D/environment/php/nginx-1.0.9/html/test/cluster.html",
+			"settings":
+			{
+				"buffer_size": 1868,
+				"line_ending": "Windows"
+			}
+		}
+	],
+	"build_system": "Packages/Python/Python.sublime-build",
+	"command_palette":
+	{
+		"height": 196.0,
+		"selected_items":
+		[
+			[
+				"close",
+				"File: Close All"
+			],
+			[
+				"save",
+				"File: Save All"
+			],
+			[
+				"php",
+				"Set Syntax: PHP"
+			],
+			[
+				"sql",
+				"Set Syntax: SQL"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"insl",
+				"Package Control: Install Package"
+			],
+			[
+				"clos",
+				"File: Close All"
+			],
+			[
+				"per",
+				"Set Syntax: Perl"
+			],
+			[
+				"insp",
+				"Package Control: Install Package"
+			],
+			[
+				"inst",
+				"Package Control: Install Package"
+			],
+			[
+				"ale",
+				"Preferences: Alignment Key Bindings – Default"
+			],
+			[
+				"instl",
+				"Package Control: Install Package"
+			],
+			[
+				"html",
+				"Set Syntax: HTML"
+			],
+			[
+				"bh",
+				"BracketHighlighter: Wrap Selections with Brackets"
+			],
+			[
+				"bH",
+				"BracketHighlighter: Toggle High Visibility Mode"
+			],
+			[
+				"b",
+				"BracketHighlighter: Toggle Global Enable"
+			],
+			[
+				"breah",
+				"BracketHighlighter: Select Next Attribute (right)"
+			],
+			[
+				"ins",
+				"Package Control: Install Package"
+			],
+			[
+				"pdf",
+				"ToPdf"
+			],
+			[
+				"Snippet: ",
+				"Snippet: #!/usr/bin/env"
+			]
+		],
+		"width": 464.0
+	},
+	"console":
+	{
+		"height": 209.0
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/D/environment/php/nginx-1.0.9/html/webtest/index.php",
+		"/D/environment/php/nginx-1.0.9/html/webtest/config/config.php",
+		"/D/environment/php/nginx-1.0.9/conf/nginx.conf",
+		"/D/environment/php/nginx-1.0.9/html/webtest/catphp/example-web/example/index.php",
+		"/D/environment/php/nginx-1.0.9/html/webtest/catphp/example-web/example/controllers/Index.php",
+		"/D/environment/php/nginx-1.0.9/html/webtest/catphp/example-web/example/controllers/test/Test.php",
+		"/D/environment/php/nginx-1.0.9/html/webtest/catphp/example-web/example/controllers/api/Api.php",
+		"/D/environment/php/nginx-1.0.9/html/webtest/example/controllers/Index.php",
+		"/D/environment/php/nginx-1.0.9/html/webtest/example/controllers/test/Test.php",
+		"/D/environment/php/nginx-1.0.9/html/webtest/catphp/README.md",
+		"/D/environment/php/nginx-1.0.9/html/webtest/catphp/controllers/api/Api.php",
+		"/D/environment/php/nginx-1.0.9/html/webtest/catphp/catphp.php",
+		"/D/environment/php/nginx-1.0.9/html/webtest/catphp/core_bricks/sql/select.php",
+		"/D/environment/php/nginx-1.0.9/html/webtest/catphp/core/core.php",
+		"/D/environment/php/nginx-1.0.9/html/webtest/catphp/config/core_config.php",
+		"/D/environment/php/nginx-1.0.9/html/webtest/catphp/config/thr_class_config.php",
+		"/D/environment/php/nginx-1.0.9/html/webtest/catphp/core_bricks/mvc/mvc_web.php",
+		"/D/environment/php/nginx-1.0.9/html/webtest/catphp/bricks/mvc/mvc_web.php",
+		"/D/environment/php/nginx-1.0.9/html/webtest/catphp/core_bricks/mvc/controller.php",
+		"/D/environment/php/nginx-1.0.9/html/webtest/controllers/Index.php",
+		"/D/environment/php/nginx-1.0.9/html/ttttt/index.php",
+		"/D/environment/php/nginx-1.0.9/html/ttttt/Lib/Action/IndexAction.class.php",
+		"/D/environment/php/nginx-1.0.9/html/webtest/catphp/core_bricks/upload/upload.php",
+		"/D/Sublime Text 2.0.1creak/Data/Packages/Default/Preferences.sublime-settings",
+		"/D/environment/php/nginx-1.0.9/html/webtest/sublime_project.sublime-project",
+		"/D/environment/php/nginx-1.0.9/html/webtest/sublime_project.sublime-workspace",
+		"/D/environment/php/nginx-1.0.9/html/webtest/catphp/test.php",
+		"/D/environment/php/nginx-1.0.9/html/webtest/catphp/core_bricks/csv/csv.php",
+		"/D/environment/php/nginx-1.0.9/html/webtest/catphp/core_bricks/db/database.php",
+		"/D/environment/php/nginx-1.0.9/html/webtest/catphp/core_bricks/db/db.php",
+		"/D/environment/php/nginx-1.0.9/html/webtest/catphp/core_bricks/db/db_factory.php",
+		"/D/environment/php/nginx-1.0.9/html/webtest/catphp/core_bricks/db/mysql.php",
+		"/D/environment/php/nginx-1.0.9/html/webtest/catphp/core_bricks/db/mysql_driver.php",
+		"/D/environment/php/nginx-1.0.9/html/webtest/catphp/core_bricks/db/oracle.php",
+		"/D/environment/php/nginx-1.0.9/html/webtest/catphp/core_bricks/db/pgsql.php",
+		"/D/environment/php/nginx-1.0.9/html/webtest/catphp/core_bricks/html/FormValidator.class.php",
+		"/D/environment/php/nginx-1.0.9/html/webtest/catphp/core_bricks/html/HtmlTable.php",
+		"/D/environment/php/nginx-1.0.9/html/webtest/catphp/core_bricks/validator/validator.php",
+		"/D/environment/php/nginx-1.0.9/html/webtest/catphp/thr_bricks/kint-0.9/config.default.php",
+		"/D/environment/php/nginx-1.0.9/html/webtest/catphp/thr_bricks/kint-0.9/Kint.class.php",
+		"/D/environment/php/nginx-1.0.9/html/webtest/catphp/thr_bricks/kint-0.9/decorators/concise.php",
+		"/D/environment/php/nginx-1.0.9/html/webtest/catphp/thr_bricks/kint-0.9/decorators/plain.php",
+		"/D/environment/php/nginx-1.0.9/html/webtest/catphp/thr_bricks/kint-0.9/decorators/rich.php",
+		"/D/environment/php/nginx-1.0.9/html/webtest/catphp/thr_bricks/kint-0.9/parsers/parser.class.php",
+		"/D/environment/php/nginx-1.0.9/html/webtest/catphp/thr_bricks/kint-0.9/parsers/custom/arrayobject.php",
+		"/D/environment/php/nginx-1.0.9/html/webtest/catphp/thr_bricks/kint-0.9/parsers/custom/classstatics.php",
+		"/D/environment/php/nginx-1.0.9/html/webtest/catphp/thr_bricks/kint-0.9/parsers/custom/color.php",
+		"/D/environment/php/nginx-1.0.9/html/webtest/catphp/thr_bricks/kint-0.9/parsers/custom/json.php",
+		"/D/environment/php/nginx-1.0.9/html/webtest/catphp/thr_bricks/kint-0.9/parsers/custom/microtime.php",
+		"/D/environment/php/nginx-1.0.9/html/webtest/catphp/thr_bricks/kint-0.9/parsers/custom/splfileinfo.php",
+		"/D/environment/php/nginx-1.0.9/html/webtest/catphp/thr_bricks/kint-0.9/parsers/custom/splobjectstorage.php",
+		"/D/environment/php/nginx-1.0.9/html/webtest/catphp/thr_bricks/kint-0.9/parsers/custom/timestamp.php",
+		"/D/environment/php/nginx-1.0.9/html/webtest/catphp/thr_bricks/kint-0.9/parsers/custom/xml.php",
+		"/D/environment/php/nginx-1.0.9/html/webtest/catphp/thr_bricks/kint-0.9/scripts/source.vbs",
+		"/D/environment/php/nginx-1.0.9/html/webtest/catphp/thr_bricks/kint-0.9/view/trace.phtml",
+		"/D/environment/php/nginx-1.0.9/html/webtest/catphp/thr_bricks/kint-0.9/view/js/_kint.js",
+		"/D/environment/php/nginx-1.0.9/html/webtest/controllers/Error.php",
+		"/D/environment/php/nginx-1.0.9/html/webtest/controllers/Tvserial.php",
+		"/D/environment/php/nginx-1.0.9/html/webtest/controllers/User.php",
+		"/D/environment/php/nginx-1.0.9/html/webtest/controllers/test/Test.php",
+		"/D/environment/php/nginx-1.0.9/html/pfa/Lib/Action/IndexAction.class.php",
+		"/D/Sublime Text 2.0.1creak/Data/Packages/User/PHP.sublime-settings",
+		"/D/Sublime Text 2.0.1creak/Data/Packages/User/Preferences.sublime-settings",
+		"/D/Sublime Text 2.0.1creak/Data/Packages/User/JSON.sublime-settings",
+		"/D/environment/php/nginx-1.0.9/html/webtest/catphp/core/config/config.class.php",
+		"/D/environment/php/nginx-1.0.9/html/webtest/catphp/core/config/config_manger.interface.php",
+		"/D/environment/php/nginx-1.0.9/html/webtest/catphp/core/config/php_config_manager.php",
+		"/D/environment/php/nginx-1.0.9/html/webtest/table.phtml",
+		"/D/environment/php/nginx-1.0.9/html/webtest/catphp/thr_bricks/templates/TenjinExamplesTest.php",
+		"/D/environment/php/nginx-1.0.9/html/webtest/catphp/thr_bricks/templates/Tenjin.php",
+		"/D/environment/php/nginx-1.0.9/html/webtest/新建文本文档.txt",
+		"/C/Users/Administrator/Desktop/test.py",
+		"/G/test.py",
+		"/G/pygui/dialog.ui",
+		"/G/pygui/mydialog.py",
+		"/G/pygui/daxiong/main.py",
+		"/G/pygui/daxiong/package.py",
+		"/D/dev_center/android/adt-bundle-windows-x86_64-20131030/eclipse/eclipse.ini",
+		"/E/eric5-5.4.4/install.py",
+		"/G/pygui/daxiong/test.ui",
+		"/G/pygui/test.py",
+		"/G/pygui/daxiong/test.py",
+		"/D/Sublime Text 2.0.1creak/Data/Packages/User/python.sublime-build",
+		"/G/pygui/package.py",
+		"/D/environment/php/nginx-1.0.9/conf/fastcgi.conf",
+		"/C/Users/Administrator/AppData/Local/Temp/scp38309/usr/local/nginx/html/index.php",
+		"/C/Users/Administrator/AppData/Local/Temp/scp39942/home/python/test.py",
+		"/C/Users/Administrator/AppData/Local/Temp/scp07575/usr/local/nginx/html/application/controllers/Tvserial.php",
+		"/C/Users/Administrator/.ssh/id_rsa.pub",
+		"/C/Users/Administrator/Desktop/test.php",
+		"/D/environment/php/nginx-1.0.9/html/webtest/catphp/core_bricks/mvc/MvcWeb.php",
+		"/C/Users/Administrator/AppData/Local/Temp/scp09881/userdisk/lamp/data/www/document_root/index.html",
+		"/C/Users/Administrator/AppData/Local/Temp/scp42036/etc/opkg.conf",
+		"/C/Users/Administrator/AppData/Local/Temp/scp01616/data/usr/bin/test.py",
+		"/C/Users/Administrator/AppData/Local/Temp/scp07630/data/etc/nginx/nginx.conf",
+		"/C/Users/Administrator/AppData/Local/Temp/scp16750/data/etc/init.d/nginx",
+		"/C/Users/Administrator/AppData/Local/Temp/scp45039/userdisk/lamp/etc/lighttpd/lighttpd.conf",
+		"/C/Users/Administrator/AppData/Local/Temp/scp20051/data/www/document_root/index.php",
+		"/C/Users/Administrator/AppData/Local/Temp/scp21614/data/www/document_root/index.php",
+		"/C/Users/Administrator/AppData/Local/Temp/scp24207/etc/config/firewall",
+		"/C/Users/Administrator/AppData/Local/Temp/scp11001/data/sysapihttpd/htdocs/blacklist/index.html",
+		"/D/environment/php/nginx-1.0.9/html/webtest/controllers/Test.php",
+		"/D/environment/php/nginx-1.0.9/html/webtest/catphp/core/core.class.php",
+		"/D/environment/php/nginx-1.0.9/html/webtest/catphp/core_bricks/mvc/Controller.php",
+		"/C/Users/Administrator/AppData/Local/Temp/scp56550/home/python/1.html",
+		"/C/Users/Administrator/AppData/Local/Temp/scp40260/home/python/test.py",
+		"/C/Users/Administrator/AppData/Local/Temp/scp31089/home/python/test.py",
+		"/C/Users/Administrator/AppData/Local/Temp/scp34192/usr/local/nginx/html/application/controllers/Tvserial.php",
+		"/D/environment/php/nginx-1.0.9/logs/access.log",
+		"/D/environment/php/nginx-1.0.9/logs/error.log.dump",
+		"/D/environment/php/nginx-1.0.9/html/index.php",
+		"/D/environment/php/nginx-1.0.9/logs/error.log",
+		"/C/Users/Administrator/AppData/Local/Temp/scp43006/home/python/test.py",
+		"/C/Users/Administrator/AppData/Local/Temp/scp54402/usr/local/nginx/html/application/controllers/Tvserial.php",
+		"/D/environment/php/nginx-1.0.9/html/catphp2/db/db.class.php",
+		"/C/Users/Administrator/AppData/Local/Temp/scp33350/usr/local/nginx/html/application/controllers/TvSerial.php",
+		"/C/Users/Administrator/AppData/Local/Temp/scp38691/usr/local/nginx/html/application/controllers/Tvserial.php",
+		"/C/Users/Administrator/AppData/Local/Temp/scp05333/home/python/scribe",
+		"/C/Users/Administrator/AppData/Local/Temp/scp05087/home/python/test.py",
+		"/C/Program Files (x86)/dangdang/PCreader/ebook/purchased/1900069522.json",
+		"/C/Users/Administrator/Desktop/1900116008.ddf",
+		"/C/Users/Administrator/Desktop/1900116008.pdf",
+		"/C/Users/Administrator/AppData/Local/Temp/scp41954/usr/local/nginx/html/application/controllers/User.php",
+		"/C/Users/Administrator/Desktop/李明泽简历.pdf",
+		"/C/Users/Administrator/AppData/Local/Temp/scp33781/home/python/tmp.html",
+		"/C/Users/Administrator/AppData/Local/Temp/scp38773/usr/local/nginx/html/application/controllers/User.php",
+		"/C/Users/Administrator/AppData/Local/Temp/scp31284/usr/local/nginx/html/application/controllers/User.php",
+		"/C/Users/Administrator/AppData/Local/Temp/scp10956/usr/local/nginx/conf/nginx.conf"
+	],
+	"find":
+	{
+		"height": 43.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+			"",
+			"E:\\wp"
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"test",
+			"Test",
+			"thr_bricks",
+			"core_bricks",
+			"	",
+			"引入controller文件",
+			"\n		",
+			"WEB_CONFIG",
+			"self",
+			"button",
+			"onButton",
+			"router_parse",
+			"’",
+			"‘",
+			"plgin",
+			"pligin",
+			"lib",
+			"lib/",
+			"lib/lighttpd",
+			"/usr",
+			"/",
+			"document_root",
+			"document_root\n /data/www/document_root\n",
+			"/data/www/document_root\n /data/www/document_root\n",
+			";\n",
+			"f_l_img",
+			"f_1_img",
+			"$this->redis",
+			"tbody",
+			"'",
+			"mysql",
+			"'",
+			"\"",
+			"response",
+			"responses",
+			"$\\s*",
+			"return.*",
+			"}",
+			"{",
+			"mysql_connect",
+			"put your unique phrase here",
+			"\\d*,",
+			",",
+			"textareas",
+			"lablel",
+			"＄",
+			"cfg_category_stock",
+			" ",
+			"category_stock",
+			"\"",
+			"li",
+			"views/",
+			"href=\"css",
+			"href=\"",
+			"min",
+			"height",
+			"result_out",
+			"original_id",
+			"out_result",
+			"，",
+			"）",
+			"（",
+			"is_p",
+			"i",
+			"\\n",
+			"RPC",
+			"rpc",
+			"nginx",
+			"#.*",
+			"#F1EEEE",
+			"45",
+			"gray",
+			"20",
+			"_parseType",
+			"_facade",
+			"wheat",
+			"extension_dir",
+			"extension_dr",
+			"extension",
+			"2",
+			"href",
+			"0e\\s?00\\s?00\\s?00\\s?13",
+			"14\\s?00\\s?00\\s?00\\s?13",
+			"14 00 00 00 13",
+			"\\d{1,2}\\.",
+			"'",
+			"XHPROF_LIB_ROOT",
+			"'orange' => 1,",
+			",\n",
+			" is not installed"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": true,
+		"replace_history":
+		[
+			"    ",
+			""
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 5,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "catphp/test.php",
+					"settings":
+					{
+						"buffer_size": 2495,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								100,
+								100
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close"
+							],
+							"encoding_helper_confidence": 0.99,
+							"encoding_helper_encoding": "UTF-8",
+							"encoding_helper_encoding_sublime": "UTF-8",
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "catphp/config/config.php",
+					"settings":
+					{
+						"buffer_size": 133,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								130,
+								130
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close"
+							],
+							"encoding_helper_confidence": 1.0,
+							"encoding_helper_encoding": "UTF-8",
+							"encoding_helper_encoding_sublime": "UTF-8",
+							"syntax": "Packages/PHP/PHP.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "/D/environment/php/nginx-1.0.9/html/test/test2.html",
+					"settings":
+					{
+						"buffer_size": 2227,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								457,
+								457
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close"
+							],
+							"encoding_helper_confidence": 0.99,
+							"encoding_helper_encoding": "UTF-8",
+							"encoding_helper_encoding_sublime": "UTF-8",
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 648.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "/D/environment/php/nginx-1.0.9/html/test/flare.json",
+					"settings":
+					{
+						"buffer_size": 11413,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								10840,
+								10840
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close"
+							],
+							"encoding_helper_confidence": 1.0,
+							"encoding_helper_encoding": "UTF-8",
+							"encoding_helper_encoding_sublime": "UTF-8",
+							"syntax": "Packages/JavaScript/JSON.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 10044.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "/D/environment/php/nginx-1.0.9/html/test/miserables.json",
+					"settings":
+					{
+						"buffer_size": 283,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								45,
+								45
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close"
+							],
+							"encoding_helper_confidence": 1.0,
+							"encoding_helper_encoding": "UTF-8",
+							"encoding_helper_encoding_sublime": "UTF-8",
+							"syntax": "Packages/JavaScript/JSON.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "/D/environment/php/nginx-1.0.9/html/test/cluster.html",
+					"settings":
+					{
+						"buffer_size": 1868,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								540,
+								540
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close"
+							],
+							"encoding_helper_confidence": 0.99,
+							"encoding_helper_encoding": "UTF-8",
+							"encoding_helper_encoding_sublime": "UTF-8",
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 972.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 0.0
+	},
+	"input":
+	{
+		"height": 0.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 185.0
+	},
+	"replace":
+	{
+		"height": 80.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+			[
+				"core",
+				"catphp/core/core.php"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 268.0,
+	"status_bar_visible": true
+}
