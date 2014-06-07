@@ -228,51 +228,59 @@
 	"buffers":
 	[
 		{
-			"file": "catphp/test.php",
+			"file": "index.php",
 			"settings":
 			{
-				"buffer_size": 2495,
+				"buffer_size": 103,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "catphp/config/config.php",
+			"file": "config/config.php",
 			"settings":
 			{
-				"buffer_size": 133,
+				"buffer_size": 286,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "/D/environment/php/nginx-1.0.9/html/test/test2.html",
+			"file": "catphp/bricks/mvc/mvc_web.php",
 			"settings":
 			{
-				"buffer_size": 2227,
+				"buffer_size": 2607,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "/D/environment/php/nginx-1.0.9/html/test/flare.json",
+			"file": "/D/environment/php/nginx-1.0.9/conf/nginx.conf",
 			"settings":
 			{
-				"buffer_size": 11413,
+				"buffer_size": 2794,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "README.md",
+			"settings":
+			{
+				"buffer_size": 1017,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "catphp/bricks/mvc/controller.php",
+			"settings":
+			{
+				"buffer_size": 708,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "controllers/Index.php",
+			"settings":
+			{
+				"buffer_size": 639,
 				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "/D/environment/php/nginx-1.0.9/html/test/miserables.json",
-			"settings":
-			{
-				"buffer_size": 283,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "/D/environment/php/nginx-1.0.9/html/test/cluster.html",
-			"settings":
-			{
-				"buffer_size": 1868,
-				"line_ending": "Windows"
 			}
 		}
 	],
@@ -380,6 +388,13 @@
 	},
 	"file_history":
 	[
+		"/D/environment/php/nginx-1.0.9/html/webtest/catphp/test.php",
+		"/D/environment/php/nginx-1.0.9/html/webtest/catphp/config/config.php",
+		"/D/environment/php/nginx-1.0.9/html/test/test2.html",
+		"/D/environment/php/nginx-1.0.9/html/test/flare.json",
+		"/D/environment/php/nginx-1.0.9/html/test/miserables.json",
+		"/D/environment/php/nginx-1.0.9/html/test/cluster.html",
+		"/D/environment/php/nginx-1.0.9/html/webtest/catphp/index.php",
 		"/D/environment/php/nginx-1.0.9/html/webtest/index.php",
 		"/D/environment/php/nginx-1.0.9/html/webtest/config/config.php",
 		"/D/environment/php/nginx-1.0.9/conf/nginx.conf",
@@ -406,7 +421,6 @@
 		"/D/Sublime Text 2.0.1creak/Data/Packages/Default/Preferences.sublime-settings",
 		"/D/environment/php/nginx-1.0.9/html/webtest/sublime_project.sublime-project",
 		"/D/environment/php/nginx-1.0.9/html/webtest/sublime_project.sublime-workspace",
-		"/D/environment/php/nginx-1.0.9/html/webtest/catphp/test.php",
 		"/D/environment/php/nginx-1.0.9/html/webtest/catphp/core_bricks/csv/csv.php",
 		"/D/environment/php/nginx-1.0.9/html/webtest/catphp/core_bricks/db/database.php",
 		"/D/environment/php/nginx-1.0.9/html/webtest/catphp/core_bricks/db/db.php",
@@ -501,13 +515,7 @@
 		"/C/Users/Administrator/AppData/Local/Temp/scp05087/home/python/test.py",
 		"/C/Program Files (x86)/dangdang/PCreader/ebook/purchased/1900069522.json",
 		"/C/Users/Administrator/Desktop/1900116008.ddf",
-		"/C/Users/Administrator/Desktop/1900116008.pdf",
-		"/C/Users/Administrator/AppData/Local/Temp/scp41954/usr/local/nginx/html/application/controllers/User.php",
-		"/C/Users/Administrator/Desktop/李明泽简历.pdf",
-		"/C/Users/Administrator/AppData/Local/Temp/scp33781/home/python/tmp.html",
-		"/C/Users/Administrator/AppData/Local/Temp/scp38773/usr/local/nginx/html/application/controllers/User.php",
-		"/C/Users/Administrator/AppData/Local/Temp/scp31284/usr/local/nginx/html/application/controllers/User.php",
-		"/C/Users/Administrator/AppData/Local/Temp/scp10956/usr/local/nginx/conf/nginx.conf"
+		"/C/Users/Administrator/Desktop/1900116008.pdf"
 	],
 	"find":
 	{
@@ -527,6 +535,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"routerParse2",
 			"test",
 			"Test",
 			"thr_bricks",
@@ -636,23 +645,23 @@
 	"groups":
 	[
 		{
-			"selected": 5,
+			"selected": 6,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "catphp/test.php",
+					"file": "index.php",
 					"settings":
 					{
-						"buffer_size": 2495,
+						"buffer_size": 103,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								100,
-								100
+								74,
+								74
 							]
 						],
 						"settings":
@@ -701,12 +710,10 @@
 								"bh_single_quote_open",
 								"bh_single_quote_close"
 							],
-							"encoding_helper_confidence": 0.99,
+							"encoding_helper_confidence": 1.0,
 							"encoding_helper_encoding": "UTF-8",
 							"encoding_helper_encoding_sublime": "UTF-8",
-							"syntax": "Packages/PHP/PHP.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
+							"syntax": "Packages/PHP/PHP.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -716,18 +723,18 @@
 				},
 				{
 					"buffer": 1,
-					"file": "catphp/config/config.php",
+					"file": "config/config.php",
 					"settings":
 					{
-						"buffer_size": 133,
+						"buffer_size": 286,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								130,
-								130
+								82,
+								82
 							]
 						],
 						"settings":
@@ -789,18 +796,18 @@
 				},
 				{
 					"buffer": 2,
-					"file": "/D/environment/php/nginx-1.0.9/html/test/test2.html",
+					"file": "catphp/bricks/mvc/mvc_web.php",
 					"settings":
 					{
-						"buffer_size": 2227,
+						"buffer_size": 2607,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								457,
-								457
+								2574,
+								2574
 							]
 						],
 						"settings":
@@ -852,8 +859,232 @@
 							"encoding_helper_confidence": 0.99,
 							"encoding_helper_encoding": "UTF-8",
 							"encoding_helper_encoding_sublime": "UTF-8",
-							"syntax": "Packages/HTML/HTML.tmLanguage",
-							"translate_tabs_to_spaces": false
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 486.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "/D/environment/php/nginx-1.0.9/conf/nginx.conf",
+					"settings":
+					{
+						"buffer_size": 2794,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1479,
+								1479
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close"
+							],
+							"encoding_helper_confidence": 1.0,
+							"encoding_helper_encoding": "UTF-8",
+							"encoding_helper_encoding_sublime": "UTF-8",
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 810.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "README.md",
+					"settings":
+					{
+						"buffer_size": 1017,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								447,
+								447
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close"
+							],
+							"encoding_helper_confidence": 0.99,
+							"encoding_helper_encoding": "UTF-8",
+							"encoding_helper_encoding_sublime": "UTF-8",
+							"syntax": "Packages/Markdown/Markdown.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 486.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "catphp/bricks/mvc/controller.php",
+					"settings":
+					{
+						"buffer_size": 708,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								527,
+								527
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close"
+							],
+							"encoding_helper_confidence": 1.0,
+							"encoding_helper_encoding": "UTF-8",
+							"encoding_helper_encoding_sublime": "UTF-8",
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
 						"translation.y": 648.0,
@@ -862,169 +1093,19 @@
 					"type": "text"
 				},
 				{
-					"buffer": 3,
-					"file": "/D/environment/php/nginx-1.0.9/html/test/flare.json",
+					"buffer": 6,
+					"file": "controllers/Index.php",
 					"settings":
 					{
-						"buffer_size": 11413,
+						"buffer_size": 639,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								10840,
-								10840
-							]
-						],
-						"settings":
-						{
-							"BracketHighlighterBusy": false,
-							"bh_regions":
-							[
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close"
-							],
-							"encoding_helper_confidence": 1.0,
-							"encoding_helper_encoding": "UTF-8",
-							"encoding_helper_encoding_sublime": "UTF-8",
-							"syntax": "Packages/JavaScript/JSON.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 10044.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "/D/environment/php/nginx-1.0.9/html/test/miserables.json",
-					"settings":
-					{
-						"buffer_size": 283,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								45,
-								45
-							]
-						],
-						"settings":
-						{
-							"BracketHighlighterBusy": false,
-							"bh_regions":
-							[
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close"
-							],
-							"encoding_helper_confidence": 1.0,
-							"encoding_helper_encoding": "UTF-8",
-							"encoding_helper_encoding_sublime": "UTF-8",
-							"syntax": "Packages/JavaScript/JSON.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": "/D/environment/php/nginx-1.0.9/html/test/cluster.html",
-					"settings":
-					{
-						"buffer_size": 1868,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								540,
-								540
+								356,
+								356
 							]
 						],
 						"settings":
@@ -1076,11 +1157,12 @@
 							"encoding_helper_confidence": 0.99,
 							"encoding_helper_encoding": "UTF-8",
 							"encoding_helper_encoding_sublime": "UTF-8",
-							"syntax": "Packages/HTML/HTML.tmLanguage",
-							"translate_tabs_to_spaces": false
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 972.0,
+						"translation.y": 162.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -1133,6 +1215,22 @@
 		"height": 0.0,
 		"selected_items":
 		[
+			[
+				"inde",
+				"controllers/Index.php"
+			],
+			[
+				"cont",
+				"catphp/bricks/mvc/controller.php"
+			],
+			[
+				"web",
+				"catphp/bricks/mvc/mvc_web.php"
+			],
+			[
+				"confi",
+				"config/config.php"
+			],
 			[
 				"core",
 				"catphp/core/core.php"
