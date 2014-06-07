@@ -8,9 +8,6 @@ require 'catphp.php';
 // $kint = new Kint();
 // Kint::trace();
 
-
-
-
 // 连接测试
 // 1、连接主数据库，配置正确
 $dbconfig = array(
