@@ -10,6 +10,7 @@ return  array
         'Dml'=>'/bricks/sql/dml.php',
         'Csv'=>'/bricks/csv/csv.php',
         'Db'=>'/bricks/db/db.php',
+        'HtmlTable'=>'/bricks/html/html_table.php',
     ),
 
 

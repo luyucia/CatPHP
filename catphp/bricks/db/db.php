@@ -10,7 +10,7 @@
 
 define('CLASSPATH', dirname(__FILE__));
 
-require CLASSPATH.'/DbFactory.php';
+require CLASSPATH.'/db_factory.php';
 class Db{
 
     private $db_name;

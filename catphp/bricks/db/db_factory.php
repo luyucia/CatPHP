@@ -22,17 +22,17 @@ class DbFactory{
 
         if($db_type=='mysql')
         {
-            require_once CLASSPATH.'/MysqlDriver.php';
+            require_once CLASSPATH.'/mysql.php';
             return new MysqlDriver($config);
         }
         else if($db_type=='oracle')
         {
-            require_once CLASSPATH.'/Oracle.php';
+            require_once CLASSPATH.'/oracle.php';
             return Oracle::getInstance($config);
         }
         else if($db_type=='postgre')
         {
-            require_once CLASSPATH.'/Pgsql.php';
+            require_once CLASSPATH.'/pgsql.php';
             return Pgsql::getInstance($config);
         }
         else 
