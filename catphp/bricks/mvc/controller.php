@@ -3,6 +3,8 @@
 /**
  * 
  */
+
+
 class Controller {
 
     private $context = array();
@@ -35,6 +37,8 @@ class Controller {
     public function __call($name, $arguments) {
         echo $name . ' is not defined!';
     }
+
+
 
 }
 
