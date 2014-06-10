@@ -45,6 +45,7 @@ class ExampleClass {
     }
 }
 
+```
 - 类注释
     /**
      * @name 名字
@@ -74,8 +75,6 @@ class ExampleClass {
      * @var 定义说明变量/属性。
      * @version 定义版本信息
      */
-```
-
 
 - 性能规范：
 1. 任何函数执行10万次要在1s内完成
