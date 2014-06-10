@@ -4,7 +4,6 @@
  * 
  */
 require 'web_common_fun.php';
-require 'web_common_class.php';
 
 class MvcWeb {
 

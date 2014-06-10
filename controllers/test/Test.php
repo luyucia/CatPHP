@@ -19,12 +19,12 @@ class TestController extends Controller {
         'encoding'=>'utf8   !'
         );
         
-        $tool = new Tools($dbconfig);
+        $tool = new ArrayUtil($dbconfig);
         D($dbconfig);
         $data = $tool->F("e")->R()->F()->F("@")->F("!")->F()->GetArr();
         D($data);
         
-        L("F:/develop/wnmp/nginx/html/catphp/catphp/Log","1","1");
+        L("Log.log","1","1");
     }
 
     public function testAction() {

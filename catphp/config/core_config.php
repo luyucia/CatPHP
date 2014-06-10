@@ -11,6 +11,7 @@ return  array
         'Csv'=>'/bricks/csv/csv.php',
         'Db'=>'/bricks/db/db.php',
         'HtmlTable'=>'/bricks/html/html_table.php',
+        'ArrayUtil'=>'/bricks/common/array_util.php',
     ),
 
 
