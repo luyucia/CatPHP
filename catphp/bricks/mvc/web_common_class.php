@@ -41,6 +41,10 @@ class Tools {
         return $this;
     }
 
+    /**
+     * get方法，返回经过处理的数组
+     * @return type
+     */
     public function GetArr() {
         return $this->filter_arr;
     }
