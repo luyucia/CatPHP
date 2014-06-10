@@ -1,8 +1,7 @@
 <?php
 /**
- * 工具类
- * Author:JasonLee
- * Email:limingze610@gmail.com
+ * @name 工具类
+ * @author JasonLee
  */
 class Tools {
 
