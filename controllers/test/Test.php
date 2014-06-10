@@ -21,7 +21,7 @@ class TestController extends Controller {
         
         $tool = new Tools($dbconfig);
         D($dbconfig);
-        $data = $tool->F("!")->R();
+        $data = $tool->F("e")->R()->GetArr();
         D($data);
     }
 

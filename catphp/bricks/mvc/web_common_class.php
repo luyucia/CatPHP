@@ -1,14 +1,14 @@
 <?php
 /**
  * 工具类
- * author:JasonLee
- * email:limingze610@gmail.com
+ * Author:JasonLee
+ * Email:limingze610@gmail.com
  */
 class Tools {
 
     public $filter_arr = array();
 
-    public function __construct($array = array()) {
+    public function __construct($array) {
         $this->filter_arr = $array;
     }
 
@@ -41,4 +41,7 @@ class Tools {
         return $this;
     }
 
+    public function GetArr() {
+        return $this->filter_arr;
+    }
 }
