@@ -35,3 +35,13 @@ function G($key, $default = null) {
         }
     }
 }
+
+function D($para){
+    echo "<pre>";
+    echo "<b>print_r:</b><br>";
+    print_r($para);
+    echo "<br>";
+    echo "<b>var_dump:</b><br>";
+    var_dump($para);
+    echo "</pre>";
+}

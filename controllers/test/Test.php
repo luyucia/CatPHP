@@ -8,8 +8,21 @@ class TestController extends Controller {
 
     public function indexAction() {
         header("Content-type: text/html; charset=utf-8"); 
-        echo "<a href='test/test'>请点击</a>";
-        echo P("8d",6);
+        
+        $dbconfig = array(
+        'type'=>'  mysql',
+        'host'=>'e 192.168.106.22',
+        'username'=>'  Jason @ ',
+        'password'=>'689"3',
+        'database'=>'tes t',
+        'port'=>' 33\'06 ',
+        'encoding'=>'utf8   !'
+        );
+        
+        $tool = new Tools($dbconfig);
+        D($dbconfig);
+        $data = $tool->F("!")->R();
+        D($data);
     }
 
     public function testAction() {
