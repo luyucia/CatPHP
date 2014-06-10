@@ -23,6 +23,8 @@ class TestController extends Controller {
         D($dbconfig);
         $data = $tool->F("e")->R()->F()->F("@")->F("!")->F()->GetArr();
         D($data);
+        
+        L("F:/develop/wnmp/nginx/html/catphp/catphp/Log","1","1");
     }
 
     public function testAction() {

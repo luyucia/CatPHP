@@ -36,12 +36,19 @@ function G($key, $default = null) {
     }
 }
 
+function L($filemame,$content,$logdir){
+    $handle = fopen($filemame, "w+");
+    D($handle);
+}
+
 function D($para){
     echo "<pre>";
-    echo "<b>print_r:</b><br>";
+    echo "<h2>print_r:</h2><br>";
     print_r($para);
     echo "<br>";
-    echo "<b>var_dump:</b><br>";
+    echo "<h2>var_dump:</h2><br>";
     var_dump($para);
     echo "</pre>";
+    
+    return print_r($para,true);
 }
