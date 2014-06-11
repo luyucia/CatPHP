@@ -15,8 +15,18 @@ include_once 'sql.interface.php';
 class dml implements sql{
 
     private $inteligent_type = false;
+    private $dbtype;
+    private $table;
+    private $oracle_buff = '';
+    private $mysql_buff  = '';
+    private $mysql_parse_buff  = array();
 
-    function update_sql(&$d,$table,$where,$noquot='')
+    function __construct($table,$dbtype = 'mysql') {
+        $this->dbtype     =  $dbtype;
+        $this->table  =  $table;
+    }
+
+    function updateSql(&$d,$table,$where,$noquot='')
     {
         $noquot  = explode(',', $noquot);
         $values  = '';
@@ -49,7 +59,7 @@ class dml implements sql{
         return "update set $values where $where";
     }
 
-    function insert_sql(&$d,$table,$noquot='')
+    function insertSql(&$d,$noquot='')
     {
         $noquot  = explode(',', $noquot);
         $columns = '';
@@ -81,7 +91,7 @@ class dml implements sql{
         }
         $columns    = rtrim($columns,',');
         $values     = rtrim($values,',');
-        return "insert into $table ($columns) values($values)" ;
+        return "insert into {$this->table} ($columns) values($values)" ;
 
 
     }
@@ -122,7 +132,7 @@ class dml implements sql{
         
     }
 
-    public function set_inteligent($t=true)
+    public function setInteligent($t=true)
     {
         $this->inteligent_type = $t;
     }
@@ -137,6 +147,96 @@ class dml implements sql{
 
     }
 
+    public function add(&$data,$noquot='')
+    {
+        if ($this->dbtype=='oracle') {
+           $this->oracle_buff.=$this->insertSql($data,$this->table,$noquot).';';
+        }else {
+            // 首次添加，解析数据类型，判定是否加引号
+            if($this->mysql_buff=='') {
+                $noquot  = explode(',', $noquot);
+                $columns = '';
+                $values  = '';
+                foreach ($data as $key => $value) {
+                    $columns.="$key,";
+
+                    // 开启智能类型判定
+                    if($this->inteligent_type) {
+                        $values.= $this->type($value).',';
+                        if($value[0]=="'") {
+                            $this->mysql_parse_buff[$key] = true;
+                        }else {
+                            $this->mysql_parse_buff[$key] = false;
+                        }
+                    }
+                    else {
+                        if(is_string($value)) {
+                            if(in_array($key, $noquot)) {
+                                $values.="$value,";
+                                $this->mysql_parse_buff[$key] = false;
+                            }
+                            else {
+                                $values.="'$value',";
+                                $this->mysql_parse_buff[$key] = true;
+                            }
+                        }
+                        else {
+                            $values.="$value,";
+                            $this->mysql_parse_buff[$key] = false;
+                        }
+                    }
+                }
+                $columns    = rtrim($columns,',');
+                $values     = rtrim($values,',');
+                $this->mysql_buff =  "insert into {$this->table} ($columns) values($values)" ;
+                } //非首次添加
+                else {
+                    $values = '';
+                    foreach ($data as $key => $value) {
+                        if($this->mysql_parse_buff[$key])
+                            $values[] = "'$value'";
+                        else
+                            $values[] = "$value";
+                    }
+                    $this->mysql_buff.= ',('.implode(",", $values).')';
+                }
+            }
+        
+    }
+
+    public function getInsert()
+    {
+        if ($this->dbtype=='oracle') {
+            $sql = $this->oracle_buff;
+            return $sql;
+        }else { 
+            return $this->mysql_buff;
+        }
+    }
+
     
 }
 
+
+// $d1 = array(
+//     'username' => 'luyu',
+//     'password' => 'xxx',
+//     'id' => 1,
+//     'age' => '15',
+//      );
+
+// $d2 = array(
+//     'username' => 'luyu',
+//     'password' => 'xxx',
+//     'id' => 2,
+//     'age' => '14',
+//      );
+
+
+
+// $s = new Dml('user','mysql');
+// // 设置智能解析
+// // $s->setInteligent();
+// $s->add($d1);
+// $s->add($d2);
+// echo $s->getInsert();
