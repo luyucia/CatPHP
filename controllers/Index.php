@@ -27,5 +27,6 @@ EOT;
         $this->assign('items',array('<AAA>', 'B&B', '"CCC"'));
         $this->assign('title','hello');
         echo $this->render('views/table.phtml');
+        $this->staticize('index.html');
     }
 }

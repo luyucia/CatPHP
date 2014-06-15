@@ -11,6 +11,7 @@ class Controller {
     private $engine;
 
     function __construct($rout) {
+        ob_start();
         $this->rout = $rout;
         $this->engine = new Tenjin_Engine();
     }
@@ -32,10 +33,15 @@ class Controller {
         return $this->rout[$key];
     }
 
-    // public function 
-
     public function __call($name, $arguments) {
         echo $name . ' is not defined!';
+    }
+
+    public function staticize($file)
+    {
+        $fp = fopen($file, "w+");
+        fwrite($fp, ob_get_contents());
+        fclose($fp);
     }
 
 

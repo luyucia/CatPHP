@@ -46,6 +46,8 @@ class TestController extends Controller {
         $table->setData($data);
         echo $table->getHtml();
 
+        
+
     }
 
     
