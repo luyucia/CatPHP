@@ -45,6 +45,11 @@ class Db{
         return $this->db->getData($sql,$model);
     }
 
+    public function getRow($sql)
+    {
+        return $this->db->getRow($sql);
+    }
+
     public function query($sql)
     {
         return $this->db->query($sql);

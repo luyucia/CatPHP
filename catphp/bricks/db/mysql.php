@@ -11,28 +11,26 @@
 class MysqlDriver
 {
 
+
     private $conn;
     private $conf;
     private $last_db_name = null;
 
-    
     // public static function getInstance($config)
     // {
     //     echo "aaa:".var_dump($config!=$this->conf);
     //     if(!(self::$_instance instanceof self) || $config!=$this->conf){
-    
+
     //         self::$_instance = new self($config);
     //     }
 
     //     return self::$_instance;
     // }
-    
-    // public function __clone()
- //    {
- //        trigger_error('Clone is not allowed.', E_USER_ERROR);
- //    }
 
-    
+    // public function __clone()
+    //    {
+    //        trigger_error('Clone is not allowed.', E_USER_ERROR);
+    //    }
 
     public  function __construct($config)
     {
@@ -43,7 +41,7 @@ class MysqlDriver
         // try
         // {
         //     $this->conn = mysql_connect($this->conf['host'].":".$this->conf['port'], $this->conf['username'],$this->conf['password']);
-            
+
         //     if(!$this->conn)
         //     {
         //         throw new Exception('Can not connect with your mysql');
@@ -72,39 +70,24 @@ class MysqlDriver
 
     }
 
-    
-
-    
-
     public function getConnection()
     {
         return $this->conn;
     }
 
-    
-
     public function query($sql)
     {
         $result = mysql_query($sql, $this->conn);
-    
-        if($result){
 
-            $data=false;
-
-            while($row = mysql_fetch_assoc($result)){
-
+        if ($result) {
+            $data = false;
+            while ($row = mysql_fetch_assoc($result)) { 
                 $data[] = $row;
-
             }
-
             return $data;
-
-        }else {
-
-        return false;
-
+        } else {
+            return false;
         }
-
     }
 
     public function execute($sql)
@@ -112,24 +95,31 @@ class MysqlDriver
         mysql_query($sql) or die("Invalid query: " . mysql_error());
     }
 
-    
-
     public function close()
     {
         mysql_close($this->conn);
     }
-
-    
 
     public function getInsertId()
     {
         return mysql_insert_id($this->conn);
     }
 
-    
+    public function getData($sql)
+    {
+        return $this->query($sql);
+    }
 
+    public function getRow($sql)
+    {
+        $result = mysql_query($sql, $this->conn);
 
+        $data = false;
+        if ($result) {
+            $data = mysql_fetch_row($result);
+        }
 
-
+        return $data;
+    }
 
 }
