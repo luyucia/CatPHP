@@ -13,19 +13,19 @@ class MysqlDriver
 
 
     private $conn;
-    private $conf;
-    private $last_db_name = null;
+    private static $_conf;
+    private $last_db_name;
+    private static $_instance;
 
-    // public static function getInstance($config)
-    // {
-    //     echo "aaa:".var_dump($config!=$this->conf);
-    //     if(!(self::$_instance instanceof self) || $config!=$this->conf){
+    public static function getInstance($config)
+    {
+         if(!(self::$_instance instanceof self) || $config != self::$_conf){
+             self::$_conf = $config;
+             self::$_instance = new self($config);
+         }
 
-    //         self::$_instance = new self($config);
-    //     }
-
-    //     return self::$_instance;
-    // }
+         return self::$_instance;
+     }
 
     // public function __clone()
     //    {
@@ -34,13 +34,11 @@ class MysqlDriver
 
     public  function __construct($config)
     {
-
-        $this->conf          = $config;
         $this->last_db_name  = $config['database'];
-        $this->conn = mysql_connect($this->conf['host'].":".$this->conf['port'], $this->conf['username'],$this->conf['password']) or die('Could not connect: ' . mysql_error());
+        $this->conn = mysql_connect($config['host'] . ":" . $config['port'], $config['username'], $config['password']) or die('Could not connect: ' . mysql_error());
         // try
         // {
-        //     $this->conn = mysql_connect($this->conf['host'].":".$this->conf['port'], $this->conf['username'],$this->conf['password']);
+        //     $this->conn = mysql_connect($config['host'].":".$config['port'], $config['username'],$config['password']);
 
         //     if(!$this->conn)
         //     {
@@ -53,8 +51,8 @@ class MysqlDriver
         //     echo 'sdfadfas';
         //     if(isset($config['backnode']))
         //     {
-        //         $this->conf = $config['backnode'];
-        //         $this->conn = mysql_connect($this->conf['host'].":".$this->conf['port'], $this->conf['username'],$this->conf['password']) or die('Could not connect: ' . mysql_error());
+        //         $config = $config['backnode'];
+        //         $this->conn = mysql_connect($config['host'].":".$config['port'], $config['username'],$config['password']) or die('Could not connect: ' . mysql_error());
         //     }
         //     else
         //     {
@@ -62,12 +60,16 @@ class MysqlDriver
         //     }
         // }
 
-        $dbname = $this->conf['database'];
+        $dbname = $config['database'];
 
-        mysql_set_charset($this->conf['encoding'],$this->conn);
+        mysql_set_charset($config['encoding'],$this->conn);
 
         mysql_select_db($dbname, $this->conn) or die("Could not set $dbname: " . mysql_error());
+    }
 
+    private function checkSql($sql)
+    {
+        return mysql_real_escape_string($sql);
     }
 
     public function getConnection()
@@ -77,6 +79,7 @@ class MysqlDriver
 
     public function query($sql)
     {
+        $sql = $this->checkSql($sql);
         $result = mysql_query($sql, $this->conn);
 
         if ($result) {
@@ -92,6 +95,7 @@ class MysqlDriver
 
     public function execute($sql)
     {
+        $sql = $this->checkSql($sql);
         mysql_query($sql) or die("Invalid query: " . mysql_error());
     }
 
@@ -116,7 +120,7 @@ class MysqlDriver
 
         $data = false;
         if ($result) {
-            $data = mysql_fetch_row($result);
+            $data = mysql_fetch_assoc($result);
         }
 
         return $data;

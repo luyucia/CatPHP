@@ -23,7 +23,8 @@ class DbFactory{
         if($db_type=='mysql')
         {
             require_once CLASSPATH.'/mysql.php';
-            return new MysqlDriver($config);
+            //return new MysqlDriver($config);
+            return MysqlDriver::getInstance($config);
         }
         else if($db_type=='oracle')
         {

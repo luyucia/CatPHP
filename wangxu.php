@@ -24,8 +24,9 @@ $db = new Db($dbconfig);
 $data = $db->getData('select * from users');
 if($data)
 {
-    print_r($data);
+    //print_r($data);
 }
+echo "</br>";
 
 $row = $db->getRow('select * from users');
 print_r($row);
