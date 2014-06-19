@@ -41,7 +41,7 @@ class csv
     {
         set_time_limit(0);
         header('Content-Type: application/csv;charset=gbk');
-        header("Content-Disposition: attachment; filename=\"$filename\"");
+        header("Content-Disposition: attachment; filename='$filename'");
     }
 
     // 写入数字到csv的一行
