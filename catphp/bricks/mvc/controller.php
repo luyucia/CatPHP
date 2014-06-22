@@ -12,8 +12,18 @@ class Controller {
 
     function __construct($rout) {
         ob_start();
-        $this->rout = $rout;
-        $this->engine = new Tenjin_Engine();
+        $this->rout   = $rout;
+        $WEB_CONFIG   = CatConfig::getInstance('config/config.php');
+        $template     = $WEB_CONFIG->template_engine;
+        if ($template === 'tenjin' ) {
+            $this->engine = new Tenjin_Engine();
+        }
+        elseif ($template === 'smarty') {
+                echo "暂时不支持smarty";
+                exit();
+            }
+        
+        // D($WEB_CONFIG);
     }
 
     public function assign($key, $value) {

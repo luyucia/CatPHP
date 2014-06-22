@@ -15,6 +15,7 @@ class IndexController extends Controller {
     }
 
     public function indexAction($name = "Stranger") {
+
         $text = 
 <<<EOT
 # 欢迎使用CatPHP !

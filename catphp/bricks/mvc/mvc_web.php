@@ -5,6 +5,7 @@
  */
 require 'web_common_fun.php';
 
+
 class MvcWeb {
 
     function __construct() {
@@ -13,25 +14,26 @@ class MvcWeb {
 
     // 启动
     public static function start() {
-        require 'config/config.php';
+        
+        $WEB_CONFIG  = CatConfig::getInstance('config/config.php');
 
         // 判定路由解析方式,如果是rest风格则
-        if ($WEB_CONFIG['router_rest']) {
+        if ($WEB_CONFIG->router_rest) {
             $rout = self::routerParseRest();
             // 将url中解析后的内容传给$_GET
             $_GET = array_merge($_GET, $rout);
         }
         // 如果不是rest风格
         else {
-            $rout = self::routerParse($WEB_CONFIG['router_name']['c'], $WEB_CONFIG['router_name']['a']);
+            $rout = self::routerParse($WEB_CONFIG->router_name['c'], $WEB_CONFIG->router_name['a']);
         }
-        $controller_file = CONTROLLER_PATH . $rout['c'] . '.php';
+        $controller_file = $WEB_CONFIG->controller_path . $rout['c'] . '.php';
         // 引入controller文件
         if (file_exists($controller_file)) {
             include $controller_file;
         } else {
-            foreach ($WEB_CONFIG['controller_dirs'] as $dir) {
-                $controller_file = CONTROLLER_PATH . $dir . $rout['c'] . '.php';
+            foreach ($WEB_CONFIG->controller_dirs as $dir) {
+                $controller_file = $WEB_CONFIG->controller_path . $dir . $rout['c'] . '.php';
                 if (file_exists($controller_file)) {
                     include $controller_file;
                     break;
