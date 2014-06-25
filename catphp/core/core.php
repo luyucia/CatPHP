@@ -5,7 +5,7 @@
  * An open source php development framework for PHP
  *
  * @package     CatPHP
- * @author      CatPHP Dev Team
+ * @author      luyucia@gmail.com
  * @license     http://codeigniter.com/user_guide/license.html
  * @link        http://catphp.org
  * @since       Version 1.0
@@ -37,7 +37,6 @@ spl_autoload_register('cat_core_bricks_autoload');
 
 /**
  * @name cat_core_bricks_autoload
- * @author luyucia@gmail.com
  * @param 定义函数或者方法的参数信息
  * @return 定义函数或者方法的返回信息
  * @version v 0.1
