@@ -3,7 +3,7 @@
 // 路径都用绝对路径，因为节省系统调用，比相对路径效率高
 
 // 加载核心配置文件
-$config     = require CAT_BASE.'/config/core_config.php';
+$config     = require CAT_BASE.'/config/core_class_config.php';
 // 加载第三方类库配置文件
 $thr_config = require CAT_BASE.'/config/thr_class_config.php';
 
