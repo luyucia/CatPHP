@@ -9,12 +9,12 @@ class IndexController extends Controller {
     /** 
      * 默认动作
      */
-    public function lookAction($name = "Stranger") {
+    public function lookGetAction($name = "Stranger") {
         echo "<pre>";
         print_r($_GET);
     }
 
-    public function indexAction($name = "Stranger") {
+    public function indexGetAction($name = "Stranger") {
 
         $text = 
 <<<EOT
@@ -29,5 +29,10 @@ EOT;
         $this->assign('title','hello');
         echo $this->render('views/table.phtml');
         $this->staticize('index.html');
+    }
+
+    public function testPostAction()
+    {
+        echo "this is a post";
     }
 }

@@ -20,12 +20,14 @@ class MvcWeb {
         // 判定路由解析方式,如果是rest风格则
         if ($WEB_CONFIG->router_rest) {
             $rout = self::routerParseRest();
+            $restVerb  = ucfirst(strtolower($_SERVER['REQUEST_METHOD']));
             // 将url中解析后的内容传给$_GET
             $_GET = array_merge($_GET, $rout);
         }
         // 如果不是rest风格
         else {
             $rout = self::routerParse($WEB_CONFIG->router_name['c'], $WEB_CONFIG->router_name['a']);
+            $restVerb = '';
         }
         $controller_file = $WEB_CONFIG->controller_path . $rout['c'] . '.php';
         // 引入controller文件
@@ -41,8 +43,10 @@ class MvcWeb {
             }
         }
 
+        
+
         $class = $rout['c'] . 'Controller';
-        $methd = $rout['a'] . 'Action';
+        $methd = $rout['a'] . $restVerb .'Action';
 
         $controller = new $class($rout);
         $controller->$methd();

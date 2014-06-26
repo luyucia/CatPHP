@@ -6,7 +6,7 @@
 class TestController extends Controller {
 
 
-    public function indexAction() {
+    public function indexGetAction() {
         header("Content-type: text/html; charset=utf-8"); 
         
         $dbconfig = array(
@@ -27,7 +27,7 @@ class TestController extends Controller {
         L("Log.log","1","1");
     }
 
-    public function testAction() {
+    public function testGetAction() {
         echo 'hello cat';
         $dbconfig = array(
         'type'=>'mysql',

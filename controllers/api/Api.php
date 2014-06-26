@@ -6,11 +6,11 @@
 class ApiController extends Controller {
 
 
-    public function indexAction() {
+    public function indexGetAction() {
         echo "<a href='Api/Api'>请点击</a>";
     }
 
-    public function ApiAction() {
+    public function ApiGetAction() {
         echo 'hello cat';
     }
 
