@@ -35,4 +35,9 @@ EOT;
     {
         echo "this is a post";
     }
+
+    public function testPutAction()
+    {
+        echo "this is a put";
+    }
 }
