@@ -2,7 +2,7 @@
 $a = microtime(true);
 
 require 'catphp/catphp.php';
-MvcWeb::start();
+Web::start();
 
 echo microtime(true)-$a;
 ?>

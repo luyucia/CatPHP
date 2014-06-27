@@ -6,7 +6,7 @@ return  array
     (
         'Singleton'=>'/core/singleton.php',
         'CatConfig'=>'/core/cat_config.php',
-        'MvcWeb'=>'/bricks/mvc/mvc_web.php',
+        'Web'=>'/bricks/mvc/web.php',
         'Controller'=>'/bricks/mvc/controller.php',
         'Select'=>'/bricks/sql/select.php',
         'Dml'=>'/bricks/sql/dml.php',

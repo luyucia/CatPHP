@@ -6,7 +6,7 @@
 require 'web_common_fun.php';
 
 
-class MvcWeb {
+class Web {
 
     function __construct() {
         
@@ -51,8 +51,9 @@ class MvcWeb {
             foreach ($rout as $key => $value) {
                 if($key==='c' || $key==='last') 
                     continue;
-                elseif ($key==='a') {
-                    $params[] = $value;
+                elseif ( $key==='a') {
+                    if ($value!=='' && $value!=='index') 
+                        $params[] = $value;
                 }
                 else {
                     $params[] = $key;
@@ -62,7 +63,6 @@ class MvcWeb {
             if (isset($rout['last'])) {
                 $params[] = $rout['last'];
             }
-            D($params);
         }
         else {
             $methd = $rout['a'] . 'Action';
@@ -71,6 +71,9 @@ class MvcWeb {
 
         $class = $rout['c'] . 'Controller';
         $controller = new $class($rout);
+        if (isset($params)) {
+            $controller->setRequest($params);
+        }
         $controller->$methd();
     }
 

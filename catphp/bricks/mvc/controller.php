@@ -9,6 +9,7 @@ class Controller {
 
     private $context = array();
     private $engine;
+    protected $request;
 
     function __construct($rout) {
         ob_start();
@@ -35,8 +36,17 @@ class Controller {
         return $output;
     }
 
-    protected function getRequest() {
-        
+    public function getRequest($key,$default = false) {
+        if (isset($this->request[$key])) {
+            return $this->request[$key];
+        }else {
+            return $default;
+        }
+    }
+
+    public function setRequest($req)
+    {
+        $this->request = $req;
     }
 
     protected function getRoutRequest($key) {
