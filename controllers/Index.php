@@ -9,12 +9,12 @@ class IndexController extends Controller {
     /** 
      * 默认动作
      */
-    public function lookGetAction($name = "Stranger") {
+    public function lookAction($name = "Stranger") {
         echo "<pre>";
         print_r($_GET);
     }
 
-    public function indexGetAction($name = "Stranger") {
+    public function indexAction($name = "Stranger") {
 
         $text = 
 <<<EOT
@@ -23,6 +23,9 @@ class IndexController extends Controller {
 EOT;
         $result = Parsedown::instance()->parse($text);
         // echo $result;
+        $ip = new IpLocation();
+        $loc = $ip->getlocation('61.148.17.34');
+        echo $loc['country'];
 
         $this->assign('result',$result);
         $this->assign('items',array('<AAA>', 'B&B', '"CCC"'));
@@ -31,13 +34,4 @@ EOT;
         $this->staticize('index.html');
     }
 
-    public function testPostAction()
-    {
-        echo "this is a post";
-    }
-
-    public function testPutAction()
-    {
-        echo "this is a put";
-    }
 }

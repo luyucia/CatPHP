@@ -15,19 +15,19 @@ class MvcWeb {
     // 启动
     public static function start() {
         
-        $WEB_CONFIG  = CatConfig::getInstance('config/config.php');
+        $WEB_CONFIG   = CatConfig::getInstance('config/config.php');
+        // $REST_CONFIG  = CatConfig::getInstance('config/rest.php');
 
         // 判定路由解析方式,如果是rest风格则
         if ($WEB_CONFIG->router_rest) {
             $rout = self::routerParseRest();
-            $restVerb  = ucfirst(strtolower($_SERVER['REQUEST_METHOD']));
             // 将url中解析后的内容传给$_GET
-            $_GET = array_merge($_GET, $rout);
+            // $_GET = array_merge($_GET, $rout);
+            $_GET = $_GET + $rout;
         }
         // 如果不是rest风格
         else {
             $rout = self::routerParse($WEB_CONFIG->router_name['c'], $WEB_CONFIG->router_name['a']);
-            $restVerb = '';
         }
         $controller_file = $WEB_CONFIG->controller_path . $rout['c'] . '.php';
         // 引入controller文件
@@ -42,12 +42,34 @@ class MvcWeb {
                 }
             }
         }
+        // 如果控制器属于rest
+        if( in_array($rout['c'], $WEB_CONFIG->rest_controllers) )
+        {
+            $restVerb  = ucfirst(strtolower($_SERVER['REQUEST_METHOD']));
+            $methd     = $restVerb;
+            $params = array();
+            foreach ($rout as $key => $value) {
+                if($key==='c' || $key==='last') 
+                    continue;
+                elseif ($key==='a') {
+                    $params[] = $value;
+                }
+                else {
+                    $params[] = $key;
+                    $params[] = $value;
+                }
+            }
+            if (isset($rout['last'])) {
+                $params[] = $rout['last'];
+            }
+            D($params);
+        }
+        else {
+            $methd = $rout['a'] . 'Action';
+        }
 
-        
 
         $class = $rout['c'] . 'Controller';
-        $methd = $rout['a'] . $restVerb .'Action';
-
         $controller = new $class($rout);
         $controller->$methd();
     }
@@ -67,19 +89,21 @@ class MvcWeb {
             $url = substr($url, 0, $e);
         }
         if ($url) {
-
             $r = explode('/', $url);
             $rtn['c'] = $r[0];
             // 如果设置了action
             if (isset($r[1])) {
                 $rtn['a'] = $r[1];
                 $l = count($r);
-                if ($r % 2 != 0) {
+                if ($l>2 && $l % 2 != 0) {
                     $l-=1;
+                    $hasLast = true;
                 }
                 for ($i = 2; $i < $l; $i+=2) {
                     $rtn[$r[$i]] = $r[$i + 1];
                 }
+                if(isset($hasLast))
+                    $rtn['last'] = $r[$l];
             }
             return $rtn;
         } else {
