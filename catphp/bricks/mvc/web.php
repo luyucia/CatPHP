@@ -8,8 +8,15 @@ require 'web_common_fun.php';
 
 class Web {
 
+    static $rout_rules;
+
     function __construct() {
         
+    }
+
+    public function setRouter($pattern,$controller)
+    {
+        self::$rout_rules[] = array('p' => $pattern, 'c'=>$controller);
     }
 
     // 启动
@@ -80,6 +87,7 @@ class Web {
     // 路由解析
     // 测试 10万次执行时间<1s
     private static function routerParseRest() {
+        print_r(self::$rout_rules);
         $rtn = array(
             'c' => 'index',
             'a' => 'index'
