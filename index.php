@@ -4,12 +4,12 @@ $a = microtime(true);
 require 'catphp/catphp.php';
 
 
-Web::setRouter("^blog$","test");
-Web::setRouter("^blog1$","test");
-Web::setRouter("^blog2$","test");
-Web::setRouter("^blog3$","test");
-Web::setRouter("^blog4$","test");
-Web::setRouter("^blog5$","test");
+Web::setRouter("^\w*\/","api",'index');
+Web::setRouter("^blog1$","test",'index');
+Web::setRouter("^blog2$","test",'index');
+Web::setRouter("^blog3$","test",'index');
+Web::setRouter("^blog4$","test",'index');
+Web::setRouter("^blog5$","test",'index');
 
 Web::start();
 

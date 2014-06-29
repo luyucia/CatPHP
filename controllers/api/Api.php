@@ -8,8 +8,8 @@ class ApiController extends Controller {
 
     public function Get() {
         // echo "<a href='Api/Api'>click</a>";
-        $id = $this->getRequest(0,'monren');
-        echo $id;
+        $id = $this->getRequest(0,'none');
+        echo '<h1>project:'.$id.'</h1>';
     }
 
     public function Post() {

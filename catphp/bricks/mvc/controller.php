@@ -7,9 +7,9 @@
 
 class Controller {
 
-    private $context = array();
-    private $engine;
-    protected $request;
+    private    $context = array();
+    private    $engine;
+    protected  $request;
 
     function __construct($rout) {
         ob_start();

@@ -14,9 +14,9 @@ class Web {
         
     }
 
-    public function setRouter($pattern,$controller)
+    public function setRouter($pattern,$controller,$action)
     {
-        self::$rout_rules[] = array('p' => $pattern, 'c'=>$controller);
+        self::$rout_rules[] = array('p' => $pattern, 'c'=>$controller ,'a'=>$action);
     }
 
     // 启动
@@ -27,14 +27,17 @@ class Web {
 
         // 判定路由解析方式,如果是rest风格则
         if ($WEB_CONFIG->router_rest) {
-            $rout = self::routerParseRest();
+            $rout = self::routeParseReg();
+            if ( !is_array($rout) ) {
+                $rout = self::routeParseRest();
+            }
             // 将url中解析后的内容传给$_GET
             // $_GET = array_merge($_GET, $rout);
             $_GET = $_GET + $rout;
         }
         // 如果不是rest风格
         else {
-            $rout = self::routerParse($WEB_CONFIG->router_name['c'], $WEB_CONFIG->router_name['a']);
+            $rout = self::routeParse($WEB_CONFIG->router_name['c'], $WEB_CONFIG->router_name['a']);
         }
         $controller_file = $WEB_CONFIG->controller_path . $rout['c'] . '.php';
         // 引入controller文件
@@ -84,10 +87,51 @@ class Web {
         $controller->$methd();
     }
 
+    // 解析正则规则
+    private static function routeParseReg()
+    {
+        if (count(self::$rout_rules)=== 0) {
+            return false;
+        } else {
+            $index = strpos($_SERVER['SCRIPT_NAME'], '/', 1) + 1;
+            $url = substr($_SERVER['REQUEST_URI'], $index);
+            $rtn = array(
+            'c' => 'index',
+            'a' => 'index'
+            );
+            foreach (self::$rout_rules as $rules) {
+                if (preg_match('#'.$rules['p'].'#', $url,$matchs))
+                {
+                    $rtn['c'] = $rules['c'];
+                    $rtn['a'] = $rules['a'];
+                    $url = str_replace($matchs[0], "", $url);
+                    $e   = strpos($url, '?');
+                    if ($e) {
+                        $url = substr($url, 0, $e);
+                    }
+                    $r = explode('/', $url);
+                    $l = count($r);
+                    if ($l % 2 != 0) {
+                        $l-=1;
+                        $hasLast = true;
+                    }
+                    for ($i = 0; $i < $l; $i+=2) {
+                        $rtn[$r[$i]] = $r[$i + 1];
+                    }
+                    if(isset($hasLast))
+                        $rtn['last'] = $r[$l];
+                    return $rtn;
+                }
+            }
+            return false;
+        }
+    }
+
+
+
     // 路由解析
     // 测试 10万次执行时间<1s
-    private static function routerParseRest() {
-        print_r(self::$rout_rules);
+    private static function routeParseRest() {
         $rtn = array(
             'c' => 'index',
             'a' => 'index'
@@ -122,7 +166,7 @@ class Web {
         }
     }
 
-    private static function routerParse($cName, $aName) {
+    private static function routeParse($cName, $aName) {
 
         $rtn = array(
             'c' => 'index',
