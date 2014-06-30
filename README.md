@@ -97,3 +97,11 @@ rewrite p1 p2 flag
 原理：将url请求解析到index.php，由框架中的路由解析功能，解析请求后加载指定的类
 
 
+url规则
+
+1、router_rest 
+```
+
+```
+
+
