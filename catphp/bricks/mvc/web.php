@@ -3,27 +3,28 @@
 /**
  * 
  */
-require 'web_common_fun.php';
+require 'common.php';
 
 
 class Web {
 
     static $rout_rules;
 
-    function __construct() {
+    // function __construct() {
         
-    }
+    // }
 
-    public function setRouter($pattern,$controller,$action)
-    {
-        self::$rout_rules[] = array('p' => $pattern, 'c'=>$controller ,'a'=>$action);
-    }
+    // public function setRouter($pattern,$controller,$action)
+    // {
+    //     self::$rout_rules[] = array('p' => $pattern, 'c'=>$controller ,'a'=>$action);
+    // }
 
     // 启动
     public static function start() {
         
         $WEB_CONFIG   = CatConfig::getInstance('config/config.php');
         // $REST_CONFIG  = CatConfig::getInstance('config/rest.php');
+        self::$rout_rules = $WEB_CONFIG->route_regular;
 
         // 判定路由解析方式,如果是rest风格则
         if ($WEB_CONFIG->router_rest) {

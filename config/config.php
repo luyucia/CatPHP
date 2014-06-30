@@ -11,7 +11,10 @@ return array(
             'a' => 'a',
         ), 
     // 模板引擎 可选（tenjin smarty php）
-    'template_engine'=>'tenjin'
+    'template_engine'=>'tenjin',
+    'route_regular'=>array(
+            array('p'=>'^\w*\/','c'=>'api','a'=>'index')
+        )
     );
 
 ?>
