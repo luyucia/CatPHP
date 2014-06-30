@@ -80,6 +80,7 @@ class Web {
         }
 
 
+
         $class = $rout['c'] . 'Controller';
         $controller = new $class($rout);
         if (isset($params)) {
@@ -95,7 +96,7 @@ class Web {
             return false;
         } else {
             $index = strpos($_SERVER['SCRIPT_NAME'], '/', 1) + 1;
-            $url = substr($_SERVER['REQUEST_URI'], $index);
+            $url = rtrim( substr($_SERVER['REQUEST_URI'] , $index),"/");
             $rtn = array(
             'c' => 'index',
             'a' => 'index'
@@ -117,6 +118,8 @@ class Web {
                         $hasLast = true;
                     }
                     for ($i = 0; $i < $l; $i+=2) {
+                        if($r[$i]==='c' || $r[$i]==='a')
+                            continue;
                         $rtn[$r[$i]] = $r[$i + 1];
                     }
                     if(isset($hasLast))
@@ -139,7 +142,7 @@ class Web {
         );
 
         $index = strpos($_SERVER['SCRIPT_NAME'], '/', 1) + 1;
-        $url = substr($_SERVER['REQUEST_URI'], $index);
+        $url = rtrim( substr($_SERVER['REQUEST_URI'] , $index),"/");
         $e = strpos($url, '?');
         if ($e) {
             $url = substr($url, 0, $e);
@@ -147,15 +150,18 @@ class Web {
         if ($url) {
             $r = explode('/', $url);
             $rtn['c'] = $r[0];
+
             // 如果设置了action
             if (isset($r[1])) {
-                $rtn['a'] = $r[1];
+                $rtn['a'] = $r[1]==''?'index':$r[1];
                 $l = count($r);
                 if ($l>2 && $l % 2 != 0) {
                     $l-=1;
                     $hasLast = true;
                 }
                 for ($i = 2; $i < $l; $i+=2) {
+                    if($r[$i]==='c' || $r[$i]==='a')
+                        continue;
                     $rtn[$r[$i]] = $r[$i + 1];
                 }
                 if(isset($hasLast))
