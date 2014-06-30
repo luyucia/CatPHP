@@ -13,7 +13,7 @@ return array(
     // 模板引擎 可选（tenjin smarty php）
     'template_engine'=>'tenjin',
     'route_regular'=>array(
-            // array('p'=>'^\w*\/','c'=>'api','a'=>'index')
+            array('p'=>'^\w{6}\/','c'=>'api','a'=>'index')
         )
     );
 
