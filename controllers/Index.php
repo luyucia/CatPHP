@@ -9,12 +9,12 @@ class IndexController extends Controller {
     /** 
      * 默认动作
      */
-    public function lookAction($name = "Stranger") {
+    public function look($name = "Stranger") {
         echo "<pre>";
         print_r($_GET);
     }
 
-    public function indexAction($name = "Stranger") {
+    public function index($name = "Stranger") {
 
         $text = 
 <<<EOT

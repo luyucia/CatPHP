@@ -9,7 +9,7 @@ class UserController extends Controller {
     /** 
      * 默认动作
      */
-    public function indexAction($name = "Stranger") {
+    public function index($name = "Stranger") {
         D($_GET);
     }
 

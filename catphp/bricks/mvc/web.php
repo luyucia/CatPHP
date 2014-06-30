@@ -76,7 +76,7 @@ class Web {
             }
         }
         else {
-            $methd = $rout['a'] . 'Action';
+            $methd = $rout['a'];
         }
 
 
