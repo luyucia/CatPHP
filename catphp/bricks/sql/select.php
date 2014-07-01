@@ -30,8 +30,10 @@ class select{
     }
 
     // like in 
-    public function where($column,$value,$cond='=',$quot=null,$logic='and')
+    public function where($column,&$value,$cond='=',$quot=null,$logic='and')
     {
+        if(!isset($value)) 
+            return;
         // 如果quor为null则调用type自动判断是否加单引号
         if($quot===null)
         {
@@ -102,11 +104,14 @@ class select{
         
         if (is_array($columns)) 
         {
-            $this->orderby = ' order by ';
-            foreach ($columns as $key => $value) {
-                $this->orderby .= "$key $value,";
+            if(count($columns)) {
+                
+                $this->orderby = ' order by ';
+                foreach ($columns as $key => $value) {
+                    $this->orderby .= "$key $value,";
+                }
+                $this->orderby = rtrim($this->orderby,",");
             }
-            $this->orderby = rtrim($this->orderby,",");
         }
         else
         {
@@ -133,10 +138,10 @@ class select{
     }
 
 
-    public function page_sql($page,$per_age,$dbtype='mysql')
+    public function pageSql($page,$per_age,$dbtype='mysql')
     {
-        $low = $page*$per_age;
-        $ori_sql = $this->to_string();
+        $low = ($page-1)*$per_age;
+        $ori_sql = $this->getSql();
         if($dbtype=='mysql' or $dbtype=='postgresql')
         {
             return $ori_sql." limit $low $per_age";
