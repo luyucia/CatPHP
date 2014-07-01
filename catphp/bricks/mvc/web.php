@@ -21,7 +21,8 @@ class Web {
 
     // 启动
     public static function start() {
-        
+
+        spl_autoload_register('web_autoload');
         $WEB_CONFIG   = CatConfig::getInstance('config/config.php');
         // $REST_CONFIG  = CatConfig::getInstance('config/rest.php');
         self::$rout_rules = $WEB_CONFIG->route_regular;
@@ -88,6 +89,8 @@ class Web {
         }
         $controller->$methd();
     }
+
+
 
     // 解析正则规则
     private static function routeParseReg()
@@ -191,6 +194,10 @@ class Web {
 
 }
 
-
+function web_autoload($class)
+{
+    $WEB_CONFIG   = CatConfig::getInstance('config/config.php');
+    require $WEB_CONFIG->controller_path.$class.'.php';
+}
 
 ?>

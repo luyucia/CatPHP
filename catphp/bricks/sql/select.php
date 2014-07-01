@@ -1,7 +1,6 @@
 <?php
 
-include_once 'sql.interface.php';
-class select implements sql{
+class select{
 
     private $from      = '';
     private $columns   = ' * ';
@@ -20,7 +19,9 @@ class select implements sql{
     {
         if (is_array($columns)) 
         {
-            $this->columns = implode(',', $columns);
+            if (count($columns)) {
+                $this->columns = implode(',', $columns);
+            }
         }
         else
         {
@@ -96,12 +97,16 @@ class select implements sql{
         }
     }
 
-    public function orderby($columns)
+    public function orderBy($columns)
     {
         
         if (is_array($columns)) 
         {
-            $this->orderby = ' order by '.implode(',', $columns);
+            $this->orderby = ' order by ';
+            foreach ($columns as $key => $value) {
+                $this->orderby .= "$key $value,";
+            }
+            $this->orderby = rtrim($this->orderby,",");
         }
         else
         {
@@ -109,7 +114,7 @@ class select implements sql{
         }
     }
 
-    public function to_string()
+    public function getSql()
     {
         $where ='';
         $t     = '';

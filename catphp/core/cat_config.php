@@ -24,6 +24,11 @@ class CatConfig
         
     }
 
+    public function getConfig()
+    {
+        return self::$config;
+    }
+
     public function __get($key)
     {
         return self::$config[$key];
