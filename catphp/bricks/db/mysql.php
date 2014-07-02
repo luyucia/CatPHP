@@ -43,14 +43,20 @@ class MysqlDriver
         return $this->conn;
     }
 
-    public function query($sql)
+    public function query($sql, $mode)
     {
         // $sql = $this->checkSql($sql);
         $result = mysqli_query($this->conn, $sql);
 
         if ($result) {
             $data = false;
-            while ($row = mysqli_fetch_assoc($result)) {
+
+            if ($mode == 0)
+                $modeType = MYSQLI_ASSOC;
+            else
+                $modeType = MYSQLI_NUM;
+
+            while ($row = mysqli_fetch_array($result, $modeType)) {
                 $data[] = $row;
             }
             return $data;
@@ -75,9 +81,9 @@ class MysqlDriver
         return mysqli_insert_id($this->conn);
     }
 
-    public function getData($sql)
+    public function getData($sql, $mode = 0)
     {
-        return $this->query($sql);
+        return $this->query($sql, $mode);
     }
 
     public function getRow($sql)

@@ -9,6 +9,10 @@ class select{
     private $orderby   = '';
     public  $where_arr = array();
 
+    public function __construct(){
+        error_reporting(E_ALL ^ E_STRICT);
+    }
+
     public function from($s)
     {
         $this->from = $s;
@@ -32,7 +36,7 @@ class select{
     // like in 
     public function where($column,&$value,$cond='=',$quot=null,$logic='and')
     {
-        if(!isset($value)) 
+        if(!isset($value) || $value==='') 
             return;
         // 如果quor为null则调用type自动判断是否加单引号
         if($quot===null)
@@ -144,7 +148,20 @@ class select{
         $ori_sql = $this->getSql();
         if($dbtype=='mysql' or $dbtype=='postgresql')
         {
-            return $ori_sql." limit $low $per_age";
+            return $ori_sql." limit $low,$per_age";
+        }
+        else if($dbtype='oracle')
+        {
+            return $ori_sql;
+        }
+    }
+
+    public function totalPageSql($dbtype='mysql')
+    {
+        $ori_sql = $this->getSql();
+        if($dbtype=='mysql' or $dbtype=='postgresql')
+        {
+            return str_replace($this->columns, ' count(*) as total', $ori_sql );
         }
         else if($dbtype='oracle')
         {

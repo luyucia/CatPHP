@@ -197,7 +197,8 @@ class Web {
 function web_autoload($class)
 {
     $WEB_CONFIG   = CatConfig::getInstance('config/config.php');
-    require $WEB_CONFIG->controller_path.$class.'.php';
+    $class = str_replace("Controller", "", $class);
+    require $WEB_CONFIG->controller_path.strtolower($class).'.php';
 }
 
 ?>
