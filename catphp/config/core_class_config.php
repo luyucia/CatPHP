@@ -15,6 +15,7 @@ return  array
         'HtmlTable'=>'/bricks/html/html_table.php',
         'IpLocation'=>'/bricks/ip/ip_location.php',
         'ArrayUtil'=>'/bricks/common/array_util.php',
+        'Cache'=>'/bricks/cache/cache.php',
     ),
 
 
