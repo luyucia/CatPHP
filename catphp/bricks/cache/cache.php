@@ -11,12 +11,16 @@ class Cache
     function __construct($config)
     {
         if(is_array($config)) {
-            if ($config['type'] === 'memcache') {
-                include 'driver/memcache.php';
-                $_instance = new memcacheDriver($config);
-            }else if ($config['type'] === 'redis') {
-                $_instance = new redisDriver($config);
-            }
+            $type = $config['type'];
+            include 'driver/'.$type.'.php';
+            $className = $type.'Driver';
+            $this->_instance = new $className($config);
+            // if ( === 'memcache') {
+            //     include 'driver/memcache.php';
+            //     $_instance = new memcacheDriver($config);
+            // }else if ($config['type'] === 'redis') {
+            //     $_instance = new redisDriver($config);
+            // }
         }
     }
 
@@ -24,24 +28,24 @@ class Cache
      * @name get
      * @example:$cache->get('user');
      */
-    public function get() {
-        echo 'get';
+    public function get($key) {
+        return $this->_instance->get($key);
     }
 
     /**
      * @name set
      * @example:$cache->set('user','aaa');
      */
-    public function set() {
-
+    public function set($key,$value) {
+        return $this->_instance->set($key,$value);
     }
 
     /**
      * @name delete
      * @example:$cache->delete('user');
      */
-    public function delete() {
-
+    public function delete($key) {
+        return $this->_instance->delete($key);
     }
 
     /**
@@ -49,15 +53,15 @@ class Cache
      * @example:$cache->clean();
      */
     public function clean() {
-
+        return $this->_instance->clean();
     }
 
     /**
      * @name keys
      * @example:$cache->keys();
      */
-    public function keys() {
-
+    public function keys($match='*') {
+        return $this->_instance->keys($match);
     }
 }
 
