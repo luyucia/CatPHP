@@ -1,0 +1,446 @@
+/*
+author:mayanli;
+data:2014-6-25;
+*/
+body {color: #333;}
+a {text-decoration: none; color: #1b98f8;}
+/*common styles*/
+.height-1{
+    height: 1em;
+}
+/*some of the button styles to make my buttons look unique*/
+.primary-button,.secondary-button {
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    border-radius: 4px;
+}
+.primary-button{
+    color: #fff;
+    background: #1b98f8;
+}
+.secondary-button {
+    background: #fff;
+    border: 1px solid #ddd;
+    color: #666;
+    padding: 0.5em 2em;
+    font-size: 80%;
+}
+.button-success,.button-error,.button-warning,.button-secondary,.button-add{
+    color: white;
+    border-radius: 4px;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+}
+.button-success {
+    background: rgb(28, 184, 65); /*green */
+}
+.button-error {
+    background: rgb(202, 60, 60); /*maroon */
+}
+.button-warning {
+    background: rgb(223, 117, 20); /*orange */
+}
+.button-secondary {
+    background: rgb(66, 184, 221); /*light blue */
+}
+.button-add{
+    background: #1b98f8;
+}
+
+/*add menu pop-up box, applied all pages*/
+.setup{
+    position: absolute; left: 50%; top: 10%; margin-left: -130px;
+    width: 240px;
+    height: 150px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    box-shadow: 0px 0px 2px #ccc;
+    display: none;
+}
+.setup .pure-u-1-3{width: 100%; margin-bottom: 1em;}
+.setup .pure-u-1-3 label{text-align: center; padding: 10px 0px;}
+.setup .pure-u-1-3 input{margin: 0 auto;}
+.setup .pure-u-1-3 input.error{border-color:red;}
+.ml22{
+    margin-left: 2.2em;
+    float: left;
+}
+.mr22{
+    margin-right: 2.2em;
+    float: right;
+}
+.mr-tb2{
+    margin: 2em 0em;
+}
+/* This layout consists of three main elements,but different page corresponding to the different layout, A total of three.*/
+#layout, #nav, #list, #main,#wrap,#page-all {
+    margin: 0;
+    padding: 0;
+}
+/*make the nav styles on phones,nav by default only show 导航*/
+#nav {
+    width: 100%;
+    height: 40px;
+    position: relative;
+    background: rgb(37, 42, 58);
+    text-align: center;
+}
+#nav .nav-menu-button {
+    display: block;
+    top: 0.5em;
+    right: 0.5em;
+    position: absolute;
+}
+#nav.active {
+    height: 80%;
+}
+.nav-inner {
+    display: none;
+}
+#nav.active .nav-inner {
+    display: block;
+    padding: 2em 0;
+}
+/*
+ *nav styles,Styling the default .nav-menu to look a little more unique.
+ */
+#nav .pure-menu.pure-menu-open {
+    background: transparent;
+    border: none;
+    text-align: left;
+}
+#nav .pure-menu li.menu-li{
+    position: relative;
+}
+#nav .pure-menu li.menu-li span{
+    position: absolute;
+    left: 16px;
+    top: 10px;
+    cursor: pointer;
+}
+#nav .pure-menu li.menu-li{
+    position: relative;
+}
+#nav .pure-menu a:hover,
+#nav .pure-menu a:focus {
+    background: rgb(55, 60, 90);
+}
+#nav .pure-menu a {
+    color: #fff;
+    padding-left: 36px;
+}
+#nav .pure-menu .second-menu a{
+    font-size: 0.8em;
+    padding-left: 2em;
+}
+#nav .pure-menu.pure-menu-open ul{
+    position: static;
+    visibility: visible;
+}
+#menu-add{
+    padding: 0.4em 0.6em;
+    margin: 1em 0em 0em 1em;
+    font-size: 0.8em;
+}
+#menu-add-text{
+    width: 120px;
+    margin: 0.5em auto;
+    display: none;
+}
+#menu-add-text button{
+    padding: 0.4em 0.6em;
+    font-size: 0.8em;
+    margin-top: 1em;
+}
+#menu-add-text input{
+    width: 100%;
+}
+/*email styles*/
+.email-label-personal,.email-label-work,.email-label-travel {
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    margin-right: 0.5em;
+    border-radius: 3px;
+    line-height: 1.0em;
+    text-align: center;
+    font-weight: bold;
+}
+.email-label-personal {
+    background: #ffc94c;
+    text-indent: -999em;
+}
+.email-label-work {
+    background: #41ccb4;
+}
+.email-label-travel {
+    background: #40c365;
+}
+
+
+/*email-items styles by lists*/
+.email-item {
+    padding: 0.9em 1em;
+    border-bottom: 1px solid #ddd;
+    border-left: 6px solid transparent;
+}
+.email-avatar {
+    border-radius: 3px;
+    margin-right: 0.5em;
+}
+.email-name,.email-subject {
+    margin: 0;
+}
+.email-name {
+    text-transform: uppercase;
+    color: #999;
+}
+.email-desc {
+    font-size: 80%;
+    margin: 0.4em 0;
+}
+.email-item-selected {
+    background: #eee;
+}
+.email-item-unread {
+    border-left: 6px solid #1b98f8;
+}
+
+/* Email Content Styles */
+.email-content-header, .email-content-body, .email-content-footer,.chapter-content-body {
+    padding: 1em 2em;
+}
+.email-content-header {
+    border-bottom: 1px solid #ddd;
+}
+.email-content-title {
+    margin: 0.5em 0 0;
+}
+.email-content-subtitle {
+    font-size: 1em;
+    margin: 0;
+    font-weight: normal;
+}
+.email-content-subtitle span {
+    color: #999;
+}
+.email-content-controls {
+    margin-top: 2em;
+    text-align: right;
+}
+.email-content-controls .secondary-button {
+    margin-bottom: 0.3em;
+}
+
+.email-avatar {
+    width: 40px;
+    height: 40px;
+}
+.content {
+    margin: 0 auto;
+    padding: 0 2em;
+    min-width: 400px;
+    margin-bottom: 50px;
+}
+/*editor document page styles*/
+#result {
+    width: 100%;
+    margin: 0em;
+    border-bottom: 1px solid #ddd;
+}
+/*
+ * -- table (and up) media queries --
+ * On tablets and other medium-sized devices, we want to customize some
+ * of the mobile styles.
+ */
+@media (min-width: 40em) {
+/*common styles Styling the default on larger 640px*/
+    #nav, #list, #result,#main,#editor{
+        position: fixed; /* These are position:fixed; elements will fill the screen */
+        top: 0;
+        bottom: 0;
+        overflow: auto;
+    }
+    .nav-inner {/* Show the menu items on the larger screen */
+        display: block;
+        padding: 4em 0;
+    }
+    #nav .nav-menu-button {/* Hide the "Menu" button on larger screens */
+        display: none;
+    }
+    .content{
+        width: 80%;
+    }
+/*index styles*/
+    #page-all{
+        padding-left:150px; 
+        position: relative;
+    }
+    #page-all #nav{
+        margin-left:-150px; /* "left col (nav + list)" width */
+        width:150px;
+        height: 100%;
+    }
+    #page-all #main{
+        position: static;
+        padding: 0;
+        width: 130%;
+    }
+/*list page styles*/
+    #layout {
+            padding-left:500px; 
+            position: relative;
+        }
+    #layout #nav {
+        margin-left:-500px; /* "left col (nav + list)" width */
+        width:150px;
+        height: 100%;
+    }
+    #layout #list{
+        margin-left: -350px;
+        width: 100%;
+        height: 33%;
+        border-bottom: 1px solid #ddd;
+    }
+    #layout #main { /* only used by < 960*/
+        position: fixed;
+        top: 33%;
+        right: 0;
+        bottom: 0;
+        left: 150px;
+        overflow: auto;
+        width: auto; 
+    } 
+/*editor document page styles*/
+    #markdown{
+        padding-left:500px; 
+        position: relative;
+    }
+    #markdown #nav{
+        margin-left:-500px; /* "left col (nav + list)" width */
+        width:150px;
+        height: 100%;
+    }
+    #editor{ /* only used by < 960*/
+        position: fixed;
+        top: 40%;
+        right: 0;
+        bottom: 0;
+        left: 150px;
+        overflow: auto;
+        width: auto; 
+    }
+    #result {  /*used by srceen larger 960px*/
+        margin-left: -350px;
+        width:100%;
+        height: 40%;
+        border-right: 1px solid #ddd;
+    }
+}
+
+/*
+ * -- desktop (and up) media queries --
+ * On desktops and other large-sized devices, we want to customize some
+ * of the mobile styles.
+ */
+@media (min-width: 60em) {
+    .content{
+        width: 80%;
+    }
+/*index styles*/
+    #page-all{
+        padding-left:150px; 
+        position: relative;
+    }
+    #page-all #nav{
+        margin-left:-150px; /* "left col (nav + list)" width */
+        width:150px;
+        height: 100%;
+    }
+    #page-all #main{
+        position: static;
+        padding: 0;
+        width: 130%;
+    }
+/*list page styles*/
+    #layout #list {
+        margin-left: -350px;
+        width:350px;
+        height: 100%;
+        border-right: 1px solid #ddd;
+    }
+    #layout #main{
+        position: static;
+        margin: 0;
+        padding: 0;
+    }
+    #main,#editor{
+        position: static;
+        margin: 0;
+        padding: 0;
+    }
+/*editor document page styles*/
+    #markdown{
+        padding-left:500px; 
+        position: relative;
+    }
+    #markdown #nav{
+        margin-left:-500px; /* "left col (nav + list)" width */
+        width:150px;
+        height: 100%;
+    }
+    #result {  /*used by srceen larger 960px*/
+        margin-left: -350px;
+        width:40%;
+        height: 100%;
+        border-right: 1px solid #ddd;
+    }
+    #editor{
+        padding-left: 30%;
+        width: 70%;
+    }
+}
+
+
+
+/*markdown css*/
+.email-content-body{ font-family: "Helvetica Neue", Helvetica, "Hiragino Sans GB", Arial, sans-serif;}
+.email-content-body h2{
+    margin: 2em 0 1em 0;
+    font-weight: 300;
+    color: #404040;
+    font-weight: bold;
+    position: relative;
+}
+.email-content-body p{
+    line-height: 1.8em;
+    color: #737373;
+    font-size: 1em;
+}
+.email-content-body pre{display: block;
+    padding: 0.8em;
+    margin: 0 0 1em;
+    line-height: 1.8em;
+    font-size: 1em;
+    border: 1px solid #d9d9d9;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    background-color: #f1f1f1;
+}
+.email-content-body blockquote{
+    padding: 0.8em 0.8em 1.4em 0.95em;
+    margin-bottom: 1.125em;
+    font-family: georgia,serif;
+    font-style: italic;
+}
+.email-content-body ul{
+    font-size: 1em;
+    line-height: 1.8em;
+    color: #737373;
+}
+.email-content-body a{
+    color: -webkit-link;
+    text-decoration: underline;
+    cursor: auto;
+}

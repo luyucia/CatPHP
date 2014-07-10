@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="A layout example that shows off a responsive email layout.">
+	<title>Pure</title>
+	<link rel="stylesheet" href="/views/css/pure-min.css">
+    <style type="text/css">
+
+    </style>
+	<!--[if lte IE 8]>
+	    <link rel="stylesheet" href="css/layouts/email-old-ie.css">
+	<![endif]-->
+	<!--[if gt IE 8]><!-->
+	    <link rel="stylesheet" href="/views/css/style.css">
+	<!--<![endif]-->
+
+</head>
+<body>
+<div id="markdown" class="pure-g">
+    <div id="nav" class="pure-u">
+        <a href="#" class="nav-menu-button">导航</a>
+
+        <div class="nav-inner">
+            <!-- <button class="primary-button pure-button mr-tb2">栏目信息</button> -->
+
+            <div class="pure-menu pure-menu-open">
+                <ul id="menu-list" class="menu-ul">
+                    <!-- <li class="menu-li"><span class="email-label-personal">.</span><a href="index.html">首页</a>
+                    </li>
+                    <li class="menu-li"><span class="email-label-work">+</span><a href="list.html">列表</a>
+                    </li>
+                    <li class="menu-li"><span class="email-label-work">+</span><a href="interactive.html">交流</a></li> -->
+                </ul>
+                <div class="pure-button button-secondary" id="menu-add">添加</div>
+            </div>
+        </div>
+    </div>
+
+    <div id="result" class="pure-u-1">
+        <div class="chapter-content-body">
+            <form class="pure-form">
+                <div class="pure-u-1">
+                    <textarea id="text-input" oninput="this.editor.update()" class="pure-input-1" rows="46" cols="25" placeholder="请输入内容...">{==$doc=}</textarea>
+                </div>
+                <div class="height-1"></div>
+                <div>
+                    <div id="preserve-chapter" class="button-success pure-button">保存</div>
+                    <button class="button-error pure-button">取消</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="editor" class="pure-u-1">
+         <div class="email-content">
+            <div class="email-content-body markdown" id="preview">
+                
+            </div>
+        </div>
+    </div>
+</div>
+<div class="pure-u-3-4" id="menu-add-text">
+    <input class="pure-input-1" type="text" id="menu-add-input" placeholder="栏目名称">
+    <button class="pure-button button-add" id="add-menu-name">确定1</button>
+    <button class="pure-button button-error" id="cancel-menu-name">取消</button>
+</div>
+<!-- <div class="setup pure-form pure-form-stacked">
+    <div class="pure-u-1-3">
+        <label for="last-name">标签名称</label>
+        <input id="last-name" type="text">
+    </div>
+    <div>
+     <button class="pure-button button-add ml22" id="add-menu-name">添加</button>
+    <button class="pure-button button-error mr22" id="cancel-menu-name">取消</button>
+    </div>
+</div> -->
+
+<script src="/views/js/markdown.js"></script>
+
+
+
+<script src="/views/js/jquery-1.11.0.min.js"></script>
+
+<script>
+function save_doc(doc){
+        $.ajax({
+          type: "PUT",
+          url: "/admin",
+          data: {"data":doc,"name":"{==$doc_name=}"},
+          success:function(d){
+            console.log(d)
+          }
+        });
+}
+      function Editor(input, preview) {
+        this.update = function () {
+          preview.innerHTML = markdown.toHTML(input.value);
+          save_doc(input.value)
+        };
+        input.editor = this;
+        this.update();
+      }
+      var ed = function (id) { return document.getElementById(id); };
+      new Editor(ed("text-input"), ed("preview"));
+</script>
+<script >
+    // $('#add-menu-name').live('click',function() {
+    //     var m = $('#menu-add').val()
+    //     console.log(m)
+    // });
+
+var menu = {==$menu=}
+
+// $.get('/list', function(data) {
+//     d = jQuery.parseJSON(data);
+//     // menu = jQuery.parseJSON(d.data);
+//     console.log(d.data)
+   
+// }
+
+var menu_list = ''
+for(var li in menu) {
+    menu_list+='<li class="menu-li"><span class="email-label-work">+</span><a href="/admin/'+li+'">'+li+'</a>'
+    for(var sb in menu[li]) {
+        menu_list+='<ul class="second-menu"><li><a href="/admin/'+li+'/'+menu[li][sb]['name']+'">'+menu[li][sb]['name']+'</a></li></ul>'
+    }
+}
+
+$('#menu-list').append(menu_list)
+
+
+
+</script>
+<script src="/views/js/main.js"></script>
+</body>
+</html>
