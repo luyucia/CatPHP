@@ -63,6 +63,14 @@ class Cache
     public function keys($match='*') {
         return $this->_instance->keys($match);
     }
+
+    /**
+     * @name keys
+     * @example:$cache->getInstance();
+     */
+    public function getInstance() {
+        return $this->_instance->getInstance();
+    }
 }
 
 

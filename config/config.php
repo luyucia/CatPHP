@@ -4,7 +4,7 @@ return array(
     'view_path'=>'views/',
     'controller_path'=>'controllers/',
     'controller_dirs' => array('test/','api/'),
-    'rest_controllers'=>array('product','api'),
+    'rest_controllers'=>array('admin','list'),
     'router_rest'     => true, 
     'router_name'     =>array(
             'c' => 'c',
