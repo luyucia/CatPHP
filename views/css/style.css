@@ -453,17 +453,18 @@ a {text-decoration: none; color: #1b98f8;}
     font-size: 1em;
 }
 .email-content-body pre{display: block;
-    display: block;
-    background-color: #f5f2f0;
-    padding: 1em;
-    margin: 2em 2em;
-    -moz-border-radius: 10px;
-    -webkit-border-radius: 10px;
-    border-radius: 10px;
-    border-width: 1em;
-    border-color: #e0dfcc;
-    border-style: solid;
-    text-shadow: 0 1px white;
+display: block;
+background-color: rgba(245, 242, 240, 0.78);
+padding: 1em;
+margin: 2em 2em;
+-moz-border-radius: 10px;
+-webkit-border-radius: 10px;
+border-radius: 10px;
+border-width: 5px;
+border-color: rgba(224, 223, 204, 0.71);
+border-style: solid;
+text-shadow: 0 1px white;
+
 }
 .email-content-body blockquote{
     padding: 0.8em 0.8em 1.4em 0.95em;

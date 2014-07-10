@@ -94,8 +94,20 @@ $(function(){
 			e.stopPropagation();
 			Pure.node = $(this).parent().parent();
 			Pure.node.remove();
-			var parentNode = $(this).parent().parent();
-			for (var i = 0; i < )
+			if ($(this).parent().parent().find("ul")){
+				var parentText = $(this).parent().text();
+				var childText = "";
+				var childNode = $(this).parent().parent().find("ul li a");
+				for (var i = 0; i < childNode.length; i++) {
+					childText = childNode.text();
+					var node = parentText + ":" + childText;
+					console.log(node);
+					//Pure.deleteMenu(node);
+				}
+			}else {
+
+			}
+			
 			Pure.deleteMenu(node);
 		} 
 	}
