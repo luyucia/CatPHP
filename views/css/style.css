@@ -2,7 +2,7 @@
 author:mayanli;
 data:2014-6-25;
 */
-body {color: #333;}
+body {color: #333; background-color: #f5f5d5;}
 a {text-decoration: none; color: #1b98f8;}
 /*common styles*/
 .height-1{
@@ -130,9 +130,29 @@ a {text-decoration: none; color: #1b98f8;}
     color: #fff;
     padding-left: 36px;
 }
+#nav .pure-menu li.menu-li a:hover em{
+    display: block;
+}
 #nav .pure-menu .second-menu a{
     font-size: 0.8em;
     padding-left: 2em;
+}
+#nav .pure-menu li.menu-li a em{
+    width: 16px;
+    height: 16px;
+    border-radius: 8px;
+    line-height: 1.0em;
+    padding-left: 2px;
+    padding-right: 0px;
+    font-weight: bold;
+    float: right;
+    background-color: #e74955;
+    cursor: pointer;
+    margin-top: 4px;
+    margin-right: -12px;   
+    color: #333; 
+    font-size: 16px;
+    display: none; 
 }
 #nav .pure-menu.pure-menu-open ul{
     position: static;
@@ -208,8 +228,17 @@ a {text-decoration: none; color: #1b98f8;}
 }
 
 /* Email Content Styles */
+
 .email-content-header, .email-content-body, .email-content-footer,.chapter-content-body {
     padding: 1em 2em;
+}
+.chapter-content-body.pd-none{
+    padding:0em;
+}
+#result .chapter-content-body,#result  .pure-form,#result  .pure-u-1,#result #text-input{
+    width: 100%;
+    height: 100%;
+    background-color: #f5f5d5;
 }
 .email-content-header {
     border-bottom: 1px solid #ddd;
@@ -256,11 +285,16 @@ a {text-decoration: none; color: #1b98f8;}
  */
 @media (min-width: 40em) {
 /*common styles Styling the default on larger 640px*/
-    #nav, #list, #result,#main,#editor{
+    #nav, #list,#main,#editor{
         position: fixed; /* These are position:fixed; elements will fill the screen */
         top: 0;
         bottom: 0;
         overflow: auto;
+    }
+    #result{
+        position: fixed; /* These are position:fixed; elements will fill the screen */
+        top: 0;
+        bottom: 0;
     }
     .nav-inner {/* Show the menu items on the larger screen */
         display: block;
@@ -419,14 +453,17 @@ a {text-decoration: none; color: #1b98f8;}
     font-size: 1em;
 }
 .email-content-body pre{display: block;
-    padding: 0.8em;
-    margin: 0 0 1em;
-    line-height: 1.8em;
-    font-size: 1em;
-    border: 1px solid #d9d9d9;
-    white-space: pre-wrap;
-    word-wrap: break-word;
-    background-color: #f1f1f1;
+    display: block;
+    background-color: #f5f2f0;
+    padding: 1em;
+    margin: 2em 2em;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    border-width: 1em;
+    border-color: #e0dfcc;
+    border-style: solid;
+    text-shadow: 0 1px white;
 }
 .email-content-body blockquote{
     padding: 0.8em 0.8em 1.4em 0.95em;

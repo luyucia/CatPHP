@@ -36,7 +36,10 @@ class Controller {
         return $output;
     }
 
-    public function getRequest($key,$default = false) {
+    public function getRequest($key='',$default = false) {
+        if ($key==='') {
+            return $this->request;
+        }
         if (isset($this->request[$key])) {
             return $this->request[$key];
         }else {

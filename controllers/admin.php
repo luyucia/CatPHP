@@ -49,17 +49,10 @@ class AdminController extends Controller {
 
             );
         $cache = new Cache($config);
-        
         $this->redis = $cache->getInstance();
-        $params = array();
-        $params_str  =  urldecode(file_get_contents('php://input'));
-        $ps  =  explode('&', $params_str);
-        foreach ($ps as $param) {
-            $p = explode('=', $param);
-            $params[$p[0]] = $p[1];
-        }
-        $this->redis->set('doc:test:'.$params['name'],$params['data']);
-        echo $params['name'];
+        $this->redis->set('doc:test:'.$this->getRequest('name'),$this->getRequest('data'));
+        // print_r($this->getRequest());
+        echo 'ok';
     }
 
 }

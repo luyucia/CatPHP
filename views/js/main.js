@@ -1,6 +1,7 @@
 
 $(function(){
 	var Pure = {
+		node:null,
 		//Click on the navigation display screen when less than 40em;
 		navShow:function(){
 			$("#nav").toggleClass("active");
@@ -28,11 +29,11 @@ $(function(){
 			if (!value) return false;
 			var li_html = "";
 			if(p.attr("class") == "menu-ul") {
-				li_html = "<li class='menu-li'><span class='email-label-work'>+</span><a href='###'>"+ value +"</a></li>";
+				li_html = "<li class='menu-li'><span class='email-label-work'>+</span><a href='###'><em class='email-label-delete'>-</em>"+ value +"</a></li>";
 				p.append(li_html);
-				menu[value] = []
+				menu[value] = [];
 			}else{
-				li_html = "<li><a href='###'>" + value + "</a></li>"
+				li_html = "<li><a href='###'><em class='email-label-delete'>-</em>" + value + "</a></li>"
 				if (p.find("ul").length == 0) {
 				 	p.append("<ul class='second-menu'></ul>");
 				}
@@ -44,7 +45,6 @@ $(function(){
 			}
 			Pure.hideMenuText();
 			
-        console.log(menu)
         Pure.saveMenu()
 		},
 		saveMenu:function(){
@@ -52,6 +52,17 @@ $(function(){
 			  type: "PUT",
 			  url: "/list",
 			  data: {"data":JSON.stringify(menu)},
+			  success:function(d){
+			  	console.log(d)
+			  }
+			});
+
+		},
+		deleteMenu:function(){
+			$.ajax({
+			  type: "DELETE",
+			  url: "/list",
+			  data: {"name":"222:555"},
 			  success:function(d){
 			  	console.log(d)
 			  }
@@ -76,7 +87,17 @@ $(function(){
 			menuAddText.fadeOut("slow");
 			menuAddText.find("input").val("");
 			$("body").append(menuAddText);
-		}
+		},
+		// delate menu
+		delMenu:function(e){
+			e.preventDefault()
+			e.stopPropagation();
+			Pure.node = $(this).parent().parent();
+			Pure.node.remove();
+			var parentNode = $(this).parent().parent();
+			for (var i = 0; i < )
+			Pure.deleteMenu(node);
+		} 
 	}
 	//The binding events;
 	$(".nav-menu-button").bind("click",Pure.navShow);
@@ -84,6 +105,12 @@ $(function(){
     $("#menu-add-text input").bind("keydown",Pure.inputKeyDown);
     $("#add-menu-name").bind("click",Pure.addMenu);
     $("#cancel-menu-name").bind("click",Pure.hideMenuText);
+    $(".pure-menu ul li").hover(function(){
+    	$(this).children(".email-label-delete").show();
+    },function(){
+    	$(this).children(".email-label-delete").hide();
+    });
+    $(".email-label-delete").bind("click",Pure.delMenu);
     window.Pure = Pure;
 })
 

@@ -23,7 +23,7 @@
 
             <div class="pure-menu pure-menu-open">
                 <ul class="menu-ul">
-                    <li class="menu-li"><span class="email-label-personal">.</span><a class="mayanli" href="index.html">首页</a>
+                    <li class="menu-li"><span class="email-label-personal">.</span><a class="mayanli" href="index.html">首页</a><i>111111111</i>
                     </li>
                     <li class="menu-li"><span class="email-label-work">+</span><a href="list.html">列表</a>
                     </li>

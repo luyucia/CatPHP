@@ -75,6 +75,21 @@ class Web {
             if (isset($rout['last'])) {
                 $params[] = $rout['last'];
             }
+
+
+            // print_r(file_get_contents('php://input'));
+
+            $ps  =  explode('&', file_get_contents('php://input'));
+            // $params_str  =  urldecode(file_get_contents('php://input'));
+            foreach ($ps as $param) {
+                // $p = explode('=', $param);
+                $param = urldecode($param);
+                $eq_pos = strpos($param, "=");
+                $pkey   = substr($param, 0,$eq_pos);
+                $pvalue = substr($param,$eq_pos+1);
+                $params[$pkey] = $pvalue;
+                // print_r($params);
+            }
         }
         else {
             $methd = $rout['a'];

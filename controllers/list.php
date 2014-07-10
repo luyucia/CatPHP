@@ -23,19 +23,7 @@ class ListController extends Controller {
      * 默认动作
      */
     public function get() {
-        // echo 'null';
-        // phpinfo();
         $d = $this->redis->get('list:test');
-
-        
-        
-        $d = '{
-"xsa":[{"name":"xxx"}],
-"xsa2":[
-{"name":"xxx2"},
-{"name":"xxx22"},
-]
-}';
         $rtn = array(
             'code'=>1,
             'data'=>$d
@@ -44,19 +32,14 @@ class ListController extends Controller {
     }
 
     public function put() {
-        $params = array();
-        $params_str  =  urldecode(file_get_contents('php://input'));
-        $ps  =  explode('&', $params_str);
-        foreach ($ps as $param) {
-            $p = explode('=', $param);
-            $params[$p[0]] = $p[1];
-        }
-        $this->redis->set('list:test',$params['data']);
+
+        $this->redis->set('list:test',$this->getRequest('data'));
         echo "ok";
     }
 
     public function delete() {
-        echo 'null';
+        $this->redis->delete('list:test:',$this->getRequest('name'));
+        echo "ok";
     }
 
 }
