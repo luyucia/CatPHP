@@ -3,27 +3,29 @@
 /**
  * 
  */
-require 'web_common_fun.php';
+require 'common.php';
 
 
 class Web {
 
     static $rout_rules;
 
-    function __construct() {
+    // function __construct() {
         
-    }
+    // }
 
-    public function setRouter($pattern,$controller,$action)
-    {
-        self::$rout_rules[] = array('p' => $pattern, 'c'=>$controller ,'a'=>$action);
-    }
+    // public function setRouter($pattern,$controller,$action)
+    // {
+    //     self::$rout_rules[] = array('p' => $pattern, 'c'=>$controller ,'a'=>$action);
+    // }
 
     // 启动
     public static function start() {
-        
+
+        spl_autoload_register('web_autoload');
         $WEB_CONFIG   = CatConfig::getInstance('config/config.php');
         // $REST_CONFIG  = CatConfig::getInstance('config/rest.php');
+        self::$rout_rules = $WEB_CONFIG->route_regular;
 
         // 判定路由解析方式,如果是rest风格则
         if ($WEB_CONFIG->router_rest) {
@@ -75,8 +77,9 @@ class Web {
             }
         }
         else {
-            $methd = $rout['a'] . 'Action';
+            $methd = $rout['a'];
         }
+
 
 
         $class = $rout['c'] . 'Controller';
@@ -87,6 +90,8 @@ class Web {
         $controller->$methd();
     }
 
+
+
     // 解析正则规则
     private static function routeParseReg()
     {
@@ -94,7 +99,7 @@ class Web {
             return false;
         } else {
             $index = strpos($_SERVER['SCRIPT_NAME'], '/', 1) + 1;
-            $url = substr($_SERVER['REQUEST_URI'], $index);
+            $url = rtrim( substr($_SERVER['REQUEST_URI'] , $index),"/");
             $rtn = array(
             'c' => 'index',
             'a' => 'index'
@@ -116,6 +121,8 @@ class Web {
                         $hasLast = true;
                     }
                     for ($i = 0; $i < $l; $i+=2) {
+                        if($r[$i]==='c' || $r[$i]==='a')
+                            continue;
                         $rtn[$r[$i]] = $r[$i + 1];
                     }
                     if(isset($hasLast))
@@ -138,7 +145,7 @@ class Web {
         );
 
         $index = strpos($_SERVER['SCRIPT_NAME'], '/', 1) + 1;
-        $url = substr($_SERVER['REQUEST_URI'], $index);
+        $url = rtrim( substr($_SERVER['REQUEST_URI'] , $index),"/");
         $e = strpos($url, '?');
         if ($e) {
             $url = substr($url, 0, $e);
@@ -146,15 +153,18 @@ class Web {
         if ($url) {
             $r = explode('/', $url);
             $rtn['c'] = $r[0];
+
             // 如果设置了action
             if (isset($r[1])) {
-                $rtn['a'] = $r[1];
+                $rtn['a'] = $r[1]==''?'index':$r[1];
                 $l = count($r);
                 if ($l>2 && $l % 2 != 0) {
                     $l-=1;
                     $hasLast = true;
                 }
                 for ($i = 2; $i < $l; $i+=2) {
+                    if($r[$i]==='c' || $r[$i]==='a')
+                        continue;
                     $rtn[$r[$i]] = $r[$i + 1];
                 }
                 if(isset($hasLast))
@@ -184,6 +194,11 @@ class Web {
 
 }
 
-
+function web_autoload($class)
+{
+    $WEB_CONFIG   = CatConfig::getInstance('config/config.php');
+    $class = str_replace("Controller", "", $class);
+    require $WEB_CONFIG->controller_path.strtolower($class).'.php';
+}
 
 ?>
