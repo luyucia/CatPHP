@@ -98,7 +98,7 @@ $(function(){
 				var str = parentText + ":" + childText;
 				delete menu[parentText][childText];
 				Pure.deleteMenu(str);
-				$(this).parent().remove();
+				$(this).parent().parent().remove();
 			}else {
 				var childText = $(this).parent().find("a:first").text();
 				delete menu[childText];
@@ -126,7 +126,7 @@ $(function(){
     	e.stopPropagation();
     	$(this).find("em").hide();
     })
-    window.Pure = Pure;
+    //window.Pure = Pure;
 })
 
 
