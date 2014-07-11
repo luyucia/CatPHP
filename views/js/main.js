@@ -91,16 +91,16 @@ $(function(){
 		delMenu:function(e){
 			e.preventDefault()
 			e.stopPropagation();
-			var pNode = $(this).parent().parent().parent();
-			var parentText = pNode.find("a:first").text();
-			var childText = $(this).parent().find("a").text();
-			console.log(menu);
-			if (pNode.attr("class") == "menu-li") {
+			var pNode = $(this).parent().parent();
+			if (pNode.attr("class") == "second-menu") {
+				var parentText = pNode.parent().find("a:first").text();
+				var childText = $(this).parent().find("a:first").text();
 				var str = parentText + ":" + childText;
 				delete menu[parentText][childText];
 				Pure.deleteMenu(str);
-				$(this).parent().parent().remove();
+				$(this).parent().remove();
 			}else {
+				var childText = $(this).parent().find("a:first").text();
 				delete menu[childText];
 				Pure.deleteMenu(childText);
 				$(this).parent().remove();
