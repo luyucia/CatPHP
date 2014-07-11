@@ -96,7 +96,11 @@ $(function(){
 				var parentText = pNode.parent().find("a:first").text();
 				var childText = $(this).parent().find("a:first").text();
 				var str = parentText + ":" + childText;
-				delete menu[parentText][childText];
+				for (var i = 0; i < menu[parentText].length; i++) {
+					if (menu[parentText][i]["name"] == childText){
+						delete menu[parentText][childText][i];
+					}
+				}
 				Pure.deleteMenu(str);
 				$(this).parent().parent().remove();
 			}else {
