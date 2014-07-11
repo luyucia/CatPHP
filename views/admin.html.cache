@@ -27,14 +27,14 @@
 
             <div class="pure-menu pure-menu-open">
                 <ul id="menu-list" class="menu-ul">
-                   <!--  <li class="menu-li"><span class="email-label-personal">.</span><a href="index.html">首页</a>
+                  <!--   <li class="menu-li"><span class="email-label-personal">.</span><a href="index.html">首页</a>
                     </li>
                     <li class="menu-li"><span class="email-label-work">+</span><a href="list.html">列表</a>
                     </li>
                     <li class="menu-li"><span class="email-label-work">+</span><a href="interactive.html">交流</a></li> -->
                 </ul>
-                <div class="pure-button button-secondary" id="menu-add">添加</div>
             </div>
+            <div class="pure-button button-secondary" id="menu-add">添加</div>
         </div>
     </div>
 
@@ -125,10 +125,12 @@ var menu = ', $menu, '
 
 var menu_list = \'\'
 for(var li in menu) {
-    menu_list+=\'<li class="menu-li"><span class="email-label-work">+</span><a href="/admin/\'+li+\'"><em class="email-label-delete">-</em>\'+li+\'</a>\'
+    menu_list+=\'<li class="menu-li"><em class="email-label-delete">-</em><span class="email-label-work">+</span><a href="/admin/\'+li+\'">\'+li+\'</a>\'
+    menu_list+=\'<ul class="second-menu">\'
     for(var sb in menu[li]) {
-        menu_list+=\'<ul class="second-menu"><li><a href="/admin/\'+li+\'/\'+menu[li][sb][\'name\']+\'"><em class="email-label-delete">-</em>\'+menu[li][sb][\'name\']+\'</a></li></ul>\'
+        menu_list+=\'<li><em class="email-label-delete">-</em><a href="/admin/\'+li+\'/\'+menu[li][sb][\'name\']+\'">\'+menu[li][sb][\'name\']+\'</a></li>\'
     }
+    menu_list+=\'</ul>\'
 }
 
 $(\'#menu-list\').append(menu_list)

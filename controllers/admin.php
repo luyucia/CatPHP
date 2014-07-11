@@ -21,9 +21,14 @@ class AdminController extends Controller {
 
             );
         $cache = new Cache($config);
-        
+
         $this->redis = $cache->getInstance();
         $d = $this->redis->get('list:test');
+        var_dump($d);
+        if ($d=='null' || $d==false) {
+            $d = '{}';
+        }
+
         if (isset($_GET['last'])) {
             $doc = $this->redis->get('doc:test:'.$_GET['a'].':'.$_GET['last']);
             $doc_name = $_GET['a'].':'.$_GET['last'];

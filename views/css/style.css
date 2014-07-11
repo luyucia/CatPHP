@@ -137,7 +137,7 @@ a {text-decoration: none; color: #1b98f8;}
     font-size: 0.8em;
     padding-left: 2em;
 }
-#nav .pure-menu li.menu-li a em{
+#nav .pure-menu li.menu-li em{
     width: 16px;
     height: 16px;
     border-radius: 8px;
@@ -148,11 +148,11 @@ a {text-decoration: none; color: #1b98f8;}
     float: right;
     background-color: #e74955;
     cursor: pointer;
-    margin-top: 4px;
-    margin-right: -12px;   
+    margin-top: 10px;
+    margin-right: 2px; 
     color: #333; 
     font-size: 16px;
-    display: none; 
+    display: none;
 }
 #nav .pure-menu.pure-menu-open ul{
     position: static;

@@ -29,19 +29,18 @@ $(function(){
 			if (!value) return false;
 			var li_html = "";
 			if(p.attr("class") == "menu-ul") {
-				li_html = "<li class='menu-li'><span class='email-label-work'>+</span><a href='###'><em class='email-label-delete'>-</em>"+ value +"</a></li>";
+				li_html = "<li class='menu-li'><em class='email-label-delete'>-</em><span class='email-label-work'>+</span><a href='###'>"+ value +"</a></li>";
 				p.append(li_html);
 				menu[value] = [];
 			}else{
-				li_html = "<li><a href='###'><em class='email-label-delete'>-</em>" + value + "</a></li>"
+				li_html = "<li><em class='email-label-delete'>-</em><a href='###'>" + value + "</a></li>"
 				if (p.find("ul").length == 0) {
 				 	p.append("<ul class='second-menu'></ul>");
 				}
 				p.find("ul").append(li_html);
 				var t = {"name":value}
-				var pvalue = p.find('a:first').text()
-				console.log(pvalue)
-				menu[pvalue].push(t)
+				var pvalue = p.find('a:first').text();
+				menu[pvalue].push(t);
 			}
 			Pure.hideMenuText();
 			
@@ -58,11 +57,11 @@ $(function(){
 			});
 
 		},
-		deleteMenu:function(){
+		deleteMenu:function(str){
 			$.ajax({
 			  type: "DELETE",
 			  url: "/list",
-			  data: {"name":"222:555"},
+			  data: {"name":str},
 			  success:function(d){
 			  	console.log(d)
 			  }
@@ -92,23 +91,21 @@ $(function(){
 		delMenu:function(e){
 			e.preventDefault()
 			e.stopPropagation();
-			Pure.node = $(this).parent().parent();
-			Pure.node.remove();
-			if ($(this).parent().parent().find("ul")){
-				var parentText = $(this).parent().text();
-				var childText = "";
-				var childNode = $(this).parent().parent().find("ul li a");
-				for (var i = 0; i < childNode.length; i++) {
-					childText = childNode.text();
-					var node = parentText + ":" + childText;
-					console.log(node);
-					//Pure.deleteMenu(node);
-				}
+			var pNode = $(this).parent().parent().parent();
+			var parentText = pNode.find("a:first").text();
+			var childText = $(this).parent().find("a").text();
+			console.log(menu);
+			if (pNode.attr("class") == "menu-li") {
+				var str = parentText + ":" + childText;
+				delete menu[parentText][childText];
+				Pure.deleteMenu(str);
+				$(this).parent().parent().remove();
 			}else {
-
+				delete menu[childText];
+				Pure.deleteMenu(childText);
+				$(this).parent().remove();
 			}
-			
-			Pure.deleteMenu(node);
+			Pure.saveMenu()
 		} 
 	}
 	//The binding events;
@@ -117,12 +114,18 @@ $(function(){
     $("#menu-add-text input").bind("keydown",Pure.inputKeyDown);
     $("#add-menu-name").bind("click",Pure.addMenu);
     $("#cancel-menu-name").bind("click",Pure.hideMenuText);
-    $(".pure-menu ul li").hover(function(){
-    	$(this).children(".email-label-delete").show();
-    },function(){
-    	$(this).children(".email-label-delete").hide();
-    });
     $(".email-label-delete").bind("click",Pure.delMenu);
+
+    //删除按钮
+    $(".pure-menu li").hover(function(e){
+    	e.preventDefault();
+    	e.stopPropagation();
+    	$(this).find("em:first").show();
+    },function(e){
+    	e.preventDefault();
+    	e.stopPropagation();
+    	$(this).find("em").hide();
+    })
     window.Pure = Pure;
 })
 
