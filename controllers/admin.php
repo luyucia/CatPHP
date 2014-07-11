@@ -21,10 +21,10 @@ class AdminController extends Controller {
 
             );
         $cache = new Cache($config);
-
+        // $cache->clean();
         $this->redis = $cache->getInstance();
         $d = $this->redis->get('list:test');
-        var_dump($d);
+        // var_dump($d);
         if ($d=='null' || $d==false) {
             $d = '{}';
         }
