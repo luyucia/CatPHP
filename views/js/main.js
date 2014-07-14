@@ -3,6 +3,7 @@ $(function(){
 	var Pure = {
 		node:null,
 		//Click on the navigation display screen when less than 40em;
+
 		navShow:function(){
 			$("#nav").toggleClass("active");
 		},
@@ -96,19 +97,21 @@ $(function(){
 				var parentText = pNode.parent().find("a:first").text();
 				var childText = $(this).parent().find("a:first").text();
 				var str = parentText + ":" + childText;
-				for (var i = 0; i < menu[parentText].length; i++) {
-					if (menu[parentText][i]["name"] == childText){
-						delete menu[parentText][childText][i];
+				console.log(menu);	
+				for (var i =0 ; i < menu[parentText].length; i++) {
+					if (menu[parentText][i]['name'] == childText) {
+						menu[parentText].splice(i,1);
 					}
 				}
 				Pure.deleteMenu(str);
-				$(this).parent().parent().remove();
+				$(this).parent().remove();
 			}else {
 				var childText = $(this).parent().find("a:first").text();
 				delete menu[childText];
 				Pure.deleteMenu(childText);
 				$(this).parent().remove();
 			}
+			console.log(menu);
 			Pure.saveMenu()
 		} 
 	}
@@ -130,7 +133,9 @@ $(function(){
     	e.stopPropagation();
     	$(this).find("em").hide();
     })
-    //window.Pure = Pure;
+    window.Pure = Pure;
+ //    menu ={}
+	// Pure.saveMenu()
 })
 
 
