@@ -11,9 +11,9 @@ class Controller {
     private    $engine;
     protected  $request;
 
-    function __construct($rout) {
+    function __construct() {
+        session_start();
         ob_start();
-        $this->rout   = $rout;
         $WEB_CONFIG   = CatConfig::getInstance('config/config.php');
         $template     = $WEB_CONFIG->template_engine;
         if ($template === 'tenjin' ) {
@@ -27,6 +27,10 @@ class Controller {
         // D($WEB_CONFIG);
     }
 
+    public function setRoute($rout) {
+        $this->rout   = $rout;
+    }
+
     public function assign($key, $value) {
         $this->context[$key] = $value;
     }
@@ -36,10 +40,7 @@ class Controller {
         return $output;
     }
 
-    public function getRequest($key='',$default = false) {
-        if ($key==='') {
-            return $this->request;
-        }
+    public function getRequest($key,$default = false) {
         if (isset($this->request[$key])) {
             return $this->request[$key];
         }else {
