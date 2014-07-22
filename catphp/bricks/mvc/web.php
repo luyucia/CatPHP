@@ -23,8 +23,7 @@ class Web {
     public static function start() {
 
         spl_autoload_register('web_autoload');
-        $WEB_CONFIG   = CatConfig::getInstance('config/config.php');
-        // $REST_CONFIG  = CatConfig::getInstance('config/rest.php');
+        $WEB_CONFIG   = CatConfig::getInstance(APP_PATH.'/config/config.php');
         self::$rout_rules = $WEB_CONFIG->route_regular;
 
         // 判定路由解析方式,如果是rest风格则
@@ -41,13 +40,13 @@ class Web {
         else {
             $rout = self::routeParse($WEB_CONFIG->router_name['c'], $WEB_CONFIG->router_name['a']);
         }
-        $controller_file = $WEB_CONFIG->controller_path . $rout['c'] . '.php';
+        $controller_file = APP_PATH.'/'.$WEB_CONFIG->controller_path . $rout['c'] . '.php';
         // 引入controller文件
         if (file_exists($controller_file)) {
             include $controller_file;
         } else {
             foreach ($WEB_CONFIG->controller_dirs as $dir) {
-                $controller_file = $WEB_CONFIG->controller_path . $dir . $rout['c'] . '.php';
+                $controller_file = APP_PATH.'/'.$WEB_CONFIG->controller_path . $dir . $rout['c'] . '.php';
                 if (file_exists($controller_file)) {
                     include $controller_file;
                     break;
@@ -81,11 +80,11 @@ class Web {
         }
 
 
-
         $class = $rout['c'] . 'Controller';
-        $controller = new $class($rout);
+        $controller = new $class();
         if (isset($params)) {
             $controller->setRequest($params);
+            $controller->setRoute($rout);
         }
         $controller->$methd();
     }
@@ -196,9 +195,30 @@ class Web {
 
 function web_autoload($class)
 {
-    $WEB_CONFIG   = CatConfig::getInstance('config/config.php');
-    $class = str_replace("Controller", "", $class);
-    require $WEB_CONFIG->controller_path.strtolower($class).'.php';
+    $WEB_CONFIG   = CatConfig::getInstance(APP_PATH.'/config/config.php');
+
+    // 判断是controller还是model
+    if(stripos($class, "Controller")) {
+        $class = str_replace("Controller", "", $class);
+        require APP_PATH.'/'.$WEB_CONFIG->controller_path.strtolower($class).'.php';
+    } else if(stripos($class, "Model")) {
+        $class = str_replace("Model", "", $class);
+        $modelFile = APP_PATH.'/'.$WEB_CONFIG->model_path.strtolower($class).'.php';
+        if(file_exists($modelFile))
+        {
+            require $modelFile;
+
+        }else{
+            foreach ($WEB_CONFIG->model_dirs as $dir) {
+                $modelFile = APP_PATH.'/'.$WEB_CONFIG->model_path. $dir .strtolower($class).'.php';
+                if (file_exists($modelFile)) {
+                    include $modelFile;
+                    break;
+                }
+            }
+        }
+
+    }
 }
 
 ?>
