@@ -74,6 +74,15 @@ class Web {
             if (isset($rout['last'])) {
                 $params[] = $rout['last'];
             }
+            // 解析非GET POST请求
+            $ps  =  explode('&', file_get_contents('php://input'));
+            foreach ($ps as $param) {
+                $param = urldecode($param);
+                $eq_pos = strpos($param, "=");
+                $pkey   = substr($param, 0,$eq_pos);
+                $pvalue = substr($param,$eq_pos+1);
+                $params[$pkey] = $pvalue;
+            }
         }
         else {
             $methd = $rout['a'];
