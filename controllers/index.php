@@ -19,6 +19,8 @@ class IndexController extends Controller {
             );
         $cache = new Cache($config);
 
+        $d = $cache->get('list:test');
+
         echo "设置缓存";
         $cache->set('user','ffff');
         echo "获取缓存";
@@ -41,6 +43,35 @@ class IndexController extends Controller {
 //         $this->assign('result',$result);
 //         $this->assign('items',array('<AAA>', 'B&B', '"CCC"'));
 //         $this->assign('title','hello');
+
+        $config = array(
+            'type' => 'redis',
+            'password' => '6KGz$1mub',
+            'db' => 1,
+
+            );
+        $cache = new Cache($config);
+        // $cache->clean();
+        $this->redis = $cache->getInstance();
+        $d = $this->redis->get('list:test');
+        // var_dump($d);
+        if ($d=='null' || $d==false) {
+            $d = '{}';
+        }
+        if (isset($_GET['last'])) {
+            $doc = $this->redis->get('doc:test:'.$_GET['a'].':'.$_GET['last']);
+            $doc_name = $_GET['a'].':'.$_GET['last'];
+        }else {
+            $doc = $this->redis->get('doc:test:'.$_GET['a']);
+            $doc_name = $_GET['a'];
+        }
+
+        if (!$doc) {
+            $doc='';
+        }
+        $this->assign('menu',$d);
+        $this->assign('doc',$doc);
+        $this->assign('doc_name',$doc_name);
         echo $this->render('views/index.html');
         // $this->staticize('index.html');
     }

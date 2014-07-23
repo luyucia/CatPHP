@@ -34,6 +34,7 @@ class ListController extends Controller {
     public function put() {
 
         $this->redis->set('list:test',$this->getRequest('data'));
+        echo $this->getRequest('data');
         echo "ok";
     }
 

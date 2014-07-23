@@ -14,7 +14,7 @@ class AdminController extends Controller {
      */
     public function get() {
 
-         $config = array(
+        $config = array(
             'type' => 'redis',
             'password' => '6KGz$1mub',
             'db' => 1,
@@ -24,7 +24,6 @@ class AdminController extends Controller {
         // $cache->clean();
         $this->redis = $cache->getInstance();
         $d = $this->redis->get('list:test');
-        // var_dump($d);
         if ($d=='null' || $d==false) {
             $d = '{}';
         }

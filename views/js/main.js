@@ -30,11 +30,11 @@ $(function(){
 			if (!value) return false;
 			var li_html = "";
 			if(p.attr("class") == "menu-ul") {
-				li_html = "<li class='menu-li'><em class='email-label-delete'>-</em><span class='email-label-work'>+</span><a href='###'>"+ value +"</a></li>";
+				li_html = "<li class='menu-li'><em class='email-label-delete'>-</em><span class='email-label-work'>+</span><a href='admin/"+ value +"'>"+ value +"</a></li>";
 				p.append(li_html);
 				menu[value] = [];
 			}else{
-				li_html = "<li><em class='email-label-delete'>-</em><a href='###'>" + value + "</a></li>"
+				li_html = "<li><em class='email-label-delete'>-</em><a href='admin/"+ value +"'>" + value + "</a></li>"
 				if (p.find("ul").length == 0) {
 				 	p.append("<ul class='second-menu'></ul>");
 				}
@@ -44,8 +44,7 @@ $(function(){
 				menu[pvalue].push(t);
 			}
 			Pure.hideMenuText();
-			
-        Pure.saveMenu()
+        	Pure.saveMenu()
 		},
 		saveMenu:function(){
 			$.ajax({

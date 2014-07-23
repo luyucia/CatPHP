@@ -109,21 +109,8 @@ function save_doc(doc){
       new Editor(ed("text-input"), ed("preview"));
 </script>
 <script >
-    // $('#add-menu-name').live('click',function() {
-    //     var m = $('#menu-add').val()
-    //     console.log(m)
-    // });
 
 var menu = {==$menu=}
-
-
-
-// $.get('/list', function(data) {
-//     d = jQuery.parseJSON(data);
-//     // menu = jQuery.parseJSON(d.data);
-//     console.log(d.data)
-   
-// }
 
 var menu_list = ''
 for(var li in menu) {
@@ -136,7 +123,6 @@ for(var li in menu) {
 }
 
 
-console.log(menu_list)
 $('#menu-list').append(menu_list)
 
 </script>
