@@ -40,28 +40,36 @@ class Controller {
         return $output;
     }
 
-    public function getRequest($key,$default = false) {
+    public function getParam($key='',$default = false) {
         if ($key==='') {
             return $this->request;
         }
         if (isset($this->request[$key])) {
             return $this->request[$key];
-        }else {
+        }
+        else if(isset($_POST[$key])) {
+            return $_POST[$key];
+        }
+        else if(isset($_POST[$key])) {
+            return $_GET[$key];
+        }
+        else {
             return $default;
         }
     }
 
-    public function setRequest($req)
+    public function setParam($req)
     {
         $this->request = $req;
     }
 
-    protected function getRoutRequest($key) {
+    protected function getUrlRequest($key) {
         return $this->rout[$key];
     }
 
     public function __call($name, $arguments) {
-        echo $name . ' is not defined!';
+        header("HTTP/1.0 404 Not Found");
+        // echo $name . ' is not defined!';
     }
 
     public function staticize($file)

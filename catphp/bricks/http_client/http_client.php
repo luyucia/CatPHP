@@ -15,7 +15,7 @@ class HttpClient
     private function _send()
     {
         $ch = curl_init();
-        $timeout = 5;
+        $timeout = 10;
 
         curl_setopt($ch, CURLOPT_URL, $this->_url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
@@ -23,13 +23,13 @@ class HttpClient
 
         if ($this->_method == 'post') {
             curl_setopt($ch, CURLOPT_POST, 1);
-            curl_setopt($ch, CURLOPT_POSTFIELDS, $this->_data);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($this->_data));
         }
 
         if (!empty($this->_agent))
             curl_setopt($ch, CURLOPT_USERAGENT, $this->_agent);
-
         $result = curl_exec($ch);
+        echo curl_error($ch);
         curl_close($ch);
 
         return $result;

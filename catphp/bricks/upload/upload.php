@@ -6,7 +6,7 @@
  * and open the template in the editor.
  */
 
-class upload
+class Upload
 {
 
     public $max_size = 0;

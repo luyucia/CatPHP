@@ -68,6 +68,13 @@ class redisDriver
     public function keys($match) {
         return $this->redis->keys($match);
     }
+    /**
+     * @name keys
+     * @example:$cache->keys();
+     */
+    public function getInstance() {
+        return $this->redis;
+    }
 
 
 

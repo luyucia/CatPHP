@@ -15,7 +15,11 @@ return  array
         'HtmlTable'=>'/bricks/html/html_table.php',
         'IpLocation'=>'/bricks/ip/ip_location.php',
         'ArrayUtil'=>'/bricks/common/array_util.php',
+        'HttpClient'=>'/bricks/http_client/http_client.php',
+        'MongoDriver'=>'/bricks/mongo/mongo_driver.php',
+        'Upload'=>'/bricks/upload/upload.php',
         'Cache'=>'/bricks/cache/cache.php',
+        'Language'=>'/bricks/language/language.php',
     ),
 
 

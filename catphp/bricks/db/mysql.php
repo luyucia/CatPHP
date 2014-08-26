@@ -29,7 +29,7 @@ class MysqlDriver
     public function __construct($config)
     {
         $this->last_db_name = $config['database'];
-        $this->conn = mysqli_connect($config['host'] . ":" . $config['port'], $config['username'], $config['password'], $config['database']) or die('Could not connect: ' . mysql_error());
+        $this->conn = mysqli_connect($config['host'] , $config['username'], $config['password'], $config['database'],$config['port']) or die('Could not connect: ' . mysql_error());
         mysqli_set_charset($this->conn, $config['encoding']);
     }
 
@@ -67,8 +67,13 @@ class MysqlDriver
 
     public function execute($sql)
     {
-        $sql = $this->checkSql($sql);
-        mysqli_query($this->conn, $sql) or die("Invalid query: " . mysql_error());
+        //$sql = $this->checkSql($sql);
+        $stmt = mysqli_prepare($this->conn, $sql);
+        // var_dump($stmt);
+        echo mysqli_error($this->conn);
+        return mysqli_stmt_execute($stmt);
+        // return mysqli_query($this->conn, $sql); 
+        // or die("Invalid query: " . mysql_error());
     }
 
     public function close()

@@ -4,15 +4,15 @@
  * 作者：卢禹
  * 日期：2012.7.10
  * 功能：数据库工厂方法，负责实例化不同类型的数据库类
- * 
- * 
+ *
+ *
  * */
 
 
 class DbFactory{
 
     /**
-     * 
+     *
      * 根据数据库描述符生成相应的数据库对象
      * @param str $dbname
      */
@@ -36,13 +36,13 @@ class DbFactory{
             require_once CLASSPATH.'/pgsql.php';
             return Pgsql::getInstance($config);
         }
-        else 
+        else
         {
             echo "The type $db_type is not support by catPHP yet,sorry ^_^";
             return null;
         }
-        
+
     }
 
-    
+
 }
