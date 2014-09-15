@@ -31,7 +31,11 @@ class CatConfig
 
     public function __get($key)
     {
-        return self::$config[$key];
+        if (isset(self::$config[$key])) {
+            return self::$config[$key];
+        }else{
+            return null;
+        }
     }
 
     private function __clone()

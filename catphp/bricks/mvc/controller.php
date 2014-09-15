@@ -9,6 +9,8 @@ class Controller {
 
     private    $context = array();
     private    $engine;
+    public     $controllerName;
+    public     $actionName;
     protected  $request;
 
     function __construct() {
@@ -40,21 +42,41 @@ class Controller {
         return $output;
     }
 
-    public function getParam($key='',$default = false) {
+    public function getParam($key='',$default = false,$incect_check = true) {
         if ($key==='') {
             return $this->request;
         }
         if (isset($this->request[$key])) {
-            return $this->request[$key];
+            if ($incect_check) {
+                return $this->filter($this->request[$key]);
+            }else{
+                return $this->request[$key];
+            }
         }
         else if(isset($_POST[$key])) {
-            return $_POST[$key];
+            if ($incect_check) {
+                return $this->filter($_POST[$key]);
+            }else {
+                return $_POST[$key];
+            }
         }
-        else if(isset($_POST[$key])) {
-            return $_GET[$key];
+        else if(isset($_GET[$key])) {
+            if ($incect_check) {
+                return $this->filter($_GET[$key]);
+            }else {
+                return $_GET[$key];
+            }
         }
         else {
             return $default;
+        }
+    }
+
+    private function filter($s) {
+        if(is_array($s)){
+            return $s;
+        }else{
+            return addslashes($s);
         }
     }
 
@@ -70,6 +92,14 @@ class Controller {
     public function __call($name, $arguments) {
         header("HTTP/1.0 404 Not Found");
         // echo $name . ' is not defined!';
+    }
+
+    public function setControllerName($name) {
+        $this->controllerName = $name;
+    }
+
+    public function setActionName($name) {
+        $this->actionName = $name;
     }
 
     public function staticize($file)

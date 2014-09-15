@@ -29,7 +29,10 @@ class HttpClient
         if (!empty($this->_agent))
             curl_setopt($ch, CURLOPT_USERAGENT, $this->_agent);
         $result = curl_exec($ch);
-        echo curl_error($ch);
+
+        if ($result === false) {
+            throw new Exception(curl_error($ch));
+        }
         curl_close($ch);
 
         return $result;

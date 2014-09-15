@@ -43,12 +43,12 @@ class MysqlDriver
         return $this->conn;
     }
 
-    public function query($sql, $mode)
+    public function query($sql, $mode = 0)
     {
         // $sql = $this->checkSql($sql);
         $result = mysqli_query($this->conn, $sql);
 
-        if ($result) {
+        if ($result && !is_bool($result)) {
             $data = false;
 
             if ($mode == 0)

@@ -5,6 +5,7 @@ class select{
     private $from      = '';
     private $columns   = ' * ';
     private $join      = '';
+    private $having    = array();
     private $groupby   = '';
     private $orderby   = '';
     public  $where_arr = array();
@@ -33,10 +34,25 @@ class select{
         }
     }
 
+    public function having($column, $value, $cond = '=',$quot = null, $logic = 'and'){
+        if(!isset($value) || $value==='')
+            return;
+        if($quot===null)
+        {
+            $value = $this->type($value);
+        }
+        else if($quot==true)
+        {
+            $value = "'$value'";
+        }
+
+        $this->having[$column][] = " $logic $column $cond $value";
+    }
+
     // like in 
     public function where($column,$value,$cond='=',$quot=null,$logic='and')
     {
-        if(!isset($value) || $value==='') 
+        if(!isset($value) || $value==='' || $value===false) 
             return;
         // 如果quor为null则调用type自动判断是否加单引号
         if($quot===null)
@@ -87,7 +103,7 @@ class select{
 
     public function join($str)
     {
-        $this->join = ' '.$str;
+        $this->join .= ' '.$str;
     }
 
     public function groupby($columns)
@@ -125,17 +141,24 @@ class select{
 
     public function getSql()
     {
-        $where ='';
-        $t     = '';
+        $where = $having = '';
+        $t = $h = '';
         foreach ($this->where_arr as $where) {
             $t.= implode(' ', $where);
         }
         if($t!='')
             $where = ' where '.substr($t, 4);
+
+        foreach($this->having as $hav){
+            $h .= implode(' ', $hav);
+        }
+        if($h != ''){
+            $having = 'having '.substr($h, 4);
+        }
         
         return 'select '.$this->columns.
                ' from ' .$this->from.$this->join.
-               $where.$this->groupby.$this->orderby;
+               $where.$this->groupby.$having.$this->orderby;
 
 
         ;

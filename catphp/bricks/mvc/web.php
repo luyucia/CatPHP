@@ -36,7 +36,7 @@ class Web {
             $url = rtrim( substr($_SERVER['REQUEST_URI'] , $index),"/");
             $r = new router($url);
             // 加载路由设置
-            if (isset($WEB_CONFIG->route_rules)) {
+            if (count($WEB_CONFIG->route_rules)) {
                 foreach ($WEB_CONFIG->route_rules as $rule) {
                     $r->addRoute($rule);
                 }
@@ -72,6 +72,8 @@ class Web {
         // 路由到指定controller的指定action
         $class = $controller_name . 'Controller';
         $controller = new $class();
+        $controller->setActionName($action_name);
+        $controller->setControllerName($controller_name);
         if (isset($url_params)) {
             $controller->setParam($url_params);
         }
