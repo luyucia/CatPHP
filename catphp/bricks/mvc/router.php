@@ -128,12 +128,15 @@ class router
                             break;
                         }
                     }
+                    // 如果路由规则中没配第二个参数比如 :xxx 则认为第二个参数为index并且已经匹配[2014-09-18]
+                    else if($match==true && $this->rout_arr[1]=='index') {
+                        $match = true;
+                    }
                     else {
                         $match = false;
                         break;
                     }
                 }
-
                 if($match) {
                     $this->controller = $rule['controller'];
                     $this->action     = $rule['action'];

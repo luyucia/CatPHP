@@ -57,16 +57,15 @@ class Web {
         if( in_array($controller_name, $WEB_CONFIG->rest_controllers) ) {
             $restVerb  = ucfirst(strtolower($_SERVER['REQUEST_METHOD']));
             $action_name  = $restVerb;
-
-            // 解析非GET POST请求
-            $ps  =  explode('&', file_get_contents('php://input'));
-            foreach ($ps as $param) {
-                $param  = urldecode($param);
-                $eq_pos = strpos($param, "=");
-                $pkey   = substr($param, 0,$eq_pos);
-                $pvalue = substr($param,$eq_pos+1);
-                $url_params[$pkey] = $pvalue;
-            }
+        }
+        // 解析非GET POST请求
+        $ps  =  explode('&', file_get_contents('php://input'));
+        foreach ($ps as $param) {
+            $param  = urldecode($param);
+            $eq_pos = strpos($param, "=");
+            $pkey   = substr($param, 0,$eq_pos);
+            $pvalue = substr($param,$eq_pos+1);
+            $url_params[$pkey] = $pvalue;
         }
 
         // 路由到指定controller的指定action

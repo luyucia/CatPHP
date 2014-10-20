@@ -19,7 +19,8 @@ class Controller {
         $WEB_CONFIG   = CatConfig::getInstance('config/config.php');
         $template     = $WEB_CONFIG->template_engine;
         if ($template === 'tenjin' ) {
-            $this->engine = new Tenjin_Engine();
+            $properties = array('cache' => false);
+            $this->engine = new Tenjin_Engine($properties);
         }
         elseif ($template === 'smarty') {
                 echo "暂时不支持smarty";

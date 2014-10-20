@@ -11,6 +11,7 @@
 define('CLASSPATH', dirname(__FILE__));
 
 require CLASSPATH . '/db_factory.php';
+
 class Db
 {
 
@@ -153,45 +154,37 @@ class Db
      *数据
      * @uses 例如：$data['username'] = 'luyu'; $data['age'] = 23;add('user',$data);
      */
-    // public function add(&$data,$table)
-    //    {
-    //        $colums = '';
-    //     $values = '';
-    //     foreach ($data as $key => $value) {
-    //         $colums .= $key.",";
-    //         $values .= $this->type_change($value).",";
-    //     }
-    //     $colums = rtrim($colums,',');
-    //     $values = rtrim($values,',');
-    //     $sql = "insert into $table ($colums) values($values)";
-    //     if (Conf::$DEBUG)
-    //         echo $sql;
-    //        return $this->execute($sql);
-    //    }
+    public function add(&$data, $table)
+    {
+        $colums = '';
+        $values = '';
+        foreach ($data as $key => $value) {
+            $colums .= $key . ",";
+            $values .= $this->type_change($value) . ",";
+        }
+        $colums = rtrim($colums, ',');
+        $values = rtrim($values, ',');
+        $sql = "insert into $table ($colums) values($values)";
+        return $this->execute($sql);
+    }
 
-    //    private function type_change(&$value)
-    // {
-    //     if (is_numeric($value) || preg_match('#^[\w\d_]*\(.*\)#' , $value)) {
-    //         if(preg_match('#^0\d+#' , $value))
-    //         {
-    //             return "'$value'";
-    //         }else
-    //         {
-    //             return $value;
-    //         }
-    //     }
-    //     else if ($value=='' || $value==null) {
-    //         return 'NULL';
-    //     }
-    //     else if(stripos($value, '.nextval')){
-    //         return $value;
-    //     }
-    //     else
-    //     {
-    //         return "'$value'";
-    //     }
+    private function type_change(&$value)
+    {
+        if (is_numeric($value) || preg_match('#^[\w\d_]*\(.*\)#', $value)) {
+            if (preg_match('#^0\d+#', $value)) {
+                return "'$value'";
+            } else {
+                return $value;
+            }
+        } else if ($value == '' || $value == null) {
+            return 'NULL';
+        } else if (stripos($value, '.nextval')) {
+            return $value;
+        } else {
+            return "'$value'";
+        }
 
-    // }
+    }
 
     /**
      *更新数据

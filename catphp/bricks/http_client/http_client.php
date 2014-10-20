@@ -10,52 +10,51 @@ class HttpClient
     private $_method;
     private $_agent;
     private $_data;
+    private $_curl;
+    private $_timeout = 10;
 
+    function __construct(){
+        $this->_curl = curl_init();
+        curl_setopt($this->_curl, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($this->_curl, CURLOPT_TIMEOUT, $this->_timeout);
+    }
 
-    private function _send()
-    {
-        $ch = curl_init();
-        $timeout = 10;
-
-        curl_setopt($ch, CURLOPT_URL, $this->_url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_TIMEOUT, $timeout);
-
-        if ($this->_method == 'post') {
-            curl_setopt($ch, CURLOPT_POST, 1);
-            curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($this->_data));
-        }
-
-        if (!empty($this->_agent))
-            curl_setopt($ch, CURLOPT_USERAGENT, $this->_agent);
-        $result = curl_exec($ch);
-
-        if ($result === false) {
-            throw new Exception(curl_error($ch));
-        }
-        curl_close($ch);
-
-        return $result;
+    public function close() {
+        curl_close($this->_curl);
     }
 
     public function setAgent($agent)
     {
         $this->_agent = $agent;
+        curl_setopt($this->_curl, CURLOPT_USERAGENT, $agent);
     }
 
     public function post($url, $data)
     {
-        $this->_method = "post";
-        $this->_url = $url;
-        $this->_data = $data;
-        return $this->_send();
+        curl_setopt($this->_curl, CURLOPT_POST, 1);
+        curl_setopt($this->_curl, CURLOPT_POSTFIELDS, http_build_query($data));
+        curl_setopt($this->_curl, CURLOPT_URL, $url);
+
+        $result = curl_exec($this->_curl);
+        if ($result === false) {
+            throw new Exception(curl_error($this->_curl));
+        }
+
+        return $result;
     }
 
     public function get($url, $data)
     {
-        $this->_method = "get";
-        $this->_url = $url . '?' . http_build_query($data);
-        return $this->_send();
+        $url = $url . '?' . http_build_query($data);
+        curl_setopt($this->_curl, CURLOPT_URL, $url);
+        curl_setopt($this->_curl, CURLOPT_POST, 0);
+
+        $result = curl_exec($this->_curl);
+        if ($result === false) {
+            throw new Exception(curl_error($this->_curl));
+        }
+
+        return $result;
     }
 
 }

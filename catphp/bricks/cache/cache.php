@@ -12,7 +12,7 @@ class Cache
     {
         if(is_array($config)) {
             $type = $config['type'];
-            include 'driver/'.$type.'.php';
+            // include 'driver/'.$type.'.php';
             $className = $type.'Driver';
             $this->_instance = new $className($config);
             // if ( === 'memcache') {
