@@ -19,9 +19,12 @@ return  array
         'HttpClient'=>'/bricks/http_client/http_client.php',
         'MongoDriver'=>'/bricks/mongo/mongo_driver.php',
         'Upload'=>'/bricks/upload/upload.php',
+        'ResumeUpload'=>'/bricks/upload/resume_upload.php',
         'Cache'=>'/bricks/cache/cache.php',
         'redisDriver'=>'/bricks/cache/driver/redis.php',
         'Language'=>'/bricks/language/language.php',
+        'Probability'=>'/bricks/math/probability.php',
+        'Filter'=>'/bricks/filter/filter.php',
     ),
 
 
