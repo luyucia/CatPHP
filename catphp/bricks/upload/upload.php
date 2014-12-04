@@ -285,6 +285,174 @@ class Upload
     }
 
     // --------------------------------------------------------------------
+    
+    public function start_SliceUpload($field = 'userfile')
+    {
+
+        if (!isset($_FILES[$field])) {
+            $this->setError('upload_no_file_selected');
+            return FALSE;
+        }
+
+        // 路径验证
+        if (!$this->validatePath()) {
+            return FALSE;
+        }
+
+        // 上传结果
+        if (!is_uploaded_file($_FILES[$field]['tmp_name'])) {
+            $error = (!isset($_FILES[$field]['error'])) ? 4 : $_FILES[$field]['error'];
+
+            switch ($error) {
+                case 1: // UPLOAD_ERR_INI_SIZE
+                    $this->setError('upload_file_exceeds_limit');
+                    break;
+                case 2: // UPLOAD_ERR_FORM_SIZE
+                    $this->setError('upload_file_exceeds_form_limit');
+                    break;
+                case 3: // UPLOAD_ERR_PARTIAL
+                    $this->setError('upload_file_partial');
+                    break;
+                case 4: // UPLOAD_ERR_NO_FILE
+                    $this->setError('upload_no_file_selected');
+                    break;
+                case 6: // UPLOAD_ERR_NO_TMP_DIR
+                    $this->setError('upload_no_temp_directory');
+                    break;
+                case 7: // UPLOAD_ERR_CANT_WRITE
+                    $this->setError('upload_unable_to_write_file');
+                    break;
+                case 8: // UPLOAD_ERR_EXTENSION
+                    $this->setError('upload_stopped_by_extension');
+                    break;
+                default :
+                    $this->setError('upload_no_file_selected');
+                    break;
+            }
+
+            return FALSE;
+        }
+
+
+        // Set the uploaded data as class variables
+        $this->file_temp = $_FILES[$field]['tmp_name'];
+        $this->file_size = $_FILES[$field]['size'];
+        $this->_fileMimeType($_FILES[$field]);
+        $this->file_type = preg_replace("/^(.+?);.*$/", "\\1", $this->file_type);
+        $this->file_type = strtolower(trim(stripslashes($this->file_type), '"'));
+        $this->file_name = $this->_prepFileName($_POST['file_name']);
+        $this->file_ext = $this->getExtension($this->file_name);
+        $this->client_name = $this->file_name;
+
+        // Is the file type allowed to be uploaded?
+        if (!$this->isAllowFileType()) {
+            $this->setError('upload_invalid_filetype');
+            return FALSE;
+        }
+
+        // if we're overriding, let's now make sure the new name and type is allowed
+        if ($this->_file_name_override != '') {
+            $this->file_name = $this->_prepFileName($this->_file_name_override);
+
+            // If no extension was provided in the file_name config item, use the uploaded one
+            if (strpos($this->_file_name_override, '.') === FALSE) {
+                $this->file_name .= $this->file_ext;
+            } // An extension was provided, lets have it!
+            else {
+                $this->file_ext = $this->getExtension($this->_file_name_override);
+            }
+
+            if (!$this->isAllowFileType(TRUE)) {
+                $this->setError('upload_invalid_filetype');
+                return FALSE;
+            }
+        }
+
+        // 大小转换为M
+        if ($this->file_size > 0) {
+            $this->file_size = round($this->file_size / 1024, 2);
+        }
+
+        // Is the file size within the allowed maximum?
+        if (!$this->isAllowFileSize()) {
+            $this->setError('upload_invalid_filesize');
+            return FALSE;
+        }
+
+        // Are the image dimensions within the allowed size?
+        // Note: This can fail if the server has an open_basdir restriction.
+        if (!$this->isAllowDimensions()) {
+            $this->setError('upload_invalid_dimensions');
+            return FALSE;
+        }
+
+        // Sanitize the file name for security
+        $this->file_name = $this->cleanFileName($this->file_name);
+
+        // Truncate the file name if it's too long
+        if ($this->max_filename > 0) {
+            $this->file_name = $this->limitFileNameLength($this->file_name, $this->max_filename);
+        }
+
+        // Remove white spaces in the name
+        if ($this->remove_spaces == TRUE) {
+            $this->file_name = preg_replace("/\s+/", "_", $this->file_name);
+        }
+
+        /*
+         * Validate the file name
+         * This function appends an number onto the end of
+         * the file if one with the same name already exists.
+         * If it returns false there was a problem.
+         */
+        $this->orig_name = $this->file_name;
+
+        if ($this->overwrite == FALSE) {
+            $this->file_name = $this->setFileName($this->upload_path, $this->file_name);
+
+            if ($this->file_name === FALSE) {
+                return FALSE;
+            }
+        }
+
+        /*
+         * Run the file through the XSS hacking filter
+         * This helps prevent malicious code from being
+         * embedded within a file.  Scripts can easily
+         * be disguised as images or other file types.
+         */
+        if ($this->xss_clean) {
+            if ($this->startXssClean() === FALSE) {
+                $this->setError('upload_unable_to_write_file');
+                return FALSE;
+            }
+        }
+
+        /*
+         * Move the file to the final destination
+         * To deal with different server configurations
+         * we'll attempt to use copy() first.  If that fails
+         * we'll use move_uploaded_file().  One of the two should
+         * reliably work in most environments
+         */
+        if (!@copy($this->file_temp, $this->upload_path . $this->file_name)) {
+            if (!@move_uploaded_file($this->file_temp, $this->upload_path . $this->file_name)) {
+                $this->setError('upload_destination_error');
+                return FALSE;
+            }
+        }
+
+        /*
+         * Set the finalized image dimensions
+         * This sets the image width/height (assuming the
+         * file was an image).  We use this information
+         * in the "data" function.
+         */
+        $this->setImageProperties($this->upload_path . $this->file_name);
+
+        return TRUE;
+    }
+    // --------------------------------------------------------------------
 
     /**
      * Finalized Data Array
