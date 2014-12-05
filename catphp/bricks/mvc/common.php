@@ -7,14 +7,10 @@
  * @return type
  */
 function P($key, $default = null) {
-    if ($default === null) {
-        return addslashes($_GET[$key]);
+    if (isset($_POST[$key])) {
+        return addslashes($_POST[$key]);
     } else {
-        if (isset($_GET[$key])) {
-            return addslashes($_GET[$key]);
-        } else {
-            return $default;
-        }
+        return $default;
     }
 }
 
@@ -25,14 +21,10 @@ function P($key, $default = null) {
  * @return type
  */
 function G($key, $default = null) {
-    if ($default === null) {
-        return addslashes($_POST[$key]);
+    if (isset($_GET[$key])) {
+        return addslashes($_GET[$key]);
     } else {
-        if (isset($_POST[$key])) {
-            return addslashes($_POST[$key]);
-        } else {
-            return $default;
-        }
+        return $default;
     }
 }
 

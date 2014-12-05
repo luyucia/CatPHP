@@ -25,6 +25,7 @@ return  array
         'Language'=>'/bricks/language/language.php',
         'Probability'=>'/bricks/math/probability.php',
         'Filter'=>'/bricks/filter/filter.php',
+        'Convert'=>'/bricks/convert_str/convert.php',
     ),
 
 
