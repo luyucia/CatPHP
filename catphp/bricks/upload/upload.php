@@ -118,19 +118,19 @@ class Upload
     public function startUpload($field = 'userfile')
     {
 
-        // Is $_FILES[$field] set? If not, no reason to continue.
+        // 验证文件名是否正确
         if (!isset($_FILES[$field])) {
             $this->setError('upload_no_file_selected');
             return FALSE;
         }
 
-        // Is the upload path valid?
+        // 验证上传目录
         if (!$this->validatePath()) {
             // errors will already be set by validatePath() so just return FALSE
             return FALSE;
         }
 
-        // Was the file able to be uploaded? If not, determine the reason why.
+        // 上传文件基本信息检测
         if (!is_uploaded_file($_FILES[$field]['tmp_name'])) {
             $error = (!isset($_FILES[$field]['error'])) ? 4 : $_FILES[$field]['error'];
 
@@ -165,23 +165,23 @@ class Upload
         }
 
 
-        // Set the uploaded data as class variables
-        $this->file_temp = $_FILES[$field]['tmp_name'];
-        $this->file_size = $_FILES[$field]['size'];
+        // 设置全局变量
+        $this->file_temp = $_FILES[$field]['tmp_name'];//文件临时目录
+        $this->file_size = $_FILES[$field]['size'];//文件大小
         $this->_fileMimeType($_FILES[$field]);
-        $this->file_type = preg_replace("/^(.+?);.*$/", "\\1", $this->file_type);
+        $this->file_type = preg_replace("/^(.+?);.*$/", "\\1", $this->file_type);//文件扩展名
         $this->file_type = strtolower(trim(stripslashes($this->file_type), '"'));
-        $this->file_name = $this->_prepFileName($_FILES[$field]['name']);
-        $this->file_ext = $this->getExtension($this->file_name);
+        $this->file_name = $this->_prepFileName($_FILES[$field]['name']);//文件名
+        $this->file_ext = $this->getExtension($this->file_name);//扩展名
         $this->client_name = $this->file_name;
 
-        // Is the file type allowed to be uploaded?
+        // 验证文件类型
         if (!$this->isAllowFileType()) {
             $this->setError('upload_invalid_filetype');
             return FALSE;
         }
 
-        // if we're overriding, let's now make sure the new name and type is allowed
+        // 是否覆盖重名文件
         if ($this->_file_name_override != '') {
             $this->file_name = $this->_prepFileName($this->_file_name_override);
 
@@ -199,25 +199,25 @@ class Upload
             }
         }
 
-        // Convert the file size to kilobytes
+        // 将文件大小转化为KB
         if ($this->file_size > 0) {
             $this->file_size = round($this->file_size / 1024, 2);
         }
 
-        // Is the file size within the allowed maximum?
+        // 限制文件大小
         if (!$this->isAllowFileSize()) {
             $this->setError('upload_invalid_filesize');
             return FALSE;
         }
 
-        // Are the image dimensions within the allowed size?
+        // 图片尺寸验证
         // Note: This can fail if the server has an open_basdir restriction.
         if (!$this->isAllowDimensions()) {
             $this->setError('upload_invalid_dimensions');
             return FALSE;
         }
 
-        // Sanitize the file name for security
+        // Sanitize the file name for security(过滤文件名)
         $this->file_name = $this->cleanFileName($this->file_name);
 
         // Truncate the file name if it's too long
@@ -225,12 +225,13 @@ class Upload
             $this->file_name = $this->limitFileNameLength($this->file_name, $this->max_filename);
         }
 
-        // Remove white spaces in the name
+        // 将多个连续空格转为一个下划线
         if ($this->remove_spaces == TRUE) {
             $this->file_name = preg_replace("/\s+/", "_", $this->file_name);
         }
 
         /*
+         * 重名文件加数字后缀
          * Validate the file name
          * This function appends an number onto the end of
          * the file if one with the same name already exists.
