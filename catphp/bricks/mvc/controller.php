@@ -7,6 +7,7 @@
 
 class Controller {
 
+    private    $_config;
     private    $context = array();
     private    $engine;
     public     $controllerName;
@@ -17,6 +18,7 @@ class Controller {
         session_start();
         ob_start();
         $WEB_CONFIG   = CatConfig::getInstance('config/config.php');
+        $this->_config   = CatConfig::getConfig();
         $template     = $WEB_CONFIG->template_engine;
         if ($template === 'tenjin' ) {
             $properties = array('cache' => false);
@@ -92,6 +94,21 @@ class Controller {
 
     public function __call($name, $arguments) {
         header("HTTP/1.0 404 Not Found");
+        $tpl = $this->_config;
+        echo $this->render($tpl['404page']);
+        exit();
+        // echo $name . ' is not defined!';
+    }
+    
+    public function go404() {
+        header("HTTP/1.0 404 Not Found");
+        $tpl = $this->_config;
+        if(isset($tpl['404page'])){
+            echo $this->render($tpl['404page']);
+        }else{
+            echo '<h2>404 not found</h2>';
+        }
+        exit();
         // echo $name . ' is not defined!';
     }
 

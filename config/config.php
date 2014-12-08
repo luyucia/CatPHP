@@ -14,7 +14,7 @@ return array(
     'template_engine'=>'tenjin',
     'route_regular'=>array(
             array('p'=>'^\w{6}\/','c'=>'api','a'=>'index')
-        )
+        ),
     );
 
 ?>
