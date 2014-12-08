@@ -95,7 +95,11 @@ class Controller {
     public function __call($name, $arguments) {
         header("HTTP/1.0 404 Not Found");
         $tpl = $this->_config;
-        echo $this->render($tpl['404page']);
+        if(isset($tpl['404page'])){
+            echo $this->render($tpl['404page']);
+        }else{
+            echo '<h2>404 not found</h2>';
+        }
         exit();
         // echo $name . ' is not defined!';
     }
