@@ -7,19 +7,24 @@
 
 class Controller {
 
-    private    $_config;
+    private    $app_config;
     private    $context = array();
     private    $engine;
     public     $controllerName;
     public     $actionName;
     protected  $request;
+    protected  $logger;
 
     function __construct() {
         session_start();
         ob_start();
-        $WEB_CONFIG   = CatConfig::getInstance('config/config.php');
-        $this->_config   = CatConfig::getConfig();
-        $template     = $WEB_CONFIG->template_engine;
+        $this->app_config   = CatConfig::getInstance('config/config.php');
+        $log_level    = $this->app_config->log_level;
+        if($log_level){
+            $this->logger = new Logging();
+            $this->logger->serLevel($log_level);
+        }
+        $template     = $this->app_config->template_engine;
         if ($template === 'tenjin' ) {
             $properties = array('cache' => false);
             $this->engine = new Tenjin_Engine($properties);
@@ -29,7 +34,7 @@ class Controller {
                 exit();
             }
         
-        // D($WEB_CONFIG);
+        // D($this->app_config);
     }
 
     public function setRoute($rout) {
@@ -94,9 +99,8 @@ class Controller {
 
     public function __call($name, $arguments) {
         header("HTTP/1.0 404 Not Found");
-        $tpl = $this->_config;
-        if(isset($tpl['404page'])){
-            echo $this->render($tpl['404page']);
+        if(isset($this->app_config->error_page)){
+            echo $this->render($this->app_config->error_page);
         }else{
             echo '<h2>404 not found</h2>';
         }
@@ -106,9 +110,8 @@ class Controller {
     
     public function go404() {
         header("HTTP/1.0 404 Not Found");
-        $tpl = $this->_config;
-        if(isset($tpl['404page'])){
-            echo $this->render($tpl['404page']);
+        if(isset($this->app_config->error_page)){
+            echo $this->render($this->app_config->error_page);
         }else{
             echo '<h2>404 not found</h2>';
         }

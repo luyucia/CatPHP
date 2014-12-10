@@ -11,7 +11,7 @@ class HttpClient
     private $_agent;
     private $_data;
     private $_curl;
-    private $_timeout = 10;
+    private $_timeout = 60;
 
     function __construct(){
         $this->_curl = curl_init();

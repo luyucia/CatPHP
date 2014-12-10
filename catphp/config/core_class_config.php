@@ -26,6 +26,7 @@ return  array
         'Probability'=>'/bricks/math/probability.php',
         'Filter'=>'/bricks/filter/filter.php',
         'Convert'=>'/bricks/convert_str/convert.php',
+        'Logging'=>'/bricks/logging/logging.php',
     ),
 
 

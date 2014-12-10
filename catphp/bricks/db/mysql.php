@@ -59,6 +59,7 @@ class MysqlDriver
             while ($row = mysqli_fetch_array($result, $modeType)) {
                 $data[] = $row;
             }
+            mysqli_free_result($result);
             return $data;
         } else {
             return false;
@@ -101,6 +102,10 @@ class MysqlDriver
         }
 
         return $data;
+    }
+
+    public function commit(){
+        mysqli_commit($this->conn);
     }
 
 }

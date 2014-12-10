@@ -113,14 +113,6 @@ class Db
         $this->db->close();
     }
 
-    /**
-     *
-     * 提交事务
-     */
-    public function commit()
-    {
-        $this->db->commit();
-    }
 
     /**
      *
@@ -144,6 +136,15 @@ class Db
     public function getInsertId()
     {
         return $this->db->getInsertId();
+    }
+
+    /**
+     *
+     * 提交事物
+     * 
+     */
+    public function commit(){
+        return $this->db->commit();
     }
 
     /**
