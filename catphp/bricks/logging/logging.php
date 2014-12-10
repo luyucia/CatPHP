@@ -13,10 +13,11 @@ class Logging
     const OFF   = 0;
     const TRACE = 1;
     const DEBUG = 2;
-    const WARN  = 3;
-    const ERROR = 4;
-    const FATAL = 5;
-    const ALL   = 6;
+    const INFO  = 3;
+    const WARN  = 4;
+    const ERROR = 5;
+    const FATAL = 6;
+    const ALL   = 7;
 
     function __construct($file=false,$level=Logging::ALL)
     {
@@ -25,12 +26,15 @@ class Logging
     }
 
     public function setLevel($level){
+        $level = strtoupper($level);
         if ($level=='OFF') {
             $this->log_level = Logging::OFF;
         }else if($level=='TRACE'){
             $this->log_level = Logging::TRACE;
         }else if($level=='DEBUG'){
             $this->log_level = Logging::DEBUG;
+        }else if($level=='INFO'){
+            $this->log_level = Logging::INFO;
         }else if($level=='WARN'){
             $this->log_level = Logging::WARN;
         }else if($level=='ERROR'){
@@ -69,6 +73,21 @@ class Logging
                 $message = date($this->date_format)."\tDEBUG\t".$tag."\t".print_r($content,true) ."\n";
             }else{
                 $message = date($this->date_format)."\tDEBUG\t".$tag."\t".$content."\n";
+            }
+            if ($this->log_file) {
+                error_log($message , 3 , $this->log_file);
+            }else{
+                error_log($message);
+            }
+        }
+    }
+
+    public function info($content , $tag='') {
+        if ($this->log_level >= Logging::DEBUG) {
+            if(is_array($content)){
+                $message = date($this->date_format)."\tINFO\t".$tag."\t".print_r($content,true) ."\n";
+            }else{
+                $message = date($this->date_format)."\tINFO\t".$tag."\t".$content."\n";
             }
             if ($this->log_file) {
                 error_log($message , 3 , $this->log_file);
