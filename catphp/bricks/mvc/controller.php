@@ -22,7 +22,7 @@ class Controller {
         $log_level    = $this->app_config->log_level;
         if($log_level){
             $this->logger = new Logging();
-            $this->logger->serLevel($log_level);
+            $this->logger->setLevel($log_level);
         }
         $template     = $this->app_config->template_engine;
         if ($template === 'tenjin' ) {
