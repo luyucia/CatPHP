@@ -13,6 +13,7 @@ return  array
         'Csv'=>'/bricks/csv/csv.php',
         'Db'=>'/bricks/db/db.php',
         'HtmlTable'=>'/bricks/html/html_table.php',
+        'HtmlForm'=>'/bricks/html/html_form.php',
         'HtmlUl'=>'/bricks/html/html_ul.php',
         'IpLocation'=>'/bricks/ip/ip_location.php',
         'ArrayUtil'=>'/bricks/common/array_util.php',
