@@ -59,18 +59,31 @@ class Web {
             $action_name  = $restVerb;
         }
         // 解析非GET POST请求
-        $ps  =  explode('&', file_get_contents('php://input'));
-        foreach ($ps as $param) {
-            $param  = urldecode($param);
-            $eq_pos = strpos($param, "=");
-            $pkey   = substr($param, 0,$eq_pos);
-            $pvalue = substr($param,$eq_pos+1);
-            $url_params[$pkey] = $pvalue;
+        if ($_SERVER['REQUEST_METHOD']!='GET' && $_SERVER['REQUEST_METHOD']!='POST'){
+            $ps  =  explode('&', file_get_contents('php://input'));
+            foreach ($ps as $param) {
+                $param  = urldecode($param);
+                $eq_pos = strpos($param, "=");
+                $pkey   = substr($param, 0,$eq_pos);
+                $pvalue = substr($param,$eq_pos+1);
+                $url_params[$pkey] = $pvalue;
+            }
         }
+        
 
         // 路由到指定controller的指定action
         $class = $controller_name . 'Controller';
-        $controller = new $class();
+            // $controller = new $class();
+        try {
+            $controller = new $class();
+        } catch (Exception $exc) {
+            header("HTTP/1.0 404 Not Found");
+            echo "</h2>404</h2>";
+            exit();
+        }
+
+        
+        
         $controller->setActionName($action_name);
         $controller->setControllerName($controller_name);
         if (isset($url_params)) {
@@ -261,18 +274,20 @@ class Web {
 function web_autoload($class)
 {
     $WEB_CONFIG   = CatConfig::getInstance(APP_PATH.'/config/config.php');
-
+    $success = false;
     // 判断是controller还是model
     if(stripos($class, "Controller")) {
         $class = str_replace("Controller", "", $class);
         $controller_file = APP_PATH.'/'.$WEB_CONFIG->controller_path.strtolower($class).'.php';
         if (file_exists($controller_file)) {
             require $controller_file;
+            $success = true;
         }else{
             foreach ($WEB_CONFIG->controller_dirs as $dir) {
                     $controller_file = APP_PATH.'/'.$WEB_CONFIG->controller_path . $dir . $class . '.php';
                     if (file_exists($controller_file)) {
-                        include $controller_file;
+                        require $controller_file;
+                        $success = true;
                         break;
                     }
                 }
@@ -283,18 +298,37 @@ function web_autoload($class)
         if(file_exists($modelFile))
         {
             require $modelFile;
+            $success = true;
 
         }else{
             foreach ($WEB_CONFIG->model_dirs as $dir) {
                 $modelFile = APP_PATH.'/'.$WEB_CONFIG->model_path. $dir .strtolower($class).'.php';
                 if (file_exists($modelFile)) {
                     include $modelFile;
+                    $success = true;
                     break;
                 }
             }
         }
-
+        
+    } else {
+        // 加载用户自定义类库
+        foreach ($WEB_CONFIG->libs as $key => $value) {
+            if($p = stripos($class, $key )){
+                $class = substr($class, 0, $p);
+                $incFile = APP_PATH.'/'.$value.'/'.$class.'.php';
+                if (file_exists($incFile)) {
+                    include $incFile;
+                    $success = true;
+                    break;
+                }
+            }
+        }
+    }
+    if(!$success){
+        throw new Exception("class $class not found", 1);
     }
 }
+
 
 ?>

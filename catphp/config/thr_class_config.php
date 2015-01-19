@@ -8,6 +8,7 @@ return  array
     'Tenjin_Engine'=>'/bricks-v/templates/Tenjin.php',
     'QRcode'=>'/bricks-v/qrcode/qrlib.php',
     'Captcha'=>'/bricks-v/captcha/captcha.php',
+    'PhpPrestoClient'=>'/bricks-v/PhpPrestoClient.php',
 
 
 );

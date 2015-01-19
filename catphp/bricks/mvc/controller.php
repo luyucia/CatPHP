@@ -133,9 +133,7 @@ class Controller {
         fwrite($fp, ob_get_contents());
         fclose($fp);
     }
-
-
-
+    
 }
 
 ?>

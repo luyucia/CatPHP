@@ -65,7 +65,7 @@ class HtmlForm {
     //向表单中追加一个input text
     public function addInputText($name = "",$id = "",$class = "",$value = "",$title = "",$placeholder = "",$other = "",$surround = array("","")){
         
-        if(!empty($name)){$name = " name = '".$name."'";}
+        if(!empty($name)){$name = " name = \"".$name."\"";}
         if(!empty($id)){$id = " id = '".$id."'";}
         if(!empty($class)){$class = " class = '".$class."'";}
         if(!empty($value)){$value = " value = '".$value."'";}

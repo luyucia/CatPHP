@@ -54,3 +54,4 @@ function cat_core_bricks_autoload($classname)
     }
 }
 
+
