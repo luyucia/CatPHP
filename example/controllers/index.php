@@ -11,6 +11,10 @@ class indexController extends Controller {
      */
     public function index($name = "Stranger") {
         echo "<h1>Welcome to Use CatPHP</h1>";
+        $this->assign("title",'Welcome');
+        $this->render('views/index.tpl');
+
+
     }
 
 }

@@ -9,6 +9,7 @@ class Controller {
 
     private    $app_config;
     private    $context = array();
+    private    $engine_name;
     private    $engine;
     public     $controllerName;
     public     $actionName;
@@ -18,21 +19,13 @@ class Controller {
     function __construct() {
         session_start();
         ob_start();
-        $this->app_config   = CatConfig::getInstance('config/config.php');
+        $this->app_config   = CatConfig::getInstance(APP_PATH.'config/config.php');
         $log_level    = $this->app_config->log_level;
         if($log_level){
             $this->logger = new Logging();
             $this->logger->setLevel($log_level);
         }
-        $template     = $this->app_config->template_engine;
-        if ($template === 'tenjin' ) {
-            $properties = array('cache' => false);
-            $this->engine = new Tenjin_Engine($properties);
-        }
-        elseif ($template === 'smarty') {
-                echo "暂时不支持smarty";
-                exit();
-            }
+        
         
         // D($this->app_config);
     }
@@ -45,9 +38,26 @@ class Controller {
         $this->context[$key] = $value;
     }
 
+    // 绘制页面
     public function render($tpl) {
-        $output = $this->engine->render($tpl, $this->context);
-        return $output;
+        $this->engine_name     = $this->app_config->template_engine['type'];
+        if ($this->engine_name === 'tenjin' ) {
+            $properties = array('cache' => false);
+            $this->engine = new Tenjin_Engine($properties);
+            $output = $this->engine->render($tpl, $this->context);
+            echo $output;
+            return $output;
+        }
+        elseif ($this->engine_name === 'smarty') {
+            $this->engine = new Smarty();
+            $this->engine->debugging      = $this->app_config->template_engine['debug'];
+            $this->engine->caching        = $this->app_config->template_engine['cache'];
+            $this->engine->cache_lifetime = $this->app_config->template_engine['cache_lifetime'];
+            foreach ($this->context as $key => $value) {
+                $this->engine->assign($key,$value);
+                $this->engine->display($tpl);
+            }
+        }
     }
 
     public function getParam($key='',$default = false,$incect_check = true) {

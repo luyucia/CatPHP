@@ -27,7 +27,7 @@ class Web {
         if (!defined("APP_PATH")) {
             define("APP_PATH", $_SERVER['DOCUMENT_ROOT']);
         }
-        
+
         spl_autoload_register('web_autoload');
         $WEB_CONFIG   = CatConfig::getInstance(APP_PATH.'/config/config.php');
 
@@ -317,21 +317,23 @@ function web_autoload($class)
         
     } else {
         // 加载用户自定义类库
-        foreach ($WEB_CONFIG->libs as $key => $value) {
-            if($p = stripos($class, $key )){
-                $class = substr($class, 0, $p);
-                $incFile = APP_PATH.'/'.$value.'/'.$class.'.php';
-                if (file_exists($incFile)) {
-                    include $incFile;
-                    $success = true;
-                    break;
+        if (isset($WEB_CONFIG->libs)) {
+            foreach ($WEB_CONFIG->libs as $key => $value) {
+                if($p = stripos($class, $key )){
+                    $class = substr($class, 0, $p);
+                    $incFile = APP_PATH.'/'.$value.'/'.$class.'.php';
+                    if (file_exists($incFile)) {
+                        include $incFile;
+                        $success = true;
+                        break;
+                    }
                 }
             }
         }
     }
-    if(!$success){
-        throw new Exception("class $class not found", 1);
-    }
+    // if(!$success){
+    //     throw new Exception("class $class not found", 1);
+    // }
 }
 
 

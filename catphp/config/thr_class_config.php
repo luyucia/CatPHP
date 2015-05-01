@@ -9,6 +9,7 @@ return  array
     'QRcode'=>'/bricks-v/qrcode/qrlib.php',
     'Captcha'=>'/bricks-v/captcha/captcha.php',
     'PhpPrestoClient'=>'/bricks-v/PhpPrestoClient.php',
+    'Smarty'=>'/bricks-v/templates/smarty-3/libs/Smarty.class.php',
 
 
 );
