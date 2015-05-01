@@ -1,7 +1,7 @@
 <?php
 $a = microtime(true);
 
-require 'catphp/catphp.php';
+require '../catphp/catphp.php';
 
 
 // Web::setRouter("^\w*\/","api",'index');

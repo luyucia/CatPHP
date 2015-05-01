@@ -1,6 +1,6 @@
 <?php
 
-require 'catphp/catphp.php';
+require '../catphp/catphp.php';
 
 // $s = new select();
 // echo $s->to_string();
