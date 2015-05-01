@@ -20,13 +20,14 @@ class Web {
     //     self::$rout_rules[] = array('p' => $pattern, 'c'=>$controller ,'a'=>$action);
     // }
 
+
     // 启动
     public static function start() {
 
         if (!defined("APP_PATH")) {
             define("APP_PATH", $_SERVER['DOCUMENT_ROOT']);
         }
-
+        
         spl_autoload_register('web_autoload');
         $WEB_CONFIG   = CatConfig::getInstance(APP_PATH.'/config/config.php');
 
