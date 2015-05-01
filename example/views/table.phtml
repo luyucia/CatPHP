@@ -1,0 +1,19 @@
+<html>
+<meta charset=utf-8>
+<meta name=description content="">
+<meta name=viewport content="width=device-width, initial-scale=1">
+  <body>
+    <h1>{=$title=}</h1>
+    <table>
+<?php $i = 0; ?>
+<?php foreach ($items as $item) { ?>
+<?php     $color = ++$i % 2 == 0 ? '#FFCCCC' : '#CCCCFF'; ?>
+      <tr bgcolor="{==$color=}">
+        <td>{==$i=}</td>
+        <td>{=$item=}</td>
+      </tr>
+<?php } ?>
+    </table>
+   {==$result=}
+  </body>
+</html>

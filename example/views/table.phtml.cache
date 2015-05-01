@@ -1,0 +1,20 @@
+<?php echo '<html>
+<meta charset=utf-8>
+<meta name=description content="">
+<meta name=viewport content="width=device-width, initial-scale=1">
+  <body>
+    <h1>', htmlspecialchars($title), '</h1>
+    <table>
+'; $i = 0; 
+ foreach ($items as $item) { 
+     $color = ++$i % 2 == 0 ? '#FFCCCC' : '#CCCCFF'; 
+echo '      <tr bgcolor="', $color, '">
+        <td>', $i, '</td>
+        <td>', htmlspecialchars($item), '</td>
+      </tr>
+'; } 
+echo '    </table>
+   ', $result, '
+  </body>
+</html>';
+ ?>
