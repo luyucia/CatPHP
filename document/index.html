@@ -1,8 +1,162 @@
-<html>
+<!doctype html>
+<html lang="en">
 <head>
-	<title>CatPHP</title>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Simple CSS for HTML tables.">
+
+    <title>Tables &ndash; Pure</title>
+
+<link rel="stylesheet" href="css/pure-min.css">
+<link rel="stylesheet" href="css/side-menu.css">
 </head>
 <body>
-<h1>CatPHP</h1>
+    <div id="layout">
+        <a href="#menu" id="menuLink" class="menu-link">
+    <span></span>
+</a>
+<div id="menu">
+    <div class="pure-menu">
+        <a class="pure-menu-heading" href="/">CatPHP</a>
+        <ul class="pure-menu-list">
+          
+            <li class="pure-menu-item pure-menu-selected">
+                <a href="#start" class="pure-menu-link">快速开始</a>
+            </li>
+          
+            <li class="pure-menu-item">
+                <a href="#design" class="pure-menu-link">设计思想</a>
+            </li>
+          
+            <li class="pure-menu-item menu-item-divided">
+                <a href="#ext" class="pure-menu-link">扩展框架</a>
+            </li>
+          
+            <li class="pure-menu-item">
+                <a href="/grids/" class="pure-menu-link">配置</a>
+            </li>
+
+            <li class="pure-menu-item">
+                <a href="/grids/" class="pure-menu-link">路由</a>
+            </li>
+          
+            <li class="pure-menu-item">
+                <a href="/forms/" class="pure-menu-link">模板</a>
+            </li>
+          
+            <li class="pure-menu-item">
+                <a href="/buttons/" class="pure-menu-link">数据库</a>
+            </li>
+          
+            <li class="pure-menu-item ">
+                <a href="/tables/" class="pure-menu-link">sql生成器</a>
+            </li>
+          
+            <li class="pure-menu-item">
+                <a href="/menus/" class="pure-menu-link">参数校验</a>
+            </li>
+          
+            <li class="pure-menu-item menu-item-divided">
+                <a href="/tools/" class="pure-menu-link">日志</a>
+            </li>
+          
+            <li class="pure-menu-item">
+                <a href="/customize/" class="pure-menu-link">HTML生成器</a>
+            </li>
+          
+            <li class="pure-menu-item">
+                <a href="/extend/" class="pure-menu-link">缓存</a>
+            </li>
+          
+            <li class="pure-menu-item">
+                <a href="http://blog.purecss.io/" class="pure-menu-link">多语言</a>
+            </li>
+            <li class="pure-menu-item">
+                <a href="https://github.com/yahoo/pure/releases/" class="pure-menu-link">HTTP Client</a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+
+<div id="start">
+	<div class="header">
+    <h1>快速开始</h1>
+    <h2>Quick Start for CatPHP</h2>
+	</div>
+	<div class="content">
+
+<h3>第一步：下载CatPHP</h3>
+<p>下载地址：<a href="https://github.com/luyucia/CatPHP">https://github.com/luyucia/CatPHP</a></p>
+<h3>第二步：将样例工程复制到您的web服务器工作目录下</h3>
+<p>将example目录复制到您的工作目录下（nginx默认为html）</p>
+<h3>第三步：配置Nginx或Apache的路由重写规则</h3>
+<p>假如您使用Nginx则：
+请在nginx目录下找到conf/nginx.conf文件，并添加重写规则：</p>
+<pre><code>if (!-e ) {
+        rewrite ^.*$ /index.php last;
+    }</code></pre>
+<p>这样nginx会将所有请求不到的url请求发送到 index。php</p>
+	    <h2 id="default-table" class="content-subhead">Default Table<a href="#default-table" class="content-link" title="Heading anchor"></a></h2>
+	    <p>完成：现在您就可以在浏览器中访问您的项目了 exp：<a href="http://127.0.0.1">http://127.0.0.1</a></p>
+
+	</div>
+</div>
+
+
+
+<div id="design">
+	<div class="header">
+    <h1>设计思想</h1>
+    <h2>Design for CatPHP</h2>
+	</div>
+	<div class="content">
+	    <h2 id="default-table" class="content-subhead">Default Table<a href="#default-table" class="content-link" title="Heading anchor"></a></h2>
+	    <p>
+	        To style an HTML table, add the <code>pure-table</code> classname. This class adds padding and borders to table elements, and emphasizes the header.
+	    </p>
+
+	    <table class="pure-table">
+		    <thead>
+		        <tr>
+		            <th>#</th>
+		            <th>Make</th>
+		            <th>Model</th>
+		            <th>Year</th>
+		        </tr>
+		    </thead>
+
+		    <tbody>
+		        <tr>
+		            <td>1</td>
+		            <td>Honda</td>
+		            <td>Accord</td>
+		            <td>2009</td>
+		        </tr>
+
+		        <tr>
+		            <td>2</td>
+		            <td>Toyota</td>
+		            <td>Camry</td>
+		            <td>2012</td>
+		        </tr>
+
+		        <tr>
+		            <td>3</td>
+		            <td>Hyundai</td>
+		            <td>Elantra</td>
+		            <td>2010</td>
+		        </tr>
+		    </tbody>
+		</table>
+	</div>
+</div>
 </body>
+<script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript">
+	$('.pure-menu-item').click(function(){
+		$('.pure-menu-selected').removeClass('pure-menu-selected')
+		$(this).addClass('pure-menu-selected')
+	})
+</script>
 </html>
