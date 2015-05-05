@@ -1,24 +1,24 @@
 <?php
 
 /**
-* 
-* 
+*
+*
 * 变量有无
 * 取值范围> < = in
 * 长度
 * 类型（整数，小数，字符串，日期）
 * 其他（邮箱，IP，手机，正则）
-* 
-* 
-* 
-* 
-* 
-* 
-* 
+*
+*
+*
+*
+*
+*
+*
 */
 class Validator
 {
-    
+
     private $data;
     private $mode   = 'stop';
     private $errors = array();
@@ -44,7 +44,7 @@ class Validator
         if($name==null)
             $name = $key;
         // 如果模式为停止，并且已经发现错误本次不进行验证 直接返回false
-        if ($this->mode=='stop' && isset($this->errors[0])) 
+        if ($this->mode=='stop' && isset($this->errors[0]))
             return false;
         // 解析规则
         $rules  =  explode('|', $rule);
@@ -56,7 +56,7 @@ class Validator
             {
                 if(!$this->required(@$this->data[$key]))
                 {
-                    $this->errors[] = '请输入'.$name;
+                    $this->errors[] = $name.' is required';
                     return false;
                 };
             }
@@ -67,7 +67,7 @@ class Validator
                 $rs = $this->type(@$this->data[$key],$matchs[1]);
                 if(!$rs)
                 {
-                    $this->errors[] = $name.'的类型不是'.$matchs[1];
+                    $this->errors[] = $name.' is not a type'.$matchs[1];
                     return false;
                 }
             }
@@ -78,10 +78,10 @@ class Validator
                 $rs = $this->range(@$this->data[$key],$matchs[1],$matchs[2]);
                 if($rs===2)
                 {
-                    $this->errors[] = $name.'的取值超过'.$matchs[2];
+                    $this->errors[] = $name.'more than'.$matchs[2];
                     return false;
                 }else if($rs===0){
-                    $this->errors[] = $name.'的取值小于'.$matchs[1];
+                    $this->errors[] = $name.'less than'.$matchs[1];
                     return false;
                 };
             }
@@ -92,15 +92,15 @@ class Validator
                 $rs = $this->reg(@$this->data[$key],$matchs[1]);
                 if(!$rs)
                 {
-                    $this->errors[] = $name.'的格式有误';
+                    $this->errors[] = $name.' is wrong format';
                     return false;
                 }
             }
-            
+
 
         }
         // 记录判定结果
-        
+
     }
     // 判定必要性
     public function required($value)
@@ -173,15 +173,12 @@ class Validator
     }
 
     // 获取错误信息
-    public function get_error($index=null)
+    public function get_error($index=0)
     {
-        if (is_numeric($index)) 
+
+        if(isset($this->errors[$index]))
         {
             return $this->errors[$index];
-        }
-        else if(isset($this->errors[0]))
-        {
-            return $this->errors;
         }
         else
             return false;
@@ -190,25 +187,25 @@ class Validator
 
 
 
-$data = array(
-    'name'    => '555' ,
-    'age'     => '25' ,
-    'account' => '' ,
-    'email'   => '' ,
-    'account' => '' ,
-    'content' => 'xxxxss' ,
-    'sex'     => 'xxxxss' ,
+// $data = array(
+//     'name'    => '5' ,
+//     'age'     => '25' ,
+//     'account' => '' ,
+//     'email'   => '' ,
+//     'account' => '' ,
+//     'content' => 'xxxxss' ,
+//     'sex'     => 'xxxxss' ,
 
- );
+//  );
 
-$v = new Validator($data);
-// $v->set_data();
-$v->set_mode('all');
-$v->check('name','required|type(string)','用户名');
-$v->check('sex','required','性别');
-$v->check('age','required|type(int)|range(18,25)','年龄');
-$v->check('content','required|len(20,50)|reg(\w*,)','内容');
-echo $v->get_error(0);
+// $v = new Validator($data);
+// // $v->set_data();
+// $v->set_mode('all');
+// $v->check('name','required|type(string)','用户名');
+// $v->check('sex','required','性别');
+// $v->check('age','required|type(int)|range(18,25)','年龄');
+// $v->check('content','required|len(20,50)|reg(\w*,)','内容');
+// echo $v->get_error(0);
 // print_r($v->get_error(0));
 // echo "string";
 // var_dump();

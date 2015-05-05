@@ -50,7 +50,9 @@ class Db
 
     public function getRow($sql)
     {
-        return $this->db->getRow($sql);
+        $rtn = $this->db->getRow($sql);
+
+        return  $rtn;
     }
 
     public function query($sql)
@@ -61,6 +63,11 @@ class Db
     public function fetch($rs, $model = 0)
     {
         return $this->db->fetch_array($rs, $model);
+    }
+
+    public function getLastError()
+    {
+        return $this->db->getLastError();
     }
 
     /**
@@ -130,7 +137,15 @@ class Db
      */
     public function execute($sql)
     {
-        return $this->db->execute($sql);
+        $rtn =  $this->db->execute($sql);
+        if (!$rtn) {
+            if(isset($this->config['debug']) && $this->config['debug']===true){
+                echo $this->getLastError();
+                echo "\nError SQL--> ".$sql;
+            }
+        }
+
+        return $rtn;
     }
 
     public function getInsertId()
@@ -141,76 +156,12 @@ class Db
     /**
      *
      * 提交事物
-     * 
+     *
      */
     public function commit(){
         return $this->db->commit();
     }
 
-    /**
-     *插入数据
-     * @param str table
-     *表名
-     * @param array data
-     *数据
-     * @uses 例如：$data['username'] = 'luyu'; $data['age'] = 23;add('user',$data);
-     */
-    public function add(&$data, $table)
-    {
-        $colums = '';
-        $values = '';
-        foreach ($data as $key => $value) {
-            $colums .= $key . ",";
-            $values .= $this->type_change($value) . ",";
-        }
-        $colums = rtrim($colums, ',');
-        $values = rtrim($values, ',');
-        $sql = "insert into $table ($colums) values($values)";
-        return $this->execute($sql);
-    }
 
-    private function type_change(&$value)
-    {
-        if (is_numeric($value) || preg_match('#^[\w\d_]*\(.*\)#', $value)) {
-            if (preg_match('#^0\d+#', $value)) {
-                return "'$value'";
-            } else {
-                return $value;
-            }
-        } else if ($value == '' || $value == null) {
-            return 'NULL';
-        } else if (stripos($value, '.nextval')) {
-            return $value;
-        } else {
-            return "'$value'";
-        }
-
-    }
-
-    /**
-     *更新数据
-     * @param str table
-     *表名
-     * @param array data
-     *数据
-     * @param str where
-     *条件
-     * @uses 例如：$data['username'] = 'luyu'; $data['age'] = 23;add('user',$data);
-     */
-    // public function update($table,$data,$where)
-    // {
-
-    //     $sql = "UPDATE $table SET ";
-
-    //     foreach ($data as $key => $value) {
-    //         $sql.= "$key = ".$this->type_change($value).",";
-    //     }
-
-    //     $sql = rtrim($sql,',');
-    //     $sql.=" WHERE ".$where;
-    //     if (Conf::$DEBUG)
-    //         echo $sql;
-    //     return $this->execute($sql);
-    // }
 
 }

@@ -18,10 +18,6 @@ class DbFactory{
      */
     static public function getDb($config)
     {
-        if (!isset($config['type'])) {
-            throw new Exception("Please indicate the type of database", 1);
-            return null;
-        }
         $db_type = strtolower($config['type']);
 
         if($db_type=='mysql')
@@ -42,7 +38,7 @@ class DbFactory{
         }
         else
         {
-            throw new Exception("The type $db_type is not support by catPHP yet,sorry ^_^", 1);
+            echo "The type $db_type is not support by catPHP yet,sorry ^_^";
             return null;
         }
 

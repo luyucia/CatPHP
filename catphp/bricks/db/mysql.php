@@ -69,11 +69,15 @@ class MysqlDriver
     public function execute($sql)
     {
         //$sql = $this->checkSql($sql);
+        $rtn = false;
         $stmt = mysqli_prepare($this->conn, $sql);
-        // var_dump($stmt);
-        echo mysqli_error($this->conn);
-        return mysqli_stmt_execute($stmt);
-        // return mysqli_query($this->conn, $sql); 
+        if ($stmt) {
+            $rtn =  mysqli_stmt_execute($stmt);
+        }
+        $this->lastError = mysqli_error($this->conn);
+
+        return $rtn;
+        // return mysqli_query($this->conn, $sql);
         // or die("Invalid query: " . mysql_error());
     }
 
@@ -97,15 +101,28 @@ class MysqlDriver
         $result = mysqli_query($this->conn, $sql);
 
         $data = false;
-        if ($result) {
+        // 查询错误
+        if( $result === false && is_bool($result) ){
+            if(isset(self::$_conf['debug']) && self::$_conf['debug']===true){
+                $this->lastError = mysqli_error($this->conn);
+                echo $this->lastError ;
+            }
+        }
+        elseif ($result->num_rows != 0) {
             $data = mysqli_fetch_assoc($result);
         }
 
         return $data;
     }
 
-    public function commit(){
+    public function commit()
+    {
         mysqli_commit($this->conn);
+    }
+
+    public function getLastError()
+    {
+        return $this->lastError;
     }
 
 }
