@@ -6,7 +6,7 @@
  */
 class indexController extends Controller {
 
-    /** 
+    /**
      * 默认动作
      */
     public function index($name = "Stranger") {
@@ -21,10 +21,10 @@ class indexController extends Controller {
 假如您使用Nginx则：
 请在nginx目录下找到conf/nginx.conf文件，并添加重写规则：
 
-    if (!-e $request_filename) {
+    if (!-e \$request_filename) {
             rewrite ^.*$ /index.php last;
         }
-    
+
 这样nginx会将所有请求不到的url请求发送到 index。php
 
 完成：现在您就可以在浏览器中访问您的项目了 exp：http://127.0.0.1
