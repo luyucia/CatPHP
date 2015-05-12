@@ -98,9 +98,14 @@ class router
         // 按照路由规则解析路由
         if (isset($this->rule_arr)) {
             foreach ($this->rule_arr as $rule) {
+                $rule_len = count($rule['rule']);
                 $rtn_data = array();
                 $ri  = 0;
-                for ($i=0; $i < $this->rout_len; $i++) { 
+                // 如果url解析出来的参数个数和规则不等则直接滤过此条匹配
+                if ($this->rout_len!=$rule_len){
+                    continue;
+                }
+                for ($i=0; $i < $this->rout_len; $i++) {
                     // 如果是:开头，直接匹配
                     if(isset($rule['rule'][$i]) && $rule['rule'][$i][0]===':') {
                         $rtn_data[substr($rule['rule'][$i], 1)] = $this->rout_arr[$i];
@@ -111,7 +116,7 @@ class router
                         continue;
                     }
                     else if(isset($rule['rule'][$i]) && $rule['rule'][$i]==='*') {
-                        for ($j=$i; $j < $this->rout_len; $j++) { 
+                        for ($j=$i; $j < $this->rout_len; $j++) {
                             if (isset($this->rout_arr[$j+1])) {
                                 $rtn_data[$this->rout_arr[$j]] = $this->rout_arr[$j+1];
                                 $j++;
@@ -149,7 +154,7 @@ class router
         if(!$match) {
             $this->controller = $this->rout_arr[0];
             $this->action     = $this->rout_arr[1];
-            for ($j=2; $j < $this->rout_len; $j++) { 
+            for ($j=2; $j < $this->rout_len; $j++) {
                 if (isset($this->rout_arr[$j+1])) {
                     $rtn_data[$this->rout_arr[$j]] = $this->rout_arr[$j+1];
                     $j++;
@@ -234,7 +239,7 @@ class router
 // $r->addRoute($rule4);
 // $r->addRoute($rule5);
 
-// for ($i=0; $i < 100000; $i++) { 
+// for ($i=0; $i < 100000; $i++) {
 //     $r->getRouting();
 // }
 // $r->getRouting();
