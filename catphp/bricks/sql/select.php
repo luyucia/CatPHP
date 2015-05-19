@@ -11,7 +11,7 @@ class select{
     public  $where_arr = array();
 
     public function __construct(){
-        error_reporting(E_ALL ^ E_STRICT);
+        // error_reporting(E_ALL ^ E_STRICT);
     }
 
     public function from($s)
@@ -22,7 +22,7 @@ class select{
 
     public function column($columns)
     {
-        if (is_array($columns)) 
+        if (is_array($columns))
         {
             if (count($columns)) {
                 $this->columns = implode(',', $columns);
@@ -49,10 +49,10 @@ class select{
         $this->having[$column][] = " $logic $column $cond $value";
     }
 
-    // like in 
+    // like in
     public function where($column,$value,$cond='=',$quot=null,$logic='and')
     {
-        if(!isset($value) || $value==='' || $value===false) 
+        if(!isset($value) || $value==='' || $value===false)
             return;
         // 如果quor为null则调用type自动判断是否加单引号
         if($quot===null)
@@ -93,7 +93,7 @@ class select{
             {
                 return '(\''.implode("','", $v).'\')';
             }
-            
+
         }
         else
         {
@@ -108,8 +108,8 @@ class select{
 
     public function groupby($columns)
     {
-        
-        if (is_array($columns)) 
+
+        if (is_array($columns))
         {
             $this->groupby = ' group by '.implode(',', $columns);
         }
@@ -121,11 +121,11 @@ class select{
 
     public function orderBy($columns)
     {
-        
-        if (is_array($columns)) 
+
+        if (is_array($columns))
         {
             if(count($columns)) {
-                
+
                 $this->orderby = ' order by ';
                 foreach ($columns as $key => $value) {
                     $this->orderby .= "$key $value,";
@@ -155,7 +155,7 @@ class select{
         if($h != ''){
             $having = 'having '.substr($h, 4);
         }
-        
+
         return 'select '.$this->columns.
                ' from ' .$this->from.$this->join.
                $where.$this->groupby.$having.$this->orderby;
@@ -184,7 +184,9 @@ class select{
         $ori_sql = $this->getSql();
         if($dbtype=='mysql' or $dbtype=='postgresql')
         {
-            return str_replace($this->columns, ' count(*) as total', $ori_sql );
+            // return str_replace($this->columns, ' count(*) as total', $ori_sql );
+            // 在有group by的情况下会有问题.所以改成子查询方式
+            return 'select count(*) as total from ('.$ori_sql.') as tmp';
         }
         else if($dbtype='oracle')
         {

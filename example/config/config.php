@@ -31,7 +31,7 @@ return array(
             "action" => 'index'
             ),
             array(
-            "rule" => "read/(\d{6})",
+            "rule" => "read/(\d{6}$)",
             "controller" => 'book',
             "action" => 'read',
             "reg_map"=>array('bookid')
