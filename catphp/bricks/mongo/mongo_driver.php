@@ -25,6 +25,7 @@ class MongoDriver
             }else{
                 $this->mongo = new MongoClient();
             }
+            $this->selectDb($config['database']);
         } catch (MongoConnectionException $e) {
             $this->error = $e->getMessage();
             return false;
@@ -61,8 +62,11 @@ class MongoDriver
     {
         $db = $this->curr_db;
         try {
-            $this->mongo->$db->$collection->insert($record, array('w' => true));
-            return true;
+            $collection_obj = $this->mongo->selectCollection($db,$collection);
+            $collection_obj->insert($record);
+            return (string)$record['_id'];
+            // $this->mongo->$db->$collection->insert($record, array('w' => true));
+            // return true;
         } catch (MongoCursorException $e) {
             $this->error = $e->getMessage();
             return false;
@@ -83,8 +87,7 @@ class MongoDriver
             $options['multiple'] = 0;
         }
         try {
-            $this->mongo->$db->$collection->update($condition, $newdata, $options);
-            return true;
+            return $this->mongo->$db->$collection->update($condition, $newdata, $options);
         } catch (MongoCursorException $e) {
             $this->error = $e->getMessage();
             return false;

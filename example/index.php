@@ -13,5 +13,5 @@ require '../catphp/catphp.php';
 
 Web::start();
 
-echo "cost : ".(microtime(true)-$a)." ms";
+// echo "cost : ".(microtime(true)-$a)." ms";
 ?>

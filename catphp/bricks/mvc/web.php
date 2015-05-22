@@ -1,7 +1,7 @@
 <?php
 
 /**
- * 
+ *
  */
 require 'common.php';
 require 'router.php';
@@ -12,7 +12,7 @@ class Web {
     static $rout_rules;
 
     // function __construct() {
-        
+
     // }
 
     // public function setRouter($pattern,$controller,$action)
@@ -74,7 +74,7 @@ class Web {
                 $url_params[$pkey] = $pvalue;
             }
         }
-        
+
 
         // 路由到指定controller的指定action
         $class = $controller_name . 'Controller';
@@ -86,8 +86,8 @@ class Web {
             exit();
         }
 
-        
-        
+
+
         $controller->setActionName($action_name);
         $controller->setControllerName($controller_name);
         if (isset($url_params)) {
@@ -134,10 +134,10 @@ class Web {
         //     $methd     = $restVerb;
         //     $params = array();
         //     foreach ($rout as $key => $value) {
-        //         if($key==='c' || $key==='last') 
+        //         if($key==='c' || $key==='last')
         //             continue;
         //         elseif ( $key==='a') {
-        //             if ($value!=='' && $value!=='index') 
+        //             if ($value!=='' && $value!=='index')
         //                 $params[] = $value;
         //         }
         //         else {
@@ -314,7 +314,7 @@ function web_autoload($class)
                 }
             }
         }
-        
+
     } else {
         // 加载用户自定义类库
         if (isset($WEB_CONFIG->libs)) {
