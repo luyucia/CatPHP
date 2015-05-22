@@ -19,6 +19,7 @@ class BaseController extends Controller {
     }
 
     public function echoJson($code,$info){
+        header("Access-Control-Allow-Origin:*");
         $data = array();
         $data['code'] = $code;
         $data['info'] = $info;
