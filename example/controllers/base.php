@@ -19,7 +19,8 @@ class BaseController extends Controller {
     }
 
     public function echoJson($code,$info){
-        header("Access-Control-Allow-Origin:*");
+        header("Access-Control-Allow-Origin: *");
+        header("Access-Control-Allow-Headers:Origin, X-Requested-With, Content-Type, Accept");
         $data = array();
         $data['code'] = $code;
         $data['info'] = $info;

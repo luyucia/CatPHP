@@ -1,7 +1,7 @@
 <?php
 
 /**
- * 
+ *
  */
 
 
@@ -25,8 +25,8 @@ class Controller {
             $this->logger = new Logging();
             $this->logger->setLevel($log_level);
         }
-        
-        
+
+
         // D($this->app_config);
     }
 
@@ -55,8 +55,8 @@ class Controller {
             $this->engine->cache_lifetime = $this->app_config->template_engine['cache_lifetime'];
             foreach ($this->context as $key => $value) {
                 $this->engine->assign($key,$value);
-                $this->engine->display($tpl);
             }
+            $this->engine->display($tpl);
         }
     }
 
@@ -117,7 +117,7 @@ class Controller {
         exit();
         // echo $name . ' is not defined!';
     }
-    
+
     public function go404() {
         header("HTTP/1.0 404 Not Found");
         if(isset($this->app_config->error_page)){
@@ -143,7 +143,7 @@ class Controller {
         fwrite($fp, ob_get_contents());
         fclose($fp);
     }
-    
+
 }
 
 ?>

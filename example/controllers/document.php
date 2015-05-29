@@ -78,7 +78,7 @@ class documentController extends BaseController {
     // 保存文章
     public function save(){
         $condition['_id']    = new MongoId(Request::input('doc_id')) ;
-        $new_data['content'] = Request::input('content');
+        $new_data['content'] = Request::input('content','','default',false);
         $rs = $this->mongo->update('document',$condition,array('$set'=>$new_data));
         $this->echoJson(1,$rs);
 
@@ -96,6 +96,28 @@ class documentController extends BaseController {
         $condition['_id'] = Request::input('doc_id');
         $rs = $this->mongo->remove('document',$condition);
         $this->echoJson(1,$rs);
+    }
+
+
+    public function export(){
+        $condition['project_id'] = Request::input('project_id');
+        $fields = array('name','_id','content');
+        $rs = $this->mongo->find('document',$condition,array(),$fields);
+
+        $mk = new Parsedown();
+        $docs = array();
+        foreach ($rs as $row) {
+            $doc            = array();
+            $doc['name']    = $row['name'];
+            $doc['content'] = $mk->parse($row['content']);
+            $docs[] = $doc;
+        }
+
+        $this->assign("docs",$docs);
+        $this->render('views/document.html');
+
+        $this->staticize('runtime/document.html');
+
     }
 
 }

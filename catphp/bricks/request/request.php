@@ -16,6 +16,7 @@
 class Request
 {
     static $method     = 'all';
+    static $body_input = null;
     static $filter_map = array(
             'default' => FILTER_DEFAULT,                 //默认
             'regexp'  => FILTER_VALIDATE_REGEXP,         //根据 regexp，兼容 Perl 的正则表达式来验证值
@@ -65,7 +66,19 @@ class Request
             $var = $_GET[$var_name];
         }elseif (isset($_COOKIE[$var_name])  && (self::$method == 'all') ) {
             $var = $_COOKIE[$var_name];
+        }elseif (isset(self::$body_input[$var_name])  && (self::$method == 'all')) {
+            $var = self::$body_input[$var_name];
         }
+        else{
+           $headers =  getallheaders();
+           if(isset($headers['Content-Type']) && stripos($headers['Content-Type'], "application/json")!==false){
+                $request_body = file_get_contents('php://input');
+                self::$body_input = json_decode($request_body,true);
+                $var = self::$body_input[$var_name];
+           }
+        }
+
+
         // 如果没有值则取默认值
         if (!isset($var) || $var==NULL) {
            return $default;
