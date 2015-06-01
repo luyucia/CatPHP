@@ -37,7 +37,8 @@ class Web {
 
         // 判定路由解析方式,如果是rest风格则,则构造路由解析对象
         if ($WEB_CONFIG->router_rest) {
-            $index = strpos($_SERVER['SCRIPT_NAME'], '/', 1) + 1;
+            $index = strpos($_SERVER['SCRIPT_NAME'], '/', 0) + 1;
+
             $url = rtrim( substr($_SERVER['REQUEST_URI'] , $index),"/");
             $r = new router($url);
             // 加载路由设置

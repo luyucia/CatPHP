@@ -21,223 +21,141 @@
             <div class="pure-menu">
                 <a class="pure-menu-heading" href="/">CatPHP</a>
                 <ul class="pure-menu-list">
-                                <li  class="pure-menu-item"><a href="#aaa" class="pure-menu-link">aaa</a></li>
-                                <li  class="pure-menu-item"><a href="#catPHP" class="pure-menu-link">catPHP</a></li>
-                                <li  class="pure-menu-item"><a href="#好使啊" class="pure-menu-link">好使啊</a></li>
-                                <li  class="pure-menu-item"><a href="#catPHP" class="pure-menu-link">catPHP</a></li>
-                                <li  class="pure-menu-item"><a href="#catPHP" class="pure-menu-link">catPHP</a></li>
-                                <li  class="pure-menu-item"><a href="#documentController" class="pure-menu-link">documentController</a></li>
-                                <li  class="pure-menu-item"><a href="#真好使" class="pure-menu-link">真好使</a></li>
+                                <li  class="pure-menu-item"><a href="#第一章" class="pure-menu-link">第一章</a></li>
+                                <li  class="pure-menu-item"><a href="#前言" class="pure-menu-link">前言</a></li>
                                 </ul>
             </div>
         </div>
 
                 <div class="header">
-            <h1 ><a name="aaa">aaa</a></h1>
+            <h1 ><a name="第一章">第一章</a></h1>
             <h2>Start your next web project with Pure.</h2>
         </div>
         <div class="content">
-            <p>啊啊啊\\\\\\////</p>
+            <h2>大熊</h2>
         </div>
                 <div class="header">
-            <h1 ><a name="catPHP">catPHP</a></h1>
+            <h1 ><a name="前言">前言</a></h1>
             <h2>Start your next web project with Pure.</h2>
         </div>
         <div class="content">
-            <h1>sdfssdfsdf\\\\\\\\</h1>
-        </div>
-                <div class="header">
-            <h1 ><a name="好使啊">好使啊</a></h1>
-            <h2>Start your next web project with Pure.</h2>
-        </div>
-        <div class="content">
-            <h3>为什么有这么多PHP框架</h3>
-        </div>
-                <div class="header">
-            <h1 ><a name="catPHP">catPHP</a></h1>
-            <h2>Start your next web project with Pure.</h2>
-        </div>
-        <div class="content">
-            <h1>aaa</h1>
-        </div>
-                <div class="header">
-            <h1 ><a name="catPHP">catPHP</a></h1>
-            <h2>Start your next web project with Pure.</h2>
-        </div>
-        <div class="content">
-            <h3>为什么有这么多PHP框架</h3>
+            <hr />
+<h1>前言</h1>
+<h3>为什么有这么多PHP框架</h3>
 <p>PHP没有规范写起来比较随意,框架系别较多,
 常见的有web系别</p>
 <ul>
 <li>功能大全系:ZendFramwork,Cake</li>
 <li>扩展性:Yaf,Phalcon</li>
 <li>代码生成系:Yii</li>
-<li>轻量系:TP,CI</li>
-<li>微型系(自我实现系):如我们的
-有的需要功能多,有的希望小巧,有的希望灵活,有的喜欢写sql有的习惯orm
-有的希望量体裁衣,有人喜欢简单,有人喜欢复杂...(这种人我不能理解)
+<li>轻量系:ThinkPHP,CI</li>
+<li>微型系(自我实现系):如我们的</li>
+</ul>
+<p>有的人需要功能多,有的希望小巧,有的希望灵活,有的喜欢写sql有的习惯orm
+有的希望量体裁衣,有的人喜欢简单,有的人喜欢复杂...(这种人我不能理解)，总的来说就是不同人有不同的需求和喜好。</p>
 <h3>为什么有这么多PHP框架了还要再开发一个</h3>
-<p>不差这一个了
-现有框架其实并非开源，为什么</p>
-<h3>核心设计思想</h3>
-<p>周易</p>
+<ul>
+<li>不差这一个了</li>
+<li>现有框架其实并非开源，为什么？</li>
+</ul>
+<p>当你阅读一篇文章，并希望通过阅读体会中心思想的时候，你所体会到的往往并非作者的真实思想。"一百个人心中有一百个哈姆雷特",代码如同文章，阅读源码往往未必能知道作者的设计思想，因此catPHP把设计思路作为一个重要的部分"开源给大家"。</p>
+<ul>
+<li>catphp可以融合进任何项目或框架，一处开发处处使用</li>
+<li>希望统一PHP框架，有很多小的PHP类库非常优秀，和一些非常使用，经常使用的PHP类库，希望能把他们融合进来，使开发者不用花时间去寻找</li>
+</ul>
+<h3>何为框架</h3>
+<p>框架有这样几个主要作用：</p>
+<ul>
+<li>提升开发效率，</li>
+<li>解耦业务逻辑和开发逻辑，抽象共有功能</li>
+<li>使代码工程有组织，节省维护成本，沟通成本</li>
+</ul>
+<h3>类库和框架的区别</h3>
+<p>类库是类的集合，这些类之间可能是相互独立的。应用开发者希望使用任何一个类时可以直接调用它，而不必再写一个。与类库相比，框架和类库有着相似的形式，即框架也往往是类的集合；但不同之处在于，框架中的各个类并不是孤立的，而框架中的业务逻辑代码是将不同的类“连”在一起，在它们之间建立协作关系。
+类就像拼图，一个类就是一块拼图，框架就是拼了一半的拼图，一用就像完整的拼图。</p>
+<hr />
+<h1>设计思想</h1>
+<h2>Design for CatPHP</h2>
+<ul>
+<li>
+<p>完全模块化设计，满足所有人的需求，通过组合实习框架伸缩性，</p>
+</li>
+<li>catphp可以嵌入到其他php框架中，学会了catphp终身可以使用，换公司也不怕了</li>
+<li>完全开源，设计思想开源，让每个人了解框架内部逻辑，免去任何疑惑。</li>
+<li>每个模块都可以单独使用，并有良好的文档支持。</li>
+</ul>
 <h3>优势</h3>
-<p>社区支持
-文档工具支持
-规范化
-文档\单元测试</p></li>
-</ul>
-        </div>
-                <div class="header">
-            <h1 ><a name="documentController">documentController</a></h1>
-            <h2>Start your next web project with Pure.</h2>
-        </div>
-        <div class="content">
-            <pre><code>&lt;?php
-/**
- * @name IndexController
- * @author Luyu
- * @desc 默认控制器
- */
-class documentController extends BaseController {
-
-    public function createProject(){
-        $data['name']         = Request::input('name');
-        $data['user_id']      = 1;
-        $data['created_time'] = date('Y-m-d H:i:s');
-        $rs =  $this-&gt;mongo-&gt;insert('projects',$data);
-        $this-&gt;echoJson(1,$rs);
-    }
-
-    public function listProject(){
-        $condition['user_id'] = 1;
-        $rs = $this-&gt;mongo-&gt;find('projects',$condition);
-        foreach ($rs as &amp;$row) {
-            $row['_id'] = (string)$row['_id'];
-        }
-        $this-&gt;echoJson(1,$rs);
-    }</code></pre>
-        </div>
-                <div class="header">
-            <h1 ><a name="真好使">真好使</a></h1>
-            <h2>Start your next web project with Pure.</h2>
-        </div>
-        <div class="content">
-            <h1>CatPHP</h1>
-<h2>CatPHP is a simple modularity PHP framework</h2>
-<p>CatPHP的理念</p>
-<p>为什么要开发CatPHP
-目前已经有很多非常优秀的PHP框架，如国内的ThinkPHP，国外的CodeItenger，Zend，并且每个稍微大点的公司也都有自己开发的框架，有PHP层面的框架，还有扩展形式的框架，可谓是五花八门。这其实给PHP开发这带来了一些麻烦，那就是不能走到哪都用自己熟悉的东西，比如在上家公司用ThinkPHP，在这家公司就得用CI，又或者之前自己开发了框架，到了新公司又不让用了，这种不统一带来了很多麻烦，虽然说学习一个新框架对成手PHP还是一件很简单的事，但我觉得人生短暂，不应该为这种重复而没有意义的事情而浪费生命，因此我希望CatPHP可以统一PHP框架，可能是有些不现实，但我要解释一下理由，其实PHP框架大多针对web应用开发，而这类框架的核心无非是配置管理，目录规范，自动加载和路由功能，而开发者在写逻辑中打交道最多的还是各种功能类库的调用，而以往的框架通常难以做到在框架中用你最熟悉的类库，比如在thinkphp中调用ci的数据库操作类，并且通常框架的源码虽然开放，但是要想做二次开发还是要研究源码的，而大多的框架只有使用手册和API手册，对于源码的设计思想都是不开放的，要搞清楚一个整体的设计思路还是要花些时间的，那么CatPHP是怎么解决这些问题的呢，首先CatPHP的设计思路简单，明了，有详尽的文档来描述设计思路，并且所有功能都是模块化的，是真正的模块化，也就是说任何功能，不依赖于框架，可单独使用，这样设计的好处就是，任何人可以简单的开发某个功能模块，然后很轻松的集成到CatPHP当中，一个人的能力总是有限的，不可能开发出各种完美的功能，并且每个人所处的工作领域都是不同的，一个人设计的功能不可能满足各个领域的各种应用，就拿db模块来说，每个人需要的封装力度是不同的，有的人需要ORM，有的则需要自己写sql，那么以往的框架是不能做到这点的，而CatPHP的功能是模块化的，是可替换的，可根据具体项目需求选择不同的封装力度的模块，任何人都可以写这些模块，CatPHP是属于每一个人的，并且CatPHP是可以嵌入到任何其他框架当中的，这样就不用担心跳槽后再去学习新的框架。</p>
 <ul>
-<li>
-<p>1、彻底的开源,思想层面上的开源<br>
-开源不应该仅仅是代码的共享，更应该是思想的共享。很多很好的开源软件非常的优秀，只可惜阅读他的源代码是非常困难的，并不是因为代码本身写的不好或注释不完整，而是因为不了解整体架构和背景。我认为每一行代码都是有他的背景的，为何这样写而不那样写，这么写的作用是什么，优点是什么，缺点是什么</p>
-</li>
-<li>
-<p>2、非侵入式的PHP框架<br>
-多数PHP框架是为了WEB而生，但PHP却不仅仅可以用来做WEB，因此CatPHP希望任何的应用都可以使用本框架，并且希望在项目生命周期的任何阶段都可以引入CatPHP，这就意味着CatPHP是完全解耦与项目的，你可以使用CI、Zend等任何的框架，但需要CatPHP的时候随时可以加进来。</p>
-</li>
-<li>3、简单与性能优先<br>
-在功能、性能、设计的权衡中，性能与简单优先。</li>
+<li>社区支持</li>
+<li>文档工具支持</li>
+<li>规范化</li>
+<li>文档\单元测试</li>
 </ul>
-<p>设计理念
-简单
-完全开放
-完全模块化</p>
-<p>特性
-设计简洁，
-终身受用</p>
+<h1>扩展框架</h1>
+<h3>目录结构</h3>
 <ul>
-<li>
-<p>动态</p>
-<ol>
-<li>catphp.org域名已买下!官网建设中</li>
-<li>数据库操作类，及执行时间监控报告模块正在开发中</li>
-<li>多模板引擎支出正在完善中</li>
-</ol>
-</li>
-<li>
-<p>tasklist</p>
-<ol>
-<li>官网</li>
-<li>html模块中form生成器</li>
-<li>安全检查工具类</li>
-<li>静态化工具类</li>
-</ol>
-</li>
-<li>
-<p>编码规范</p>
-<ol>
-<li>文件命名：小写加下划线</li>
-<li>类名：首字母大写，驼峰</li>
-<li>函数名：驼峰</li>
-<li>缩进：4空格</li>
-<li>大括号：非换行式，{ 之前要有1空格
-样例：
-<pre><code class="language-php">
-/**
-* @name 名字
-* @abstract 申明变量/类/方法
-* @access 指明这个变量、类、函数/方法的存取权限
-* @author 函数作者的名字和邮箱地址
-* @category 组织packages
-* @copyright 指明版权信息
-* @const 指明常量
-* @deprecate 指明不推荐或者是废弃的信息
-* @example 示例
-* @exclude 指明当前的注释将不进行分析，不出现在文挡中
-* @final 指明这是一个最终的类、方法、属性，禁止派生、修改。
-* @global 指明在此函数中引用的全局变量
-* @include 指明包含的文件的信息
-* @link 定义在线连接
-* @module 定义归属的模块信息
-* @modulegroup 定义归属的模块组
-* @package 定义归属的包的信息
-* @param 定义函数或者方法的参数信息
-* @return 定义函数或者方法的返回信息
-* @see 定义需要参考的函数、变量，并加入相应的超级连接。
-* @since 指明该api函数或者方法是从哪个版本开始引入的
-* @static 指明变量、类、函数是静态的。
-* @throws 指明此函数可能抛出的错误异常,极其发生的情况
-* @todo 指明应该改进或没有实现的地方
-* @var 定义说明变量/属性。
-* @version 定义版本信息
-*/
-class ExampleClass {</code></pre></li>
-</ol>
-<p>function exampleFunction() {</p>
-<pre><code>if ( isset($a) ) {
-    echo 'a';
-}</code></pre>
-<p>}
-}</p>
-</li>
+<li>bricks catphp模块</li>
+<li>bricks-v 第三方模块</li>
+<li>core 内核</li>
+<li>config 框架自身的配置文件与应用无关</li>
+<li>catphp.php 框架入口文件</li>
 </ul>
-<pre><code>
-- 性能规范：
-1. 任何函数执行10万次要在1s内完成
+<h3>添加自己写的模块</h3>
+<ol>
+<li>开发一个类，放到bricks目录下</li>
+<li>
+<p>在config中找到core_class_config.php 添加路径到这个文件中即可</p>
+<p>设计：根据代码即文档的思想，把需要包含的类人工添加到配置文件中。而且加载的时候会根据绝对路径加载，效率高于相对路径的加载。</p>
+</li>
+</ol>
+<h1>配置</h1>
+<pre><code>return array(
+    // 模板文件路径
+    'view_path'=&gt;'views/',
+    // 控制器文件路径，controller都会在这个目录下查找
+    'controller_path'=&gt;'controllers/',
+    // 控制器子目录，如果希望在控制器目录下放子目录可在此设置
+    'controller_dirs' =&gt; array('test/','api/'),
+    // 设置哪些controller为RESTfule形式
+    'rest_controllers'=&gt;array('product','api'),
+    // 设置路由模式，router_rest为true时，采用Rest风格路由，为false则采用参数形式，router_name参数生效
+    'router_rest'     =&gt; true,
+    'router_name'     =&gt;array(
+            'c' =&gt; 'c',
+            'a' =&gt; 'a',
+        ),
+    // 设置日志等级
+    'log_level'       =&gt; Logging::ALL,
+    // 模板引擎 可选（tenjin smarty php）
+    'template_engine'=&gt;array(
+        'type'  =&gt; 'smarty',
+        'debug' =&gt; false,
+        'cache' =&gt; false,
+        'cache_lifetime' =&gt; 120,
+    ),
+    // 设置路由规则，详细内容请参考文档中的路由专题
+    'route_rules'=&gt;array(
+        // 静态路由 和参数
+            array(
+            "rule" =&gt; "read/title/page",
+            "controller" =&gt; 'book',
+            "action" =&gt; 'test'
+            ),
+            array(
+            "rule" =&gt; "read/:title/:page",
+            "controller" =&gt; 'book',
+            "action" =&gt; 'index'
+            ),
+            array(
+            "rule" =&gt; "read/(\d{6})",
+            "controller" =&gt; 'book',
+            "action" =&gt; 'read',
+            "reg_map"=&gt;array('bookid')
+            ),
 
-- 设计规范：
-1. 任何类不依赖于框架，可单独使用
-
-----------
-nginx设置：</code></pre>
-<p>if (!-e $request_filename) 
-{</p>
-<pre><code>rewrite ^.*$ /webtest/index.php last;</code></pre>
-<p>}</p>
-<pre><code>- 注意，要放在location ~ \.php${............}后面
---rewrite ^/(.*)$ /webtest/index.php last;
-rewrite p1 p2 flag
-将url中，匹配正则表达式p1的地方，替换成p2进行访问。
-原理：将url请求解析到index.php，由框架中的路由解析功能，解析请求后加载指定的类
-
-url规则
-
-1、router_rest </code></pre>
-<pre><code>
-
-    python install xxx</code></pre>
+        ),
+    );</code></pre>
+<h1>路由</h1>
         </div>
         
 

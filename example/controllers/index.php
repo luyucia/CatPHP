@@ -10,6 +10,8 @@ class indexController extends Controller {
      * 默认动作
      */
     public function index($name = "Stranger") {
+        // phpinfo();
+        header("Content-Type: text/html;charset=utf-8");
         echo "<h1>Welcome to Use CatPHP</h1>";
         $text = <<<EOF
 
