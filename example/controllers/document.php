@@ -93,8 +93,17 @@ class documentController extends BaseController {
 
     // 删除文章
     public function delete(){
-        $condition['_id'] = Request::input('doc_id');
+        $condition['_id'] = new MongoId(Request::input('doc_id')) ;
         $rs = $this->mongo->remove('document',$condition);
+        $this->echoJson(1,$rs);
+    }
+
+    // 重命名
+    public function rename(){
+        var_dump(Request::input('doc_id'));
+        $condition['_id'] = new MongoId(Request::input('doc_id')) ;
+        $new_data['name'] = Request::input('newname','','default',false);
+        $rs = $this->mongo->update('document',$condition,array('$set'=>$new_data));
         $this->echoJson(1,$rs);
     }
 
