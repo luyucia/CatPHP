@@ -50,10 +50,13 @@ class select{
     }
 
     // like in
-    public function where($column,$value,$cond='=',$quot=null,$logic='and')
+    public function where($column,&$value,$cond='=',$quot=null,$logic='and')
     {
         if(!isset($value) || $value==='' || $value===false)
             return;
+        if (is_array($value) && $cond=='=') {
+            $cond = 'in';
+        }
         // 如果quor为null则调用type自动判断是否加单引号
         if($quot===null)
         {
@@ -133,7 +136,7 @@ class select{
                 $this->orderby = rtrim($this->orderby,",");
             }
         }
-        else
+        else if($columns!='' && is_string($columns))
         {
             $this->orderby = ' order by '.$columns;
         }

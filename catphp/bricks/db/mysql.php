@@ -47,9 +47,8 @@ class MysqlDriver
     {
         // $sql = $this->checkSql($sql);
         $result = mysqli_query($this->conn, $sql);
-
+        $data   = array();
         if ($result && !is_bool($result)) {
-            $data = false;
 
             if ($mode == 0)
                 $modeType = MYSQLI_ASSOC;
@@ -61,9 +60,9 @@ class MysqlDriver
             }
             mysqli_free_result($result);
             return $data;
-        } else {
-            return false;
         }
+
+        return $data;
     }
 
     public function execute($sql)

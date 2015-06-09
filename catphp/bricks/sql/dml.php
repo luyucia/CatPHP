@@ -30,7 +30,7 @@ class dml implements sql{
     {
         $noquot  = explode(',', $noquot);
         $values  = '';
-        foreach ($d as $key => $value) 
+        foreach ($d as $key => $value)
         {
 
             if($this->inteligent_type)
@@ -38,7 +38,7 @@ class dml implements sql{
                 $values.="$key=".$this->type($value).',';
                 continue;
             }
-            
+
             if(is_string($value))
             {
                 if(in_array($key, $noquot))
@@ -56,7 +56,7 @@ class dml implements sql{
             }
         }
         $values     = rtrim($values,',');
-        return "update set $values where $where";
+        return "update $table set $values where $where";
     }
 
     function insertSql(&$d,$noquot='')
@@ -72,7 +72,7 @@ class dml implements sql{
                 $values.= $this->type($value).',';
                 continue;
             }
-            
+
             if(is_string($value))
             {
                 if(in_array($key, $noquot))
@@ -101,7 +101,7 @@ class dml implements sql{
         if(is_string($v))
         {
             // 如果是字符类型的数字
-            if (is_numeric($v)) 
+            if (is_numeric($v))
             {
                 if($v[0]=='0')
                 {
@@ -122,14 +122,14 @@ class dml implements sql{
                 {
                     return "'$v'";
                 }
-                
+
             }
         }
         else
         {
             return $v;
         }
-        
+
     }
 
     public function setInteligent($t=true)
@@ -137,7 +137,7 @@ class dml implements sql{
         $this->inteligent_type = $t;
     }
 
-    public function delete_sql($table,$where)
+    public function deleteSql($table,$where)
     {
         return "delete from $table where $where";
     }
@@ -201,7 +201,7 @@ class dml implements sql{
                     $this->mysql_buff.= ',('.implode(",", $values).')';
                 }
             }
-        
+
     }
 
     public function getInsert()
@@ -209,12 +209,12 @@ class dml implements sql{
         if ($this->dbtype=='oracle') {
             $sql = $this->oracle_buff;
             return $sql;
-        }else { 
+        }else {
             return $this->mysql_buff;
         }
     }
 
-    
+
 }
 
 
