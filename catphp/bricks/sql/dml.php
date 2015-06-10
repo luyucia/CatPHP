@@ -11,8 +11,7 @@
  * @author luyu
  */
 
-include_once 'sql.interface.php';
-class dml implements sql{
+class dml{
 
     private $inteligent_type = false;
     private $dbtype;
@@ -26,7 +25,7 @@ class dml implements sql{
         $this->table  =  $table;
     }
 
-    function updateSql(&$d,$table,$where,$noquot='')
+    function updateSql(&$d,$where,$noquot='')
     {
         $noquot  = explode(',', $noquot);
         $values  = '';
@@ -56,7 +55,7 @@ class dml implements sql{
             }
         }
         $values     = rtrim($values,',');
-        return "update $table set $values where $where";
+        return "update {$this->table} set $values where $where";
     }
 
     function insertSql(&$d,$noquot='')
@@ -137,14 +136,9 @@ class dml implements sql{
         $this->inteligent_type = $t;
     }
 
-    public function deleteSql($table,$where)
+    public function deleteSql($where)
     {
-        return "delete from $table where $where";
-    }
-
-    public function to_string()
-    {
-
+        return "delete from {$this->table} where $where";
     }
 
     public function add(&$data,$noquot='')
@@ -204,7 +198,7 @@ class dml implements sql{
 
     }
 
-    public function getInsert()
+    public function BatchInsertSql()
     {
         if ($this->dbtype=='oracle') {
             $sql = $this->oracle_buff;
@@ -232,11 +226,25 @@ class dml implements sql{
 //     'age' => '14',
 //      );
 
-
-
 // $s = new Dml('user','mysql');
+
 // // 设置智能解析
 // // $s->setInteligent();
+
+// // 构造insert语句
+// echo $s->insertSql($d1);
+// // insert into user (username,password,id,age) values('luyu','xxx',1,'15')
+
+// // 构造update语句
+// echo $s->updateSql($d1,'id=1');
+// // update user set username='luyu',password='xxx',id=1,age='15' where id=1
+
+// // 构造delete语句
+// echo $s->deleteSql('id=1');
+// // delete from user where id=1
+
+// // 构造批量插入sql
 // $s->add($d1);
 // $s->add($d2);
-// echo $s->getInsert();
+// echo $s->BatchInsertSql();
+// // insert into user (username,password,id,age) values('luyu','xxx',1,'15'),('luyu','xxx',2,'14')
