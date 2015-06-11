@@ -22,24 +22,50 @@ class Validator
     private $data;
     private $mode   = 'stop';
     private $errors = array();
+    private $config = array();
+    private $error_format = array(
+        'required'     =>':field is required',
+        'type'         =>'the type of :field is wrong!',
+        'more than'    =>':field is too large',
+        'less than'    =>':field is too small',
+        'more len'     =>':field is too length',
+        'less len'     =>':field is too short',
+        'wrong format' =>':field is wrong format',
+        );
 
 
-    function __construct($data=null)
+    function __construct($data=null,$config=array())
     {
-        $this->data = $data;
+        $this->data   = $data;
+        $this->config = $config;
+
+        $this->doValidate();
+    }
+
+    public function setErrorFormat($error,$format)
+    {
+        $this->error_format[$error] = $format;
     }
     // 设置数据
-    public function set_data($data)
+    public function setData($data,$config)
     {
-        $this->data = $data;
+        $this->data   = $data;
+        $this->config = $config;
+        $this->doValidate();
     }
     // 设置模式
-    public function set_mode($mode)
+    public function setMode($mode)
     {
         $this->mode = $mode;
     }
 
-    public function check($key,$rule,$name=null)
+    private function doValidate(){
+        foreach ($this->config as $key => $value) {
+            $this->check($key,$value);
+        }
+    }
+
+    public function check($key,$rule_str,$name=null)
     {
         if($name==null)
             $name = $key;
@@ -47,68 +73,81 @@ class Validator
         if ($this->mode=='stop' && isset($this->errors[0]))
             return false;
         // 解析规则
-        $rules  =  explode('|', $rule);
+        $rules  =  explode('|', $rule_str);
         // 按照规则判定
         foreach ($rules as $rule) {
-
             // 验证必要性
             if($rule=='required')
             {
                 if(!$this->required(@$this->data[$key]))
                 {
-                    $this->errors[] = $name.' is required';
-                    return false;
+                    $this->errors[$key]['error'] = 'required';
+                    break;
                 };
             }
             // 验证类型
             else if(strpos($rule,'type')!==false)
             {
-                preg_match('/type\((.*)\)/', $rule,$matchs);
+                preg_match('/type:(.*)/', $rule,$matchs);
                 $rs = $this->type(@$this->data[$key],$matchs[1]);
                 if(!$rs)
                 {
-                    $this->errors[] = $name.' is not a type'.$matchs[1];
-                    return false;
+                    $this->errors[$key]['error']  = 'type';
+                    break;
                 }
             }
             // 验证取值范围
             else if(strpos($rule,'range')!==false)
             {
-                preg_match('/range\((.*),(.*)\)/', $rule,$matchs);
+                preg_match('/range:(.*)-(.*)/', $rule,$matchs);
                 $rs = $this->range(@$this->data[$key],$matchs[1],$matchs[2]);
                 if($rs===2)
                 {
-                    $this->errors[] = $name.'more than'.$matchs[2];
-                    return false;
+                    $this->errors[$key]['error'] = 'more than';
+                    break;
                 }else if($rs===0){
-                    $this->errors[] = $name.'less than'.$matchs[1];
-                    return false;
+                    $this->errors[$key]['error'] = 'less than';
+                    break;
                 };
             }
             // 验证正则
             else if(strpos($rule,'reg')!==false)
             {
-                preg_match('/reg\((.*)\)/', $rule,$matchs);
+                preg_match('/reg:(.*)/', $rule,$matchs);
                 $rs = $this->reg(@$this->data[$key],$matchs[1]);
                 if(!$rs)
                 {
-                    $this->errors[] = $name.' is wrong format';
-                    return false;
+                    $this->errors[$key]['error'] = 'wrong format';
+                    break;
                 }
             }
-
-
+            // 长度
+            else if(strpos($rule,'len')!==false)
+            {
+                preg_match('/len:(.*)-(.*)/', $rule,$matchs);
+                $rs = $this->len(@$this->data[$key],$matchs[1],$matchs[2]);
+                if($rs===2)
+                {
+                    $this->errors[$key]['error'] = 'more len';
+                    break;
+                }else if($rs===0){
+                    $this->errors[$key]['error'] = 'less len';
+                    break;
+                };
+            }
         }
+
         // 记录判定结果
 
     }
     // 判定必要性
     public function required($value)
     {
-        if(!isset($value)) return false;
-        if($value===null)  return false;
-        if($value==='')    return false;
-        return true;
+        if(isset($value) && $value!==null && $value!=='' && $value!==false) {
+            return true;
+        }else{
+            return false;
+        }
     }
     // 范围判定，小于最小返回0，大于最大返回2，正常返回1
     public function range($value,$min,$max)
@@ -173,44 +212,57 @@ class Validator
     }
 
     // 获取错误信息
-    public function get_error($index=0)
+    public function getError($key)
     {
+        $format = $this->error_format[$this->errors[$key]['error']];
 
-        if(isset($this->errors[$index]))
+        if(strpos($this->config[$key],'name')!==false)
         {
-            return $this->errors[$index];
+            preg_match('/name:(.*)/', $this->config[$key],$matchs);
+            $this->errors[$key]['field_name'] = $matchs[1];
+            $field_name = $matchs[1];
+        }else{
+            $field_name = $key;
         }
-        else
-            return false;
+        return preg_replace('#:field#', $field_name, $format);
+    }
+
+    public function getAllError()
+    {
+        $errors = array();
+        foreach ($this->errors as $key => $value) {
+            $errors[] = $this->getError($key);
+        }
+        return $errors;
     }
 }
 
 
 
 // $data = array(
-//     'name'    => '5' ,
+//     'name'    => '' ,
 //     'age'     => '25' ,
 //     'account' => '' ,
 //     'email'   => '' ,
 //     'account' => '' ,
 //     'content' => 'xxxxss' ,
-//     'sex'     => 'xxxxss' ,
+//     'sex'     => 'xxx' ,
 
 //  );
 
-// $v = new Validator($data);
-// // $v->set_data();
-// $v->set_mode('all');
-// $v->check('name','required|type(string)','用户名');
-// $v->check('sex','required','性别');
-// $v->check('age','required|type(int)|range(18,25)','年龄');
-// $v->check('content','required|len(20,50)|reg(\w*,)','内容');
-// echo $v->get_error(0);
-// print_r($v->get_error(0));
-// echo "string";
-// var_dump();
-// 验证数组
-// 验证单一变量
+// $config = array(
+//     'name'    => 'required|type:string|name:姓名',
+//     'sex'     => 'required|type:int',
+//     'age'     => 'required|type:int|range:18-25',
+//     'content' => 'required|len:20-50|reg:\w*,',
+//     );
+
+// $v = new Validator($data,$config);
+// $v->setErrorFormat('required',"请输入:field");
+// $v->setErrorFormat('less len',"请输入:field");
+// $v->setMode('all');
+// print_r($v->getAllError());
+
 
 
 
