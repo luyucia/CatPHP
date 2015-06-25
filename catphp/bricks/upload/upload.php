@@ -1,12 +1,12 @@
 <?php
 
-/* 
+/*
  * Author:LUYU
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
 
-class Upload
+class Cat_Upload
 {
 
     public $max_size = 0;
@@ -286,7 +286,7 @@ class Upload
     }
 
     // --------------------------------------------------------------------
-    
+
     public function start_SliceUpload($field = 'userfile')
     {
 

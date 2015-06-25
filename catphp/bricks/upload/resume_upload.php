@@ -38,7 +38,7 @@ class resumeUpload {
     //分片段 断点上传
     //未进行合并0 合并成功1 文件不完整(已删除) -1
     public function sliceUpload($path, $field, $file_num, $total_num, $real_name) {
-        $upload = new Upload();
+        $upload = new Cat_Upload();
         if (!is_dir($path)) {
             mkdir($path, 0755, true);
         }
@@ -57,7 +57,7 @@ class resumeUpload {
 
     //使用ajax上传
     public function ajaxUpload($path, $field, $real_name) {
-        $upload = new Upload();
+        $upload = new Cat_Upload();
         if (!is_dir($path)) {
             mkdir($path, 0755, true);
         }

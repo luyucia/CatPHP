@@ -1,18 +1,18 @@
 <?php
 
 /**
-* 
+* 单例模式的Config类,比每次都require_once效率高3倍
 */
 class CatConfig
 {
     public static $instance;
     public static $configFile;
     public static $config;
-    
+
     private function __construct($configFile)
     {
         self::$configFile = $configFile;
-        self::$config     = require 'config/config.php';
+        self::$config     = require $configFile;
     }
 
     public static function getInstance($configFile)
@@ -21,7 +21,16 @@ class CatConfig
             self::$instance = new self($configFile);
         }
         return self::$instance;
-        
+
+    }
+
+    public function get($key)
+    {
+        if (isset(self::$config[$key])) {
+            return self::$config[$key];
+        }else{
+            return null;
+        }
     }
 
     public static function getConfig()

@@ -19,7 +19,7 @@ class Controller {
     function __construct() {
         session_start();
         ob_start();
-        $this->app_config   = CatConfig::getInstance(APP_PATH.'config/config.php');
+        $this->app_config   = CatConfig::getInstance(APP_PATH.'/config/config.php');
         $log_level    = $this->app_config->log_level;
         if($log_level){
             $this->logger = new Logging();
@@ -44,7 +44,7 @@ class Controller {
         if ($this->engine_name === 'tenjin' ) {
             $properties = array('cache' => false);
             $this->engine = new Tenjin_Engine($properties);
-            $output = $this->engine->render($tpl, $this->context);
+            $output = $this->engine->render(CAT_VIEW_PATH.$tpl, $this->context);
             echo $output;
             return $output;
         }
@@ -56,7 +56,7 @@ class Controller {
             foreach ($this->context as $key => $value) {
                 $this->engine->assign($key,$value);
             }
-            $this->engine->display($tpl);
+            $this->engine->display(CAT_VIEW_PATH.$tpl);
         }
     }
 
