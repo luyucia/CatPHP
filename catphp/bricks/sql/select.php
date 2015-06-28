@@ -161,7 +161,7 @@ class select{
 
         return 'select '.$this->columns.
                ' from ' .$this->from.$this->join.
-               $where.$this->groupby.$having.$this->orderby;
+               $this->securityFilter($where.$this->groupby.$having.$this->orderby);
 
 
         ;
@@ -198,4 +198,26 @@ class select{
     }
 
 
+    private function securityFilter($str){
+        return preg_replace('/if\(|select |update |insert |union|/', '', $str);
+    }
+
+
 }
+
+// $s = new Select();
+// // 设置表名
+// $s->from('tablename a');
+// // 设置要选择的字段
+// $s->column('a.id,a.name,a.city,a.time');
+// // 添加条件
+// // foreach ($condition as $key => $value) {
+// //     $s->where($key,$value);
+// // }
+// // 排序
+// $s->orderBy(urldecode('a.time desc ,if(116>115),1,(select%201%20from%20information_schema.tables))') );
+// echo $s->getSql();
+// // 获取带分页的sql语句
+// // $sql = $s->PageSql($page,$pagesize);
+// // 获取总数的sql语句
+// // $total_sql = $s->totalPageSql();

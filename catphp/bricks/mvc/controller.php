@@ -48,6 +48,7 @@ class Controller {
             if ($out) {
                 echo $output;
             }
+            $output = $this->engine->render(CAT_VIEW_PATH.$tpl, $this->context);
             return $output;
         }
         elseif ($this->engine_name === 'smarty') {
@@ -59,7 +60,7 @@ class Controller {
                 $this->engine->assign($key,$value);
             }
             // return $this->engine->display($tpl);
-            $output = $this->engine->fetch($tpl);
+            $output = $this->engine->fetch(CAT_VIEW_PATH.$tpl);
             if ($out) {
                 echo $output;
             }

@@ -4,20 +4,31 @@
 */
 class HtmlTable
 {
-    
+
     private $html;
     private $table_attribute='';
     private $ths   = array();
     private $tbody ='';
     private $row_id_column = -1;
     private $hides = array();
-    private $set_td_class = 1;
+    private $set_td_class = false;
+    private $table_config = false;
 
 
-    function __construct()
+    function __construct($table_config = false)
     {
-        // echo "ok";
+        if ($table_config) {
+            $this->table_config = $table_config;
+        }
     }
+
+    public function setConfig($table_config = false)
+    {
+        if ($table_config) {
+            $this->table_config = $table_config;
+        }
+    }
+
     public function setTableAttribute($attr='')
     {
         $this->table_attribute = $attr;
@@ -52,30 +63,68 @@ class HtmlTable
 
             foreach ($data as $row) {
                 // 是否为行加上id
-                if ($this->row_id_column!=-1) 
+                if ($this->row_id_column!=-1)
                 {
-                    $rid = " id='td_".$row[$this->row_id_column]."'";
+                    $rid = " id='tr_".$row[$this->row_id_column]."'";
                 }else{
                     $rid='';
                 }
                 $tr = "\n<tr$rid>";
                 $td ='';
-                $j=0;
-                foreach ($row as $key=>$c) {
-                    // 判断是否需要隐藏该列
-                    if (in_array($j, $this->hides) ) {
-                        
-                    }else
+                $j  =0;
+                // 如果有配置文件
+                if ($this->table_config)
+                {
+                    foreach ($this->table_config as $key => $value)
                     {
-                        if ($this->set_td_class==1) {
-                            $td.="<td class='td_$key'>$c</td>";
-                        }else
+                        if(!isset($row[$key]))
                         {
-                            $td.="<td>$c</td>";
+                            $row[$key] = '';
+                        }
+                        if ($this->set_td_class)
+                        {
+                            if ($this->set_td_class==1)
+                            {
+                                $td.="<td class='td_$key'>{$row[$key]}</td>";
+                            }else
+                            {
+                                $td.="<td class='{$this->set_td_class}'>{$row[$key]}</td>";
+                            }
+                        }
+                        else
+                        {
+                            $td.="<td>{$row[$key]}</td>";
                         }
                     }
-                    $j++;
                 }
+                else //没有配置文件
+                {
+                    foreach ($row as $key=>$c) {
+                        // 判断是否需要隐藏该列
+                        if (in_array($j, $this->hides) )
+                        {
+
+                        }
+                        else
+                        {
+                            if ($this->set_td_class)
+                            {
+                                if($this->set_td_class=$this->set_td_class=1)
+                                {
+                                    $td.="<td class='td_$key'>$c</td>";
+                                }else{
+                                    $td.="<td class='{$this->set_td_class}'>$c</td>";
+                                }
+                            }
+                            else
+                            {
+                                $td.="<td>$c</td>";
+                            }
+                        }
+                        $j++;
+                    }
+                }
+
                 $tr.=$td."</tr>";
                 $tbody.=$tr;
             }
@@ -90,7 +139,7 @@ class HtmlTable
         $this->row_id_column = $c;
     }
     // 设置列class
-    public function setColumnClass($c)
+    public function setColumnClass($c = 1)
     {
         $this->set_td_class = $c;
     }
@@ -124,34 +173,81 @@ class HtmlTable
     {
         $thead = "<thead>";
 
-        foreach ($this->ths as $h) 
+        if ($this->table_config)
         {
-
-            $tr="\n<tr>";
-            $th='';
-            $len = count($h['title']);
-            for ($i=0; $i < $len; $i++) 
-            { 
-                $title    = $h['title'][$i];
-                $colspan  = '';
-                $rowspan  = '';
-                
-                if (isset($h['colspan'][$i])) {
-                    $colspan = "colspan='".$h['colspan'][$i]."' ";
+            $tr ="\n<tr>";
+            $th = '';
+            foreach ($this->table_config as $key => $attrs) {
+                $title = $attrs[0];
+                unset($attrs[0]);
+                $attr_str = '';
+                foreach ($attrs as $attr => $value) {
+                    $attr_str.=" $attr='$value' ";
                 }
-                if (isset($h['rowspan'][$i])) {
-                    $rowspan = "rowspan='".$h['rowspan'][$i]."' ";
-                }
-                $th.= "\n<th $colspan $rowspan>$title</th>";
+                $th.= "\n<th $attr_str>$title</th>";
             }
             $tr.=$th."\n</tr>";
             $thead.=$tr;
         }
+        else
+        {
+            foreach ($this->ths as $h)
+            {
+
+                $tr="\n<tr>";
+                $th='';
+                $len = count($h['title']);
+                for ($i=0; $i < $len; $i++)
+                {
+                    $title    = $h['title'][$i];
+                    $colspan  = '';
+                    $rowspan  = '';
+
+                    if (isset($h['colspan'][$i])) {
+                        $colspan = "colspan='".$h['colspan'][$i]."' ";
+                    }
+                    if (isset($h['rowspan'][$i])) {
+                        $rowspan = "rowspan='".$h['rowspan'][$i]."' ";
+                    }
+                    $th.= "\n<th $colspan $rowspan>$title</th>";
+                }
+                $tr.=$th."\n</tr>";
+                $thead.=$tr;
+            }
+        }
+
         $thead.="</thead>";
-        
+
         return $thead;
     }
 
 
 
 }
+
+// $table_config = array
+// (
+// 'dateid'          => array('日期','class'=>'sort','width'=>130),
+// 'cityName'        => array('城市名称','class'=>'sort','width'=>130),
+// 'provinceName'    => array('省份名称','class'=>'sort','width'=>130),
+// 'consultantNum'   => array('金牌顾问人数','class'=>'sort','width'=>130),
+// 'dealerNum'       => array('覆盖经销商','class'=>'sort','width'=>130),
+// 'brandNum'        => array('覆盖品牌','class'=>'sort','width'=>130),
+// 'manufacturerNum' => array('覆盖厂商','class'=>'sort','width'=>130),
+// 'serialNum'       => array('覆盖车系','class'=>'sort','width'=>130),
+// 'callNum'         => array('日拨打人次','class'=>'sort','width'=>130),
+// 'callPassNum'     => array('日接通人次','class'=>'sort','width'=>130),
+// );
+
+
+// $data = array(
+// array('dateid'=>'2015','cityName'=>'北京'),
+// array('dateid'=>'2015','cityName'=>'不少地方'),
+// array('dateid'=>'2015','cityName'=>'添加'),
+
+// );
+
+// $t = new HtmlTable();
+// $t->setConfig($table_config);
+// $t->setData($data);
+// echo $t->getHtml();

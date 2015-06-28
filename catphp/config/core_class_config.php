@@ -19,7 +19,7 @@ return  array
         'ArrayUtil'    =>'/bricks/common/array_util.php',
         'HttpClient'   =>'/bricks/http_client/http_client.php',
         'MongoDriver'  =>'/bricks/mongo/mongo_driver.php',
-        // 'Upload'       =>'/bricks/upload/upload.php',
+        'Cat_Upload'   =>'/bricks/upload/upload.php',
         'ResumeUpload' =>'/bricks/upload/resume_upload.php',
         'Cache'        =>'/bricks/cache/cache.php',
         'redisDriver'  =>'/bricks/cache/driver/redis.php',
@@ -30,6 +30,8 @@ return  array
         'Logging'      =>'/bricks/logging/logging.php',
         'Request'        =>'/bricks/request/request.php',
         'Zip'        =>'/bricks/zip/zip.php',
+        'Cat_Table'    =>'/bricks/cat_table/cat_table.php',
+        'Validator'    =>'/bricks/validator/validator.php',
     ),
 
 

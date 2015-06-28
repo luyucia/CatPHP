@@ -1,10 +1,16 @@
 <?php
+// Model文件路径
+define('CAT_MODEL_PATH',APP_PATH.'/models/');
+// 模板文件路径
+define('CAT_VIEW_PATH',APP_PATH.'/views/');
+// 控制器文件路径，controller都会在这个目录下查找
+define('CAT_CONTROLLER_PATH',APP_PATH.'/controllers/');
+// controller文件后缀,默认是空,也可以是Controller或其他,这样文件命名就要是exampleController.php
+define('CAT_CONTROLLER_FILE_SUFFIX','');
+// model文件后缀,默认是空,也可以是Model或其他,这样文件命名就要是exampleModel.php
+define('CAT_MODEL_FILE_SUFFIX','');
 
 return array(
-    // 模板文件路径
-    'view_path'=>'views/',
-    // 控制器文件路径，controller都会在这个目录下查找
-    'controller_path'=>'controllers/',
     // 控制器子目录，如果希望在控制器目录下放子目录可在此设置
     'controller_dirs' => array('test/','api/'),
     // 设置哪些controller为RESTfule形式
@@ -19,7 +25,7 @@ return array(
     'log_level'       => Logging::ALL,
     // 模板引擎 可选（tenjin smarty php）
     'template_engine'=>array(
-        'type'  => 'smarty',
+        'type'  => 'tenjin',
         'debug' => false,
         'cache' => false,
         'cache_lifetime' => 120,
