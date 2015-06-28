@@ -12,7 +12,7 @@ class CatConfig
     private function __construct($configFile)
     {
         self::$configFile = $configFile;
-        self::$config     = require 'config/config.php';
+        self::$config     = require $configFile;
     }
 
     public static function getInstance($configFile)
@@ -27,6 +27,15 @@ class CatConfig
     public static function getConfig()
     {
         return self::$config;
+    }
+
+    public function get($key)
+    {
+        if (isset(self::$config[$key])) {
+            return self::$config[$key];
+        }else{
+            return null;
+        }
     }
 
     public function __get($key)

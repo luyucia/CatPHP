@@ -29,6 +29,7 @@ return  array
         'Convert'      =>'/bricks/convert_str/convert.php',
         'Logging'      =>'/bricks/logging/logging.php',
         'Request'        =>'/bricks/request/request.php',
+        'Zip'        =>'/bricks/zip/zip.php',
     ),
 
 

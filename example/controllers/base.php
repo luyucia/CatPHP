@@ -16,11 +16,12 @@ class BaseController extends Controller {
             'database'=>'catdoc',
             );
         $this->mongo = MongoDriver::getInstance($config);
+        header("Access-Control-Allow-Origin: *");
+        header("Access-Control-Allow-Headers:Origin, X-Requested-With, Content-Type, Accept");
+        
     }
 
     public function echoJson($code,$info){
-        header("Access-Control-Allow-Origin: *");
-        header("Access-Control-Allow-Headers:Origin, X-Requested-With, Content-Type, Accept");
         $data = array();
         $data['code'] = $code;
         $data['info'] = $info;
