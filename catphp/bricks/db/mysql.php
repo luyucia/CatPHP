@@ -29,14 +29,14 @@ class MysqlDriver
     public function __construct($config)
     {
         $this->last_db_name = $config['database'];
-        $this->conn = mysqli_connect($config['host'] , $config['username'], $config['password'], $config['database'],$config['port']) or die('Could not connect: ' . mysql_error());
+        $this->conn = mysqli_connect($config['host'] , $config['username'], $config['password'], $config['database'],$config['port']) or die('Could not connect: ' . mysqli_connect_error());
         mysqli_set_charset($this->conn, $config['encoding']);
     }
 
-    private function checkSql($sql)
-    {
-        return mysql_real_escape_string($sql);
-    }
+    // private function checkSql($sql)
+    // {
+    //     return mysqli_real_escape_string($sql);
+    // }
 
     public function getConnection()
     {

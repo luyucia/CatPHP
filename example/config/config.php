@@ -13,6 +13,7 @@ define('CAT_MODEL_FILE_SUFFIX','');
 return array(
     // 控制器子目录，如果希望在控制器目录下放子目录可在此设置
     'controller_dirs' => array('test/','api/'),
+    'model_dirs' => array(),
     // 设置哪些controller为RESTfule形式
     'rest_controllers'=>array('product','api'),
     // 设置路由模式，router_rest为true时，采用Rest风格路由，为false则采用参数形式，router_name参数生效
@@ -25,7 +26,7 @@ return array(
     'log_level'       => Logging::ALL,
     // 模板引擎 可选（tenjin smarty php）
     'template_engine'=>array(
-        'type'  => 'tenjin',
+        'type'  => 'php',
         'debug' => false,
         'cache' => false,
         'cache_lifetime' => 120,

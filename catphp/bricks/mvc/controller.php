@@ -57,6 +57,9 @@ class Controller {
                 $this->engine->assign($key,$value);
             }
             $this->engine->display(CAT_VIEW_PATH.$tpl);
+        }else{
+            extract($this->context);
+            include CAT_VIEW_PATH.$tpl;
         }
     }
 
