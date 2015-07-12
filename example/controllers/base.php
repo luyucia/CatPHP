@@ -21,7 +21,7 @@ class BaseController extends Controller {
         
     }
 
-    public function echoJson($code,$info){
+    public function echoJson($code,$info=array()){
         $data = array();
         $data['code'] = $code;
         $data['info'] = $info;

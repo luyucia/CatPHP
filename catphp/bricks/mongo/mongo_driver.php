@@ -61,16 +61,17 @@ class MongoDriver
     public function insert($collection, $record)
     {
         $db = $this->curr_db;
-        try {
+        // try {
             $collection_obj = $this->mongo->selectCollection($db,$collection);
-            $collection_obj->insert($record);
+            var_dump($record);
+            $collection_obj->insert($record,array('w' => true));
             return (string)$record['_id'];
             // $this->mongo->$db->$collection->insert($record, array('w' => true));
             // return true;
-        } catch (MongoCursorException $e) {
-            $this->error = $e->getMessage();
-            return false;
-        }
+        // } catch (MongoCursorException $e) {
+            // $this->error = $e->getMessage();
+            // return false;
+        // }
     }
 
     public function count($collection, $query = array())

@@ -15,10 +15,14 @@ class documentController extends BaseController {
 
     public function createProject(){
         $data['name']         = Request::input('name');
-        $data['user_id']      = 1;
-        $data['created_time'] = date('Y-m-d H:i:s');
-        $rs =  $this->mongo->insert('projects',$data);
-        $this->echoJson(1,$rs);
+        if ($data['name']) {
+            $data['user_id']      = 1;
+            $data['created_time'] = date('Y-m-d H:i:s');
+            $rs =  $this->mongo->insert('projects',$data);
+            $this->echoJson(1,$rs);
+        }else{
+            $this->echoJson(2);
+        }
     }
 
     public function listProject(){

@@ -38,15 +38,6 @@ class CatConfig
         return self::$config;
     }
 
-    public function get($key)
-    {
-        if (isset(self::$config[$key])) {
-            return self::$config[$key];
-        }else{
-            return null;
-        }
-    }
-
     public function __get($key)
     {
         if (isset(self::$config[$key])) {
