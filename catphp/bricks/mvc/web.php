@@ -18,8 +18,19 @@ class Web {
             define("APP_PATH", $_SERVER['DOCUMENT_ROOT']);
         }
 
-        spl_autoload_register('web_autoload');
-        $WEB_CONFIG   = CatConfig::getInstance(APP_PATH.'/config/config.php');
+        $configFilePath = APP_PATH.'/config/config.php';
+        // spl_autoload_register('web_autoload');
+        $WEB_CONFIG   = CatConfig::getInstance($configFilePath);
+
+        // 调用内核自动加载功能
+        CatPHP::addClassPath(CAT_CONTROLLER_PATH,'Controller',CAT_CONTROLLER_FILE_SUFFIX);
+        CatPHP::addClassPath(CAT_MODEL_PATH,'Model',CAT_MODEL_FILE_SUFFIX);
+        foreach ($WEB_CONFIG->controller_dirs as $dir){
+            CatPHP::addClassPath(CAT_CONTROLLER_PATH.$dir,'Controller',CAT_CONTROLLER_FILE_SUFFIX);
+        }
+        foreach ($WEB_CONFIG->model_dirs as $dir) {
+            CatPHP::addClassPath(CAT_MODEL_PATH.$dir,'Model',CAT_MODEL_FILE_SUFFIX);
+        }
 
         $controller_name = '';
         $action_name     = '';
@@ -108,66 +119,66 @@ class Web {
 
 }
 
-function web_autoload($class)
-{
-    $WEB_CONFIG   = CatConfig::getInstance(APP_PATH.'/config/config.php');
-    $success = false;
-    // 判断是controller还是model
-    if(stripos($class, "Controller")) {
-        $class = str_replace("Controller", "", $class);
-        $controller_file = CAT_CONTROLLER_PATH.strtolower($class).CAT_CONTROLLER_FILE_SUFFIX.'.php';
-        if (file_exists($controller_file)) {
-            require $controller_file;
-            $success = true;
-        }else{
-            foreach ($WEB_CONFIG->controller_dirs as $dir) {
-                    $controller_file = CAT_CONTROLLER_PATH . $dir . $class .CAT_CONTROLLER_FILE_SUFFIX. '.php';
-                    if (file_exists($controller_file)) {
-                        require $controller_file;
-                        $success = true;
-                        break;
-                    }
-                }
-        }
-    } else if(stripos($class, "Model")) {
-        $class = str_replace("Model", "", $class);
-        $modelFile = CAT_MODEL_PATH.strtolower($class).CAT_MODEL_FILE_SUFFIX.'.php';
-        if(file_exists($modelFile))
-        {
-            require $modelFile;
-            $success = true;
+// function web_autoload($class)
+// {
+//     $WEB_CONFIG   = CatConfig::getInstance(APP_PATH.'/config/config.php');
+//     $success = false;
+//     // 判断是controller还是model
+//     if(stripos($class, "Controller")) {
+//         $class = str_replace("Controller", "", $class);
+//         $controller_file = CAT_CONTROLLER_PATH.strtolower($class).CAT_CONTROLLER_FILE_SUFFIX.'.php';
+//         if (file_exists($controller_file)) {
+//             require $controller_file;
+//             $success = true;
+//         }else{
+//             foreach ($WEB_CONFIG->controller_dirs as $dir) {
+//                     $controller_file = CAT_CONTROLLER_PATH . $dir . $class .CAT_CONTROLLER_FILE_SUFFIX. '.php';
+//                     if (file_exists($controller_file)) {
+//                         require $controller_file;
+//                         $success = true;
+//                         break;
+//                     }
+//                 }
+//         }
+//     } else if(stripos($class, "Model")) {
+//         $class = str_replace("Model", "", $class);
+//         $modelFile = CAT_MODEL_PATH.strtolower($class).CAT_MODEL_FILE_SUFFIX.'.php';
+//         if(file_exists($modelFile))
+//         {
+//             require $modelFile;
+//             $success = true;
 
-        }else{
-            foreach ($WEB_CONFIG->model_dirs as $dir) {
-                $modelFile = CAT_MODEL_PATH. $dir .strtolower($class).CAT_MODEL_FILE_SUFFIX.'.php';
-                if (file_exists($modelFile)) {
-                    include $modelFile;
-                    $success = true;
-                    break;
-                }
-            }
-        }
+//         }else{
+//             foreach ($WEB_CONFIG->model_dirs as $dir) {
+//                 $modelFile = CAT_MODEL_PATH. $dir .strtolower($class).CAT_MODEL_FILE_SUFFIX.'.php';
+//                 if (file_exists($modelFile)) {
+//                     include $modelFile;
+//                     $success = true;
+//                     break;
+//                 }
+//             }
+//         }
 
-    } else {
-        // 加载用户自定义类库
-        if (isset($WEB_CONFIG->libs)) {
-            foreach ($WEB_CONFIG->libs as $key => $value) {
-                if($p = stripos($class, $key )){
-                    $class = substr($class, 0, $p);
-                    $incFile = APP_PATH.'/'.$value.'/'.$class.'.php';
-                    if (file_exists($incFile)) {
-                        include $incFile;
-                        $success = true;
-                        break;
-                    }
-                }
-            }
-        }
-    }
-    // if(!$success){
-    //     throw new Exception("class $class not found", 1);
-    // }
-}
+//     } else {
+//         // 加载用户自定义类库
+//         if (isset($WEB_CONFIG->libs)) {
+//             foreach ($WEB_CONFIG->libs as $key => $value) {
+//                 if($p = stripos($class, $key )){
+//                     $class = substr($class, 0, $p);
+//                     $incFile = APP_PATH.'/'.$value.'/'.$class.'.php';
+//                     if (file_exists($incFile)) {
+//                         include $incFile;
+//                         $success = true;
+//                         break;
+//                     }
+//                 }
+//             }
+//         }
+//     }
+//     // if(!$success){
+//     //     throw new Exception("class $class not found", 1);
+//     // }
+// }
 
 
 ?>

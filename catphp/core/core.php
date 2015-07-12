@@ -55,3 +55,55 @@ function cat_core_bricks_autoload($classname)
 }
 
 
+/**
+* CatPHP内核类
+*/
+class CatPHP
+{
+
+    function __construct()
+    {
+    }
+
+    static $paths = array();
+
+    public static function addClassPath($path,$suffix,$file_suffix = false)
+    {
+        $config['path']   = $path;
+        $config['suffix'] = $suffix;
+        if ($file_suffix!==false) {
+            $config['file_suffix'] = $file_suffix;
+        }else{
+            $config['file_suffix'] = $suffix;
+        }
+        self::$paths[]    = $config;
+    }
+
+    public static function auto_load($class)
+    {
+        // 遍历所有路径配置,遇到指定后缀则匹配触发加载
+        foreach (self::$paths as $path) {
+            if ($i = strpos($class, $path['suffix'])) {
+                $pure_class = strtolower(substr($class, 0, $i));
+                $file = $path['path'].'/'.$pure_class.$path['file_suffix'].'.php';
+
+                if(file_exists($file))
+                {
+                    include $file;
+                    return;
+                }
+
+            }
+        }
+    }
+
+    public static function coreStart()
+    {
+        spl_autoload_register('CatPHP::auto_load');
+    }
+
+}
+
+CatPHP::coreStart();
+
+

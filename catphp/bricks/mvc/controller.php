@@ -65,6 +65,9 @@ class Controller {
                 echo $output;
             }
             return $output;
+        }else{
+            extract($this->context);
+            include CAT_VIEW_PATH.$tpl;
         }
     }
 

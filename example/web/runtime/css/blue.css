@@ -1,0 +1,35 @@
+.header {
+  font-family: "Raleway", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  max-width: 768px;
+  margin: 0 auto;
+  padding: 1em;
+  text-align: center;
+  border-bottom: 1px solid #eee;
+  background: #fff;
+  letter-spacing: 0.05em;
+}
+
+
+pre{
+    background: rgba(238, 238, 238, 0.35);
+  border-radius: 3px;
+  padding: 10px;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.125);
+  font-family: "Raleway", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+p{
+  font-size: 16px;
+  line-height: 1.65;
+}
+
+
+h1{
+  font-family: "Raleway", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+
+code{
+  font-family: Monaco, 'Lucida Console', monospace, Consolas, Courier;
+  font-size: 14px;
+}
