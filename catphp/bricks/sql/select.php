@@ -52,9 +52,12 @@ class select{
     // like in
     public function where($column,&$value,$cond='=',$quot=null,$logic='and')
     {
-        if(!isset($value) || $value==='' || $value===false)
+        if(!isset($value) || $value==='' || $value===false || is_null($value))
             return;
         if (is_array($value) && $cond=='=') {
+            if (!isset($value[0])) {
+                return;
+            }
             $cond = 'in';
         }
         // 如果quor为null则调用type自动判断是否加单引号

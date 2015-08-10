@@ -44,7 +44,7 @@ class Cat_Table
     public function findOne($where,$column='*')
     {
         $sql = $this->_find($where,$column);
-        return $this->db->getRow($sql);
+        return $this->db->getRow($sql.' limit 1');
     }
 
     public function findAll($where,$column='*')
