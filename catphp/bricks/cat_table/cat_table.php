@@ -10,12 +10,12 @@ class Cat_Table
     private $db      = null;
     private $dml     = null;
 
-    function __construct($dbconfig,$table,$prefix='')
+    function __construct($db,$table,$prefix='')
     {
         $this->table  = $table;
         $this->prefix = $prefix;
 
-        $this->db  = new Db($dbconfig);
+        $this->db  = $db;
         $this->dml = new Dml($prefix . $this->table);
         $this->select = new Select();
         $this->select->from($prefix . $this->table);
@@ -44,7 +44,7 @@ class Cat_Table
     public function findOne($where,$column='*')
     {
         $sql = $this->_find($where,$column);
-        return $this->db->getRow($sql.' limit 1');
+        return $this->db->getRow($sql);
     }
 
     public function findAll($where,$column='*')

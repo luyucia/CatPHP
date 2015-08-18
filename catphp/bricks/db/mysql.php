@@ -73,11 +73,13 @@ class MysqlDriver
         if ($stmt) {
             $rtn =  mysqli_stmt_execute($stmt);
         }
-        $this->lastError = mysqli_error($this->conn);
 
-        return $rtn;
-        // return mysqli_query($this->conn, $sql);
-        // or die("Invalid query: " . mysql_error());
+        $this->lastError     = mysqli_error($this->conn);
+        if ($rtn) {
+            return $stmt->affected_rows;
+        }else{
+            return false;
+        }
     }
 
     public function close()
