@@ -44,11 +44,10 @@ class Controller {
         if ($this->engine_name === 'tenjin' ) {
             $properties = array('cache' => false);
             $this->engine = new Tenjin_Engine($properties);
-            $output = $this->engine->render($tpl, $this->context);
+            $output = $this->engine->render(CAT_VIEW_PATH.$tpl, $this->context);
             if ($out) {
                 echo $output;
             }
-            $output = $this->engine->render(CAT_VIEW_PATH.$tpl, $this->context);
             return $output;
         }
         elseif ($this->engine_name === 'smarty') {

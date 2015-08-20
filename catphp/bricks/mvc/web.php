@@ -25,9 +25,9 @@ class Web {
         // 调用内核自动加载功能
         CatPHP::addClassPath(CAT_CONTROLLER_PATH,'Controller',CAT_CONTROLLER_FILE_SUFFIX);
         CatPHP::addClassPath(CAT_MODEL_PATH,'Model',CAT_MODEL_FILE_SUFFIX);
-        foreach ($WEB_CONFIG->controller_dirs as $dir){
-            CatPHP::addClassPath(CAT_CONTROLLER_PATH.$dir,'Controller',CAT_CONTROLLER_FILE_SUFFIX);
-        }
+        // foreach ($WEB_CONFIG->controller_dirs as $dir){
+        //     CatPHP::addClassPath(CAT_CONTROLLER_PATH.$dir,'Controller',CAT_CONTROLLER_FILE_SUFFIX);
+        // }
         foreach ($WEB_CONFIG->model_dirs as $dir) {
             CatPHP::addClassPath(CAT_MODEL_PATH.$dir,'Model',CAT_MODEL_FILE_SUFFIX);
         }
@@ -39,9 +39,9 @@ class Web {
         // 判定路由解析方式,如果是rest风格则,则构造路由解析对象
         if ($WEB_CONFIG->router_rest) {
             $index = strpos($_SERVER['SCRIPT_NAME'], '/', 0) + 1;
-
             $url = rtrim( substr($_SERVER['REQUEST_URI'] , $index),"/");
-            $r = new router($url);
+            $global = $WEB_CONFIG->router_global;
+            $r = new router($url,$global);
             // 加载路由设置
             if (count($WEB_CONFIG->route_rules)) {
                 foreach ($WEB_CONFIG->route_rules as $rule) {
@@ -50,6 +50,9 @@ class Web {
             }
             $r->getRouting();
 
+            if ($global) {
+                CatPHP::addClassPath(CAT_CONTROLLER_PATH.$r->module,'Controller',CAT_CONTROLLER_FILE_SUFFIX);
+            }
             $url_params      = $r->getUrlParam();
             $controller_name = $r->getController();
             $action_name     = $r->getAction();
@@ -87,7 +90,6 @@ class Web {
             echo "</h2>404</h2>";
             exit();
         }
-
 
 
         $controller->setActionName($action_name);

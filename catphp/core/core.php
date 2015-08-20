@@ -84,9 +84,8 @@ class CatPHP
         // 遍历所有路径配置,遇到指定后缀则匹配触发加载
         foreach (self::$paths as $path) {
             if ($i = strpos($class, $path['suffix'])) {
-                $pure_class = strtolower(substr($class, 0, $i));
+                $pure_class = lcfirst(substr($class, 0, $i));
                 $file = $path['path'].'/'.$pure_class.$path['file_suffix'].'.php';
-
                 if(file_exists($file))
                 {
                     include $file;

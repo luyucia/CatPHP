@@ -5,15 +5,18 @@
 */
 class router
 {
-    private $controller;
-    private $action;
+    public $module;
+    public $controller;
+    public $action;
     private $url_param;
     private $rout_arr;
     private $rout_len;
     private $rule_arr;
+    private $global;
 
-    function __construct($url)
+    function __construct($url,$global = false)
     {
+        $this->global = $global;
         $this->urlParse($url);
     }
 
@@ -25,6 +28,10 @@ class router
             $url = trim( substr($url, 0 ,  $question_mark_pos),"/");
         } else {
             $url = trim( $url,"/");
+        }
+        // 忽略index.php的影响
+        if (stripos($url,'index.php')===0) {
+            $url = substr($url, 10);
         }
         $this->rout_arr = explode('/', $url);
         if (!isset($this->rout_arr[0]) || $this->rout_arr[0]==='') {
@@ -100,7 +107,7 @@ class router
             foreach ($this->rule_arr as $rule) {
                 $rtn_data = array();
                 $ri  = 0;
-                for ($i=0; $i < $this->rout_len; $i++) { 
+                for ($i=0; $i < $this->rout_len; $i++) {
                     // 如果是:开头，直接匹配
                     if(isset($rule['rule'][$i]) && $rule['rule'][$i][0]===':') {
                         $rtn_data[substr($rule['rule'][$i], 1)] = $this->rout_arr[$i];
@@ -111,7 +118,7 @@ class router
                         continue;
                     }
                     else if(isset($rule['rule'][$i]) && $rule['rule'][$i]==='*') {
-                        for ($j=$i; $j < $this->rout_len; $j++) { 
+                        for ($j=$i; $j < $this->rout_len; $j++) {
                             if (isset($this->rout_arr[$j+1])) {
                                 $rtn_data[$this->rout_arr[$j]] = $this->rout_arr[$j+1];
                                 $j++;
@@ -147,12 +154,28 @@ class router
         }
         // 如果规则没有匹配的执行默认解析
         if(!$match) {
-            $this->controller = $this->rout_arr[0];
-            $this->action     = $this->rout_arr[1];
-            for ($j=2; $j < $this->rout_len; $j++) { 
-                if (isset($this->rout_arr[$j+1])) {
-                    $rtn_data[$this->rout_arr[$j]] = $this->rout_arr[$j+1];
-                    $j++;
+            // 如果设置全局路由则解析模块名 url规则为：模块名/控制器/方法
+            if($this->global && isset($this->rout_arr[2]))
+            {
+                $this->module     = $this->rout_arr[0];
+                $this->controller = $this->rout_arr[1];
+                $this->action     = $this->rout_arr[2];
+                for ($j=3; $j < $this->rout_len; $j++) {
+                    if (isset($this->rout_arr[$j+1])) {
+                        $rtn_data[$this->rout_arr[$j]] = $this->rout_arr[$j+1];
+                        $j++;
+                    }
+                }
+            }
+            else
+            {
+                $this->controller = $this->rout_arr[0];
+                $this->action     = $this->rout_arr[1];
+                for ($j=2; $j < $this->rout_len; $j++) {
+                    if (isset($this->rout_arr[$j+1])) {
+                        $rtn_data[$this->rout_arr[$j]] = $this->rout_arr[$j+1];
+                        $j++;
+                    }
                 }
             }
         }
@@ -234,7 +257,7 @@ class router
 // $r->addRoute($rule4);
 // $r->addRoute($rule5);
 
-// for ($i=0; $i < 100000; $i++) { 
+// for ($i=0; $i < 100000; $i++) {
 //     $r->getRouting();
 // }
 // $r->getRouting();
