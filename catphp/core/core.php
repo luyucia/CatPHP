@@ -17,7 +17,7 @@
  *  加载核心配置文件
  * ------------------------------------------------------
  */
-$config     = require CAT_BASE.'/config/core_class_config.php';
+$core_class_config     = require CAT_BASE.'/config/core_class_config.php';
 /*
  * ------------------------------------------------------
  *  加载第三方类库配置文件
@@ -43,11 +43,10 @@ spl_autoload_register('cat_core_bricks_autoload');
  */
 function cat_core_bricks_autoload($classname)
 {
-    global $config;
+    global $core_class_config;
     global $thr_config;
-
-    if (isset($config['core_class_path'][$classname])) {
-        require CAT_BASE.$config['core_class_path'][$classname];
+    if (isset($core_class_config['core_class_path'][$classname])) {
+        require CAT_BASE.$core_class_config['core_class_path'][$classname];
     }
     else if(isset($thr_config[$classname])) {
         require CAT_BASE.$thr_config[$classname];

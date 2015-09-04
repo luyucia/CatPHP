@@ -25,13 +25,19 @@ class Cat_Table
     public function insert($data)
     {
         $sql = $this->dml->insertSql($data);
-        return $this->db->execute($sql);
+        $rtn = $this->db->execute($sql);
+        if ($rtn>0) {
+            return $this->db->getInsertId();
+        }else{
+            return false;
+        }
     }
 
     public function delete($where)
     {
         $sql = $this->dml->deleteSql($where);
         return $this->db->execute($sql);
+
     }
 
     public function update($data,$where)

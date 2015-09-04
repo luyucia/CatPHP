@@ -28,6 +28,20 @@ function G($key, $default = null) {
     }
 }
 
+/**
+ * 防注入获取请求参数-REQUEST方法
+ * @param type $key 键值
+ * @param type $default 为空时的默认值
+ * @return type
+ */
+function R($key, $default = null) {
+    if (isset($_REQUEST[$key])) {
+        return addslashes($_REQUEST[$key]);
+    } else {
+        return $default;
+    }
+}
+
 function L($filemame,$content,$logdir){
     $handle = fopen($filemame, "w+");
     D($handle);
