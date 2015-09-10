@@ -8,7 +8,11 @@
  */
 function P($key, $default = null) {
     if (isset($_POST[$key])) {
-        return addslashes($_POST[$key]);
+        if (is_array($_POST[$key])) {
+            return $_POST[$key];
+        }else{
+            return addslashes($_POST[$key]);
+        }
     } else {
         return $default;
     }
@@ -48,13 +52,12 @@ function L($filemame,$content,$logdir){
 }
 
 function D($para){
-    echo "<pre>";
+    echo '<xmp>';
     echo "<h2>print_r:</h2><br>";
     print_r($para);
     echo "<br>";
     echo "<h2>var_dump:</h2><br>";
     var_dump($para);
-    echo "</pre>";
-    
+
     return print_r($para,true);
 }

@@ -29,6 +29,7 @@ class Cat_Table
         if ($rtn>0) {
             return $this->db->getInsertId();
         }else{
+            echo $sql;
             return false;
         }
     }
@@ -36,14 +37,24 @@ class Cat_Table
     public function delete($where)
     {
         $sql = $this->dml->deleteSql($where);
-        return $this->db->execute($sql);
+        $rs = $this->db->execute($sql);
+        if (!$rs) {
+            echo $sql;
+        }else{
+            return $rs;
+        }
 
     }
 
     public function update($data,$where)
     {
         $sql = $this->dml->updateSql($data,$where);
-        return $this->db->execute($sql);
+        $rs = $this->db->execute($sql);
+        if (!$rs) {
+            echo $sql;
+        }else{
+            return $rs;
+        }
     }
 
 

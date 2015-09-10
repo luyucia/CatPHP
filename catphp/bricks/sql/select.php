@@ -112,7 +112,7 @@ class select{
         $this->join .= ' '.$str;
     }
 
-    public function groupby($columns)
+    public function groupBy($columns)
     {
 
         if (is_array($columns))

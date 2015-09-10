@@ -34,7 +34,7 @@ class dml{
 
             if($this->inteligent_type)
             {
-                $values.="$key=".$this->type($value).',';
+                $values.="`$key`=".$this->type($value).',';
                 continue;
             }
 
@@ -42,16 +42,16 @@ class dml{
             {
                 if(in_array($key, $noquot))
                 {
-                    $values.="$key=$value,";
+                    $values.="`$key`=$value,";
                 }
                 else
                 {
-                    $values.="$key='$value',";
+                    $values.="`$key`='$value',";
                 }
             }
             else
             {
-                $values.="$key=$value,";
+                $values.="`$key`=$value,";
             }
         }
         $values     = rtrim($values,',');
@@ -64,7 +64,7 @@ class dml{
         $columns = '';
         $values  = '';
         foreach ($d as $key => $value) {
-            $columns.="$key,";
+            $columns.="`$key`,";
             // 开启智能类型判定
             if($this->inteligent_type)
             {
