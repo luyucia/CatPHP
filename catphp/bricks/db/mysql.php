@@ -65,6 +65,25 @@ class MysqlDriver
         return $data;
     }
 
+    public function queryOne($sql)
+    {
+        $result = mysqli_query($this->conn, $sql);
+
+        $data = false;
+        // 查询错误
+        if( $result === false && is_bool($result) ){
+            if(isset(self::$_conf['debug']) && self::$_conf['debug']===true){
+                $this->lastError = mysqli_error($this->conn);
+                echo $this->lastError ;
+            }
+        }
+        elseif ($result->num_rows != 0) {
+            $data = mysqli_fetch_assoc($result);
+        }
+
+        return $data;
+    }
+
     public function execute($sql)
     {
         //$sql = $this->checkSql($sql);

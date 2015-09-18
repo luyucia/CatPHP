@@ -60,6 +60,11 @@ class Db
         return $this->db->query($sql);
     }
 
+    public function queryOne($sql)
+    {
+        return $this->db->queryOne($sql);
+    }
+
     public function fetch($rs, $model = 0)
     {
         return $this->db->fetch_array($rs, $model);

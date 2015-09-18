@@ -29,8 +29,7 @@ class Cat_Table
         if ($rtn>0) {
             return $this->db->getInsertId();
         }else{
-            echo $sql;
-            return false;
+            throw new Exception("Insert Failed. Sql:".$sql, 1);
         }
     }
 
@@ -38,20 +37,30 @@ class Cat_Table
     {
         $sql = $this->dml->deleteSql($where);
         $rs = $this->db->execute($sql);
-        if (!$rs) {
-            echo $sql;
+        if ($rs===false) {
+            throw new Exception("Delete Failed. Sql:".$sql, 1);
         }else{
             return $rs;
         }
 
     }
 
-    public function update($data,$where)
+    public function update($data,$where,$allow = false)
     {
-        $sql = $this->dml->updateSql($data,$where);
+        $handle_data = array();
+        if (is_array($allow)) {
+            foreach ($allow as $key) {
+                if (isset($data[$key])) {
+                    $handle_data[$key] = $data[$key];
+                }
+            }
+        }else{
+            $handle_data = $data;
+        }
+        $sql = $this->dml->updateSql($handle_data,$where);
         $rs = $this->db->execute($sql);
-        if (!$rs) {
-            echo $sql;
+        if ($rs===false) {
+            throw new Exception("Update Failed. Sql:".$sql, 1);
         }else{
             return $rs;
         }

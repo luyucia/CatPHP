@@ -118,14 +118,7 @@ class Controller {
     }
 
     public function __call($name, $arguments) {
-        header("HTTP/1.0 404 Not Found");
-        if(isset($this->app_config->error_page)){
-            echo $this->render($this->app_config->error_page);
-        }else{
-            echo '<h2>404 not found</h2>';
-        }
-        exit();
-        // echo $name . ' is not defined!';
+        throw new Exception("Error Method '$name' Not Found", 1);
     }
 
     public function go404() {

@@ -22,16 +22,6 @@ class Web {
         // spl_autoload_register('web_autoload');
         $WEB_CONFIG   = CatConfig::getInstance($configFilePath);
 
-        // 调用内核自动加载功能
-        CatPHP::addClassPath(CAT_CONTROLLER_PATH,'Controller',CAT_CONTROLLER_FILE_SUFFIX);
-        CatPHP::addClassPath(CAT_MODEL_PATH,'Model',CAT_MODEL_FILE_SUFFIX);
-        // foreach ($WEB_CONFIG->controller_dirs as $dir){
-        //     CatPHP::addClassPath(CAT_CONTROLLER_PATH.$dir,'Controller',CAT_CONTROLLER_FILE_SUFFIX);
-        // }
-        foreach ($WEB_CONFIG->model_dirs as $dir) {
-            CatPHP::addClassPath(CAT_MODEL_PATH.$dir,'Model',CAT_MODEL_FILE_SUFFIX);
-        }
-
         $controller_name = '';
         $action_name     = '';
         $url_params      = null;
@@ -80,16 +70,26 @@ class Web {
             }
         }
 
+        // 调用内核自动加载功能
+        CatPHP::addClassPath(CAT_CONTROLLER_PATH,'Controller',CAT_CONTROLLER_FILE_SUFFIX);
+        CatPHP::addClassPath(CAT_MODEL_PATH,'Model',CAT_MODEL_FILE_SUFFIX);
+        // foreach ($WEB_CONFIG->controller_dirs as $dir){
+        //     CatPHP::addClassPath(CAT_CONTROLLER_PATH.$dir,'Controller',CAT_CONTROLLER_FILE_SUFFIX);
+        // }
+        foreach ($WEB_CONFIG->model_dirs as $dir) {
+            CatPHP::addClassPath(CAT_MODEL_PATH.$dir,'Model',CAT_MODEL_FILE_SUFFIX);
+        }
+
 
         // 路由到指定controller的指定action
         $class = $controller_name . 'Controller';
-        try {
+        // try {
             $controller = new $class();
-        } catch (Exception $exc) {
-            header("HTTP/1.0 404 Not Found");
-            echo "</h2>404</h2>";
-            exit();
-        }
+        // } catch (Exception $exc) {
+        //     header("HTTP/1.0 404 Not Found");
+        //     echo "</h2>404</h2>";
+        //     exit();
+        // }
 
 
         $controller->setActionName($action_name);

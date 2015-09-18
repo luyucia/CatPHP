@@ -26,7 +26,12 @@ function P($key, $default = null) {
  */
 function G($key, $default = null) {
     if (isset($_GET[$key])) {
-        return addslashes($_GET[$key]);
+        if (is_array($_GET[$key])) {
+            return $_GET[$key];
+        }else{
+            return addslashes($_GET[$key]);
+        }
+        
     } else {
         return $default;
     }
@@ -40,7 +45,12 @@ function G($key, $default = null) {
  */
 function R($key, $default = null) {
     if (isset($_REQUEST[$key])) {
-        return addslashes($_REQUEST[$key]);
+        if (is_array($_REQUEST[$key])) {
+            return $_REQUEST[$key];
+        }else{
+            return addslashes($_REQUEST[$key]);
+        }
+        
     } else {
         return $default;
     }
