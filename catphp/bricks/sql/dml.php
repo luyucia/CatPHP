@@ -55,7 +55,11 @@ class dml{
             }
         }
         $values     = rtrim($values,',');
-        return "update {$this->table} set $values where $where";
+        if (is_array($where)) {
+            return "update {$this->table} set $values where ".$this->handleWhere($where);
+        }else{
+            return "update {$this->table} set $values where $where";
+        }
     }
 
     function insertSql(&$d,$noquot='')
@@ -139,6 +143,15 @@ class dml{
     public function deleteSql($where)
     {
         return "delete from {$this->table} where $where";
+    }
+
+    public function handleWhere($where)
+    {
+        $where_arr = array();
+        foreach ($where as $key => $value) {
+            $where_arr[] = "$key=".$this->type($value);
+        }
+        return implode(' and ', $where_arr);
     }
 
     public function add(&$data,$noquot='')
