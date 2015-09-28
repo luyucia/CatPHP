@@ -5,10 +5,10 @@
 */
 class Cat_Table
 {
-    private $table   = null;
-    private $prefix  = null;
-    private $db      = null;
-    private $dml     = null;
+    public $table   = null;
+    public $prefix  = null;
+    public $db      = null;
+    public $dml     = null;
 
     function __construct($db,$table,$prefix='')
     {

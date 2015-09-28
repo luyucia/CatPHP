@@ -149,7 +149,11 @@ class dml{
     {
         $where_arr = array();
         foreach ($where as $key => $value) {
-            $where_arr[] = "$key=".$this->type($value);
+            if (is_array($value)) {
+                $where_arr[] = "$key in ('".implode("','", $value)."')";
+            }else{
+                $where_arr[] = "$key=".$this->type($value);
+            }
         }
         return implode(' and ', $where_arr);
     }

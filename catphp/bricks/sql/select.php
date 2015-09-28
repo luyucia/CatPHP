@@ -60,6 +60,15 @@ class select{
             }
             $cond = 'in';
         }
+
+        if ($value==='null' && $cond==='=') {
+            $this->where_arr[$column][]=" $logic $column is null";
+            return ;
+        }elseif ($value==='null' && $cond==='!=') {
+            $this->where_arr[$column][]=" $logic $column is not null";
+            return ;
+        }
+
         // 如果quor为null则调用type自动判断是否加单引号
         if($quot===null)
         {
