@@ -5,7 +5,7 @@
 */
 class HttpClient
 {
-    
+
     private $_url;
     private $_method;
     private $_agent;
@@ -21,6 +21,12 @@ class HttpClient
 
     public function close() {
         curl_close($this->_curl);
+    }
+
+    public function setHttps($set=true)
+    {
+        curl_setopt($this->_curl, CURLOPT_SSL_VERIFYPEER, FALSE);
+        curl_setopt($this->_curl, CURLOPT_SSL_VERIFYHOST, FALSE);
     }
 
     public function setAgent($agent)
