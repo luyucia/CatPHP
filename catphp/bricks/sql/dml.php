@@ -31,6 +31,9 @@ class dml{
         $values  = '';
         foreach ($d as $key => $value)
         {
+            if ($value==false||$value==null) {
+                continue;
+            }
 
             if($this->inteligent_type)
             {
