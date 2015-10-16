@@ -31,7 +31,7 @@ class dml{
         $values  = '';
         foreach ($d as $key => $value)
         {
-            if ($value==false||$value==null) {
+            if ($value===false||$value===null) {
                 continue;
             }
 
@@ -71,6 +71,10 @@ class dml{
         $columns = '';
         $values  = '';
         foreach ($d as $key => $value) {
+
+            if ($value===false||$value===null) {
+                continue;
+            }
             $columns.="`$key`,";
             // 开启智能类型判定
             if($this->inteligent_type)
