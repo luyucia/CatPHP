@@ -31,7 +31,7 @@ function G($key, $default = null) {
         }else{
             return addslashes($_GET[$key]);
         }
-        
+
     } else {
         return $default;
     }
@@ -50,7 +50,7 @@ function R($key, $default = null) {
         }else{
             return addslashes($_REQUEST[$key]);
         }
-        
+
     } else {
         return $default;
     }

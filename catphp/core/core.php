@@ -17,6 +17,7 @@
  *  加载核心配置文件
  * ------------------------------------------------------
  */
+include 'cat_function.php';
 $core_class_config     = require CAT_BASE.'/config/core_class_config.php';
 /*
  * ------------------------------------------------------
