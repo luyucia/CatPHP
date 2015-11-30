@@ -50,7 +50,7 @@ class select{
     }
 
     // like in
-    public function where($column,&$value,$cond='=',$quot=null,$logic='and')
+    public function where($column,$value,$cond='=',$quot=null,$logic='and')
     {
         if(!isset($value) || $value==='' || $value===false || is_null($value))
             return;
