@@ -35,7 +35,7 @@ $thr_config = require CAT_BASE.'/config/thr_class_config.php';
  * 路径都用绝对路径，因为节省系统调用，比相对路径效率高
  */
 spl_autoload_register('cat_core_bricks_autoload');
-
+require  CAT_BASE.'/bricks-v/vendor/autoload.php';
 /**
  * @name cat_core_bricks_autoload
  * @param 定义函数或者方法的参数信息

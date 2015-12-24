@@ -33,7 +33,9 @@ class select{
             $this->columns = $columns;
         }
     }
-
+    /*
+    *
+    */
     public function having($column, $value, $cond = '=',$quot = null, $logic = 'and'){
         if(!isset($value) || $value==='')
             return;

@@ -1,0 +1,5 @@
+{
+    "require":{
+        "jpush/jpush": "v3.2.0"
+    }
+}

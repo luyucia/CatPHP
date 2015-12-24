@@ -1,0 +1,10 @@
+{
+
+    "require": {
+        "php": ">=5.3.0",
+        "sybio/image-workshop": "*",
+        "elasticsearch/elasticsearch": "~2.0",
+        "jpush/jpush": "v3.2.1"
+    }
+
+}
