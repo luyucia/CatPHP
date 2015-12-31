@@ -52,7 +52,7 @@ class select{
     }
 
     // like in
-    public function where($column,$value,$cond='=',$quot=null,$logic='and')
+    public function where($column,$value,$cond='=',$quot=null,$logic='and',$bracket='')
     {
         if(!isset($value) || $value==='' || $value===false || is_null($value))
             return;
@@ -81,7 +81,13 @@ class select{
             $value = "'$value'";
         }
 
-        $this->where_arr[$column][]=" $logic $column $cond $value";
+        if ($bracket=='(') {
+            $this->where_arr[$column][]=" $logic ( $column $cond $value";
+        }else if ($bracket==')') {
+            $this->where_arr[$column][]=" $logic $column $cond $value )";
+        }else{
+            $this->where_arr[$column][]=" $logic $column $cond $value";
+        }
     }
     // 删除条件
     public function remove_where($column)
