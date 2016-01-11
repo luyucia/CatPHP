@@ -5,7 +5,7 @@
 */
 class Cache
 {
-    
+
     private $_instance;
 
     function __construct($config)
@@ -70,6 +70,19 @@ class Cache
      */
     public function getInstance() {
         return $this->_instance->getInstance();
+    }
+
+    public function cacheSql($sql,$db)
+    {
+        $key = md5($sql);
+        $value = $this->_instance->get($key);
+        if ($value) {
+            return $value;
+        }else{
+            $value = $db->query($sql);
+            $this->_instance->set($key,$value);
+            return $value;
+        }
     }
 }
 
