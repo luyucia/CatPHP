@@ -35,6 +35,7 @@ return  array
         'ThirdWeixin' =>'/bricks/third/weixin.php',
         'ThirdQQ'     =>'/bricks/third/qq.php',
         'ThirdWeibo'  =>'/bricks/third/weibo.php',
+        'WechatSDK'  =>'/bricks/wechat/wechatsdk.php',
         ),
 
 

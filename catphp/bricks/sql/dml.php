@@ -31,13 +31,18 @@ class dml{
         $values  = '';
         foreach ($d as $key => $value)
         {
-            if ($value===false||$value===null) {
+            if ($value===false) {
                 continue;
             }
 
             if($this->inteligent_type)
             {
                 $values.="`$key`=".$this->type($value).',';
+                continue;
+            }
+
+            if ($value===null) {
+                $values.="`$key`= null,";
                 continue;
             }
 
@@ -72,7 +77,7 @@ class dml{
         $values  = '';
         foreach ($d as $key => $value) {
 
-            if ($value===false||$value===null) {
+            if ($value===false) {
                 continue;
             }
             $columns.="`$key`,";
@@ -80,6 +85,11 @@ class dml{
             if($this->inteligent_type)
             {
                 $values.= $this->type($value).',';
+                continue;
+            }
+
+            if ($value===null) {
+                $values.="`$key`= null,";
                 continue;
             }
 
