@@ -89,7 +89,7 @@ class dml{
             }
 
             if ($value===null) {
-                $values.="`$key`= null,";
+                $values.="null,";
                 continue;
             }
 
