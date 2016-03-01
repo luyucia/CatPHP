@@ -21,10 +21,10 @@ class router
     }
 
     private function urlParse($url)
-    {
+	{
         // 去除开头结尾'/',和url中的参数(?后面的东西)
         $question_mark_pos = stripos($url, '?');
-        if($question_mark_pos) {
+        if($question_mark_pos !== false) {
             $url = trim( substr($url, 0 ,  $question_mark_pos),"/");
         } else {
             $url = trim( $url,"/");
@@ -39,7 +39,7 @@ class router
         }
         if (!isset($this->rout_arr[1])) {
             $this->rout_arr[1] = 'index';
-        }
+		}
         $this->rout_len = count($this->rout_arr);
     }
 
