@@ -12,6 +12,7 @@ return  array
         'Dml'          =>'/bricks/sql/dml.php',
         'Csv'          =>'/bricks/csv/csv.php',
         'Db'           =>'/bricks/db/db.php',
+        'CatDB'           =>'/bricks/db/cdb.php',
         'HtmlTable'    =>'/bricks/html/html_table.php',
         'HtmlForm'     =>'/bricks/html/html_form.php',
         'HtmlUl'       =>'/bricks/html/html_ul.php',

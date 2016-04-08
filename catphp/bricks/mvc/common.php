@@ -1,5 +1,16 @@
 <?php
 
+// 注入判定
+function isSqlInject($str)
+{
+    preg_match_all("/select|insert|update|delete|from|set|load_file|outfile|'|union|and|or|mysql|SCHEMATA|%/", $str, $matchs);
+    if (count($matchs[0])>2) {
+        return true;
+    }else{
+        return false;
+    }
+}
+
 /**
  * 防注入获取请求参数-POST方法
  * @param type $key 键值
@@ -11,7 +22,9 @@ function P($key, $default = null) {
         if (is_array($_POST[$key])) {
             return $_POST[$key];
         }else{
-            return addslashes($_POST[$key]);
+            if (!isSqlInject($_POST[$key])) {
+                return addslashes($_POST[$key]);
+            }
         }
     } else {
         return $default;
@@ -29,7 +42,9 @@ function G($key, $default = null) {
         if (is_array($_GET[$key])) {
             return $_GET[$key];
         }else{
-            return addslashes($_GET[$key]);
+            if (!isSqlInject($_GET[$key])) {
+                return addslashes($_GET[$key]);
+            }
         }
 
     } else {

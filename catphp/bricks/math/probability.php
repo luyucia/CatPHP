@@ -1,7 +1,7 @@
 <?php
 
 /**
-* 
+*
 */
 class Probability
 {
@@ -25,6 +25,26 @@ class Probability
             return false;
         }
     }
+
+    public static function mulit($data)
+    {
+        $total  = 0;
+        $result = '';
+        foreach ($data as $key => $value) {
+            $total+=$value*1000;
+        }
+        foreach ($data as $key => $value) {
+            $rand_number= rand(1,$total);
+            if ($rand_number<= $value*1000) {
+                $result = $key;
+                break;
+            }else{
+                $total-=$value*1000;
+            }
+        }
+        unset($data);
+        return $result;
+    }
 }
 
 // Example:
@@ -37,5 +57,18 @@ class Probability
 //     }
 // }
 // var_dump($num);
+
+// $data = [
+// 'a'=>0.2,
+// 'b'=>0.3,
+// 'c'=>0.9,
+// 'd'=>0.1,
+// ];
+
+
+// for ($i=0; $i < 100; $i++) {
+//     $d = Probability::mulit($data);
+//     echo $d;
+// }
 
 ?>
