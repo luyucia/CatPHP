@@ -10,10 +10,11 @@
 
 class Sql
 {
-    public $tableName;
+    public  $tableName;
     public  $queryType = 's';
     private $columns   = '*';
     public  $where = [];
+    public  $whereString = '';
     public  $sql;
     public  $orderBy = '';
     public  $groupBy = '';
@@ -46,7 +47,8 @@ class Sql
 
     private function makeWhere($bindParam)
     {
-        $whereStr = '';
+
+            $whereStr = '';
             foreach ($this->where as $i=>$w) {
                 if (is_array($w[1])) {
                     if ($bindParam) {
@@ -81,8 +83,15 @@ class Sql
             }
         // }
 
-
+        if (!empty($this->whereString)) {
+            $whereStr .= ' and '.$this->whereString;
+        }
         return $whereStr;
+    }
+
+    public function whereString($whereStr)
+    {
+        $this->whereString = $whereStr;
     }
 
     public function where($where,$value,$condition='=',$logic='and')
