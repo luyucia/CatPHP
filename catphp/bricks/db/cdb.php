@@ -403,6 +403,35 @@ class CatDB
     //     $this->fetchMode =
     // }
 
+    public function queryOne($sql,$bindParams=[])
+    {
+        if ($this->cacheEnable===true && $this->cache!=null) {
+            if ($this->cacheKey) {
+                $key = 'dc:'.$this->cacheNameSpace.':'.$this->cacheKey;
+            }else
+            {
+                $key = 'dc:'.$this->cacheNameSpace.':'.md5($sql.implode('', $bindParams));
+            }
+            $rs =  unserialize($this->cache->get($key)) ;
+
+            if ($rs!==false) {
+                return $rs;
+            }else{
+                $this->connect();
+                $this->stmt = $this->dbh->prepare($sql);
+                $this->stmt->execute($bindParams);
+                $rs =  $this->stmt->fetch(PDO::FETCH_ASSOC);
+                $this->cache->setex($key,$this->cacheTime,serialize($rs) );
+                return $rs;
+            }
+        }else{
+            $this->connect();
+            $this->stmt = $this->dbh->prepare($sql);
+            $this->stmt->execute($bindParams);
+            return $this->stmt->fetch(PDO::FETCH_ASSOC);
+        }
+    }
+
     private function runQuery($sql,$bindParams=[])
     {
         // echo $sql;
