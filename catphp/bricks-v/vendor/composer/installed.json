@@ -461,7 +461,7 @@
         },
         "time": "2014-12-03 06:20:07",
         "type": "library",
-        "installation-source": "dist",
+        "installation-source": "source",
         "autoload": {
             "psr-0": {
                 "jpush": "src/"

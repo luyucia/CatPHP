@@ -154,7 +154,7 @@ class Sql
         return "update {$this->tableName} set ".implode(',', $columns).$this->makeWhere(true);
     }
 
-    public function increment($column,$value)
+    public function increment($column,$value=1)
     {
         return "update {$this->tableName} set $column=$column+$value ".$this->makeWhere(true);
     }
@@ -228,7 +228,7 @@ class CatDB
         // 数据库类型不支持
         try
         {
-            $this->dbh = new PDO("{$this->config['type']}:host={$this->config['host']};dbname={$this->config['database']};charset={$this->config['charset']}", $this->config['username'], $this->config['password'],[PDO::ATTR_PERSISTENT => true]);
+            $this->dbh = new PDO("{$this->config['type']}:host={$this->config['host']};dbname={$this->config['database']};charset={$this->config['charset']}", $this->config['username'], $this->config['password'],[PDO::ATTR_PERSISTENT => false]);
 
             $this->dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             // echo "do connect";
