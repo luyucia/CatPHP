@@ -56,7 +56,12 @@ class Sql
                     }else{
                         $w[1] = '('.implode(',',  array_map([$this,'pendingType'],$w[1])  ).')';
                     }
-                    $w[2] = 'in';
+                    if($w[2]=='not in')
+                    {
+                        $w[2] = 'not in';
+                    }else{
+                        $w[2] = 'in';
+                    }
                 }
                 elseif ($w[1]==='null') {
                     $w[2] = 'is';
@@ -65,7 +70,7 @@ class Sql
                     $w[1] = "'$w[1]'";
                 }
 
-                if (!is_array($w[1]) && $bindParam && $w[2]!='in') {
+                if (!is_array($w[1]) && $bindParam && $w[2]!='in' && $w[2]!='not in') {
                     $w[1] = '?';
                 }
 
@@ -112,7 +117,7 @@ class Sql
         // elseif ($condition=='like') {
         //     $value = "'$value'";
         // }
-        if ($value===false) {
+        if ($value===false || $value==='') {
             return ;
         }
 
@@ -127,7 +132,11 @@ class Sql
     {
         $paramArray = [];
         foreach ($this->where as $p) {
-            $paramArray[] = $p[1];
+            if (is_array($p[1])) {
+                $paramArray = array_merge($paramArray,$p[1]);
+            }else{
+                $paramArray[] = $p[1];
+            }
         }
         return $paramArray;
     }
@@ -150,8 +159,13 @@ class Sql
         foreach ($data as $key => $value) {
             $columns[] = "`$key`".' = ?';
         }
+        $whereStr = $this->makeWhere(true);
+        if ($whereStr) {
+            return "update {$this->tableName} set ".implode(',', $columns).$whereStr;
+        }else{
+            throw new Exception("where Not Specified ", 1);
 
-        return "update {$this->tableName} set ".implode(',', $columns).$this->makeWhere(true);
+        }
     }
 
     public function increment($column,$value=1)
@@ -161,7 +175,12 @@ class Sql
 
     public function delete()
     {
-        return "delete from {$this->tableName}".$this->makeWhere(true);
+        $whereStr = $this->makeWhere(true);
+        if ($whereStr) {
+            return "delete from {$this->tableName}".$whereStr;
+        }else{
+            throw new Exception("where Not Specified ", 1);
+        }
     }
 
     public function groupBy()
@@ -212,6 +231,7 @@ class CatDB
     public  $cacheNameSpace  = '';
     public  $cacheEnable     = false;
     private $config          = [];
+    private $sqlStr          = array();
 
     function __construct($config)
     {
@@ -390,18 +410,23 @@ class CatDB
     {
         $sql =  $this->sqlObj->sql($bindParam);
         return $sql;
+
+    }
+
+    public function printSql($print=true)
+    {
+        if ($print) {
+            print_r($this->sqlStr);
+        }
+        return $this->sqlStr;
     }
 
     public function execute($sql='',$bindParams=[])
     {
+        $this->sqlStr[] = $sql;
         $this->stmt = $this->dbh->prepare($sql);
         $this->stmt->execute($bindParams);
     }
-
-    // public function setFetchMode()
-    // {
-    //     $this->fetchMode =
-    // }
 
     public function queryOne($sql,$bindParams=[])
     {
@@ -418,6 +443,7 @@ class CatDB
                 return $rs;
             }else{
                 $this->connect();
+                $this->sqlStr[] = $sql;
                 $this->stmt = $this->dbh->prepare($sql);
                 $this->stmt->execute($bindParams);
                 $rs =  $this->stmt->fetch(PDO::FETCH_ASSOC);
@@ -426,6 +452,7 @@ class CatDB
             }
         }else{
             $this->connect();
+            $this->sqlStr[] = $sql;
             $this->stmt = $this->dbh->prepare($sql);
             $this->stmt->execute($bindParams);
             return $this->stmt->fetch(PDO::FETCH_ASSOC);
@@ -451,6 +478,7 @@ class CatDB
                 return $rs;
             }else{
                 $this->connect();
+                $this->sqlStr[] = $sql;
                 $this->stmt = $this->dbh->prepare($sql);
                 $this->stmt->execute($bindParams);
                 $rs =  $this->stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -461,6 +489,7 @@ class CatDB
             // echo $sql;
             // echo "$key";
             $this->connect();
+            $this->sqlStr[] = $sql;
             $this->stmt = $this->dbh->prepare($sql);
             $this->stmt->execute($bindParams);
             return $this->stmt->fetchAll(PDO::FETCH_ASSOC);
