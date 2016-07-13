@@ -423,6 +423,7 @@ class CatDB
 
     public function execute($sql='',$bindParams=[])
     {
+        $this->connect();
         $this->sqlStr[] = $sql;
         $this->stmt = $this->dbh->prepare($sql);
         $this->stmt->execute($bindParams);
