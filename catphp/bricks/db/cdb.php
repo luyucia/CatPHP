@@ -252,7 +252,7 @@ class CatDB
 
             $this->dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             // echo "do connect";
-            // $this->dbh->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+            $this->dbh->setAttribute(PDO::ATTR_AUTOCOMMIT, 1);
         }
         catch (PDOException $e)
         {
