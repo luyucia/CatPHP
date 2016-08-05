@@ -18,6 +18,7 @@ class Sql
     public  $sql;
     public  $orderBy = '';
     public  $groupBy = '';
+    public  $joinStr = '';
 
     function __construct($tableName)
     {
@@ -28,6 +29,7 @@ class Sql
     {
         if ($this->queryType==='s') {
             return "select {$this->columns} from {$this->tableName} "
+            .$this->joinStr
             .$this->makeWhere($bindParam)
             .$this->groupBy
             .$this->orderBy
@@ -194,6 +196,13 @@ class Sql
     {
         if (is_string($orderBy)) {
             $this->orderBy = ' order by '.$orderBy;
+        }
+    }
+
+    public function join($joinStr)
+    {
+        if (is_string($joinStr)) {
+            $this->joinStr = $joinStr;
         }
     }
 

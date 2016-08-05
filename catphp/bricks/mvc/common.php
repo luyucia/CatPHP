@@ -3,7 +3,7 @@
 // 注入判定
 function isSqlInject($str)
 {
-    preg_match_all("/select|insert|update|delete|from|set|load_file|outfile|'|union|and|or|mysql|SCHEMATA|%/", $str, $matchs);
+    preg_match_all("/select|insert|update|delete|from|set|load_file|outfile|'|union|and|or|mysql|SCHEMATA|%/i", $str, $matchs);
     if (count($matchs[0])>2) {
         return true;
     }else{
@@ -63,7 +63,9 @@ function R($key, $default = null) {
         if (is_array($_REQUEST[$key])) {
             return $_REQUEST[$key];
         }else{
-            return addslashes($_REQUEST[$key]);
+            if (!isSqlInject($_REQUEST[$key])) {
+                return addslashes($_REQUEST[$key]);
+            }
         }
 
     } else {
