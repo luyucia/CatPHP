@@ -3,7 +3,7 @@
 // 注入判定
 function isSqlInject($str)
 {
-    preg_match_all("/select|insert|update|delete|from|set|load_file|outfile|'|union|and|or|mysql|SCHEMATA|all|%/i", $str, $matchs);
+    preg_match_all("/select|insert|update|delete|from|set|load_file|outfile|'|union|and|or|mysql|SCHEMATA|%/i", $str, $matchs);
     if (count($matchs[0])>2) {
         return true;
     }else{
