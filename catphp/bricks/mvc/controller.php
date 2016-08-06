@@ -17,7 +17,7 @@ class Controller {
     protected  $logger;
 
     function __construct() {
-        session_start();
+        // session_start();
         ob_start();
         $this->app_config   = CatConfig::getInstance(APP_PATH.'/config/config.php');
         $log_level    = $this->app_config->log_level;
