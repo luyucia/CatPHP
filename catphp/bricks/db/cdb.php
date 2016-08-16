@@ -561,6 +561,17 @@ class CatDB
 
     }
 
+    public function getStatement($sql='',$bindParams=[])
+    {
+        $this->connect();
+        $this->sqlStr[] = $sql;
+        // echo $sql;
+        $this->stmt = $this->dbh->prepare($sql);
+        $this->stmt->execute($bindParams);
+        // $rs =  $this->stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $this->stmt;
+    }
+
     public function cache($time = 600,$cacheNameSpace = false,$key = false)
     {
         $this->cacheEnable    = true;

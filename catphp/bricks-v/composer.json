@@ -4,7 +4,10 @@
         "php": ">=5.3.0",
         "sybio/image-workshop": "*",
         "elasticsearch/elasticsearch": "~2.0",
-        "jpush/jpush": "v3.2.1"
+        "jpush/jpush": "v3.2.1",
+        "doctrine/cache":"v1.6.0"
+    },
+    "config": {
+        "secure-http": false
     }
-
 }
