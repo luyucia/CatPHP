@@ -278,7 +278,7 @@ class CatDB
 
     public function commit()
     {
-        $this->dbh->commmit();
+        $this->dbh->commit();
     }
 
     public function rollBack()
