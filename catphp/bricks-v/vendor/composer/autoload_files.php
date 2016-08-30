@@ -7,6 +7,8 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'ad155f8f1cf0d418fe49e248db8c661b' => $vendorDir . '/react/promise/src/functions_include.php',
+    'c964ee0ededf28c96ebd9db5099ef910' => $vendorDir . '/guzzlehttp/promises/src/functions_include.php',
+    'a0edc8309cc5e1d60e3047b5df6b7052' => $vendorDir . '/guzzlehttp/psr7/src/functions_include.php',
     'f5ca4fd427b6b0d498d39ee677869565' => $vendorDir . '/jpush/jpush/src/JPush/Model/Audience.php',
     'c02e26d7db303f84653ea5b06411dbc6' => $vendorDir . '/jpush/jpush/src/JPush/Model/Message.php',
     '11b0d33fcd514a4ddafdffdde52f9ffc' => $vendorDir . '/jpush/jpush/src/JPush/Model/Notification.php',
@@ -26,4 +28,5 @@ return array(
     '6a8f01eeab726e96e70a7e4646c91aa8' => $vendorDir . '/jpush/jpush/src/JPush/JPushLog.php',
     'd02dae5c3c945182b62f0d56a40c74d6' => $vendorDir . '/jpush/jpush/src/JPush/Exception/APIConnectionException.php',
     'a5622accddee34adffb88d38b99736ff' => $vendorDir . '/jpush/jpush/src/JPush/Exception/APIRequestException.php',
+    '37a3dc5111fe8f707ab4c132ef1dbc62' => $vendorDir . '/guzzlehttp/guzzle/src/functions_include.php',
 );
