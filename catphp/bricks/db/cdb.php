@@ -273,6 +273,7 @@ class CatDB
 
     public function beginTransaction()
     {
+        $this->connect();
         $this->dbh->beginTransaction();
     }
 
@@ -298,6 +299,7 @@ class CatDB
 
     public function getPdo()
     {
+        $this->connect();
         return $this->dbh;
     }
 
