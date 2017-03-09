@@ -593,10 +593,16 @@ class CatDB
     }
 
     // 通知缓存数据变更
-    public function notifyCacheUpdate()
+    public function notifyCacheUpdate($cacheNameSpace=null)
     {
-        if ($this->cache && $this->cacheNameSpace!='') {
-            $key = 'dc:'.$this->cacheNameSpace.':*';
+        // 传参数优先级高于默认
+        if($cacheNameSpace!==null){
+            $namespace = $cacheNameSpace;
+        }else{
+            $namespace = $this->cacheNameSpace;
+        }
+        if ($this->cache && $namespace!='') {
+            $key = 'dc:'.$namespace.':*';
             // 遍历缓存名空间下的所有key，删除
             $ks = $this->cache->keys($key);
             foreach ($ks as $k) {
