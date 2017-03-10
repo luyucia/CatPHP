@@ -7,7 +7,6 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'jpush' => array($vendorDir . '/jpush/jpush/src'),
-    'Psr\\Log\\' => array($vendorDir . '/psr/log'),
     'PHPImageWorkshop' => array($vendorDir . '/sybio/image-workshop/src'),
     'Httpful' => array($vendorDir . '/nategood/httpful/src'),
 );
