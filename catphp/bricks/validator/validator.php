@@ -61,7 +61,10 @@ class Validator
 
     private function doValidate(){
         foreach ($this->config as $key => $value) {
-            $this->check($key,$value);
+            if($this->check($key,$value)==false)
+            {
+                break;
+            }
         }
     }
 
@@ -70,7 +73,7 @@ class Validator
         if($name==null)
             $name = $key;
         // 如果模式为停止，并且已经发现错误本次不进行验证 直接返回false
-        if ($this->mode=='stop' && isset($this->errors[0]))
+        if ($this->mode==='stop' && isset($this->errors[0]))
             return false;
         // 解析规则
         $rules  =  explode('|', $rule_str);
