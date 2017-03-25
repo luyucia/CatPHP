@@ -323,9 +323,8 @@ class CatDB
 
     function __call($name,$arguments)
     {
-        // $this->sqlObj->
-        // call_user_method(method_name, obj)
-        call_user_method_array($name, $this->sqlObj, $arguments);
+        // 调用sql构建对象中的方法
+        call_user_func_array( [$this->sqlObj,$name], $arguments);
         return $this;
     }
 
