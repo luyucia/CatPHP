@@ -37,10 +37,18 @@ class HttpClient
 
     public function post($url, $data)
     {
+        $SSL = substr($url, 0, 8) == "https://" ? true : false;
+
         curl_setopt($this->_curl, CURLOPT_POST, 1);
+        curl_setopt($this->_curl, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($this->_curl, CURLOPT_POSTFIELDS, http_build_query($data));
         curl_setopt($this->_curl, CURLOPT_URL, $url);
-
+        curl_setopt($this->_curl, CURLOPT_HTTPHEADER, array('Expect:')); //避免data数据过长问题
+        if ($SSL) {
+            curl_setopt($this->_curl, CURLOPT_SSL_VERIFYPEER, false); // 信任任何证书,
+            // curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, true); // 检查证书中是否设置域名
+        }
+        
         $result = curl_exec($this->_curl);
         if ($result === false) {
             throw new Exception(curl_error($this->_curl));
@@ -51,9 +59,17 @@ class HttpClient
 
     public function get($url, $data)
     {
+        $SSL = substr($url, 0, 8) == "https://" ? true : false;
+
         $url = $url . '?' . http_build_query($data);
         curl_setopt($this->_curl, CURLOPT_URL, $url);
         curl_setopt($this->_curl, CURLOPT_POST, 0);
+        curl_setopt($this->_curl, CURLOPT_RETURNTRANSFER, 1);
+
+        if ($SSL) {
+            curl_setopt($this->_curl, CURLOPT_SSL_VERIFYPEER, false); // 信任任何证书,
+            // curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, true); // 检查证书中是否设置域名
+        }
 
         $result = curl_exec($this->_curl);
         if ($result === false) {
