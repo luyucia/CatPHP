@@ -37,6 +37,7 @@ return  array
         'ThirdQQ'     =>'/bricks/third/qq.php',
         'ThirdWeibo'  =>'/bricks/third/weibo.php',
         'WechatSDK'  =>'/bricks/wechat/wechatsdk.php',
+        'WeChatGongZhong'  =>'/bricks/wechat/wechatghz.php',
         'RedisLock'  =>'/bricks/lock/redis_lock.php',
         ),
 
