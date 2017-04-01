@@ -61,7 +61,7 @@ class Validator
 
     private function doValidate(){
         foreach ($this->config as $key => $value) {
-            if($this->check($key,$value)==false)
+            if($this->check($key,$value)===false)
             {
                 break;
             }
@@ -202,9 +202,9 @@ class Validator
         {
             return preg_match('/^\d*$/', $value);
         }
-        else if($type==='float')
+        else if($type==='numeric')
         {
-            return is_float($value);
+            return is_numeric($value);
         }
 
     }
