@@ -354,7 +354,7 @@ class CatDB
                 foreach ($row as $d) {
                     $this->stmt->bindValue($i++, $d);
                 }
-                $this->stmt->execute();
+                $executeResult = $this->stmt->execute();
             }
 
         }else{
@@ -365,10 +365,14 @@ class CatDB
             foreach ($data as $d) {
                 $this->stmt->bindValue($i++, $d);
             }
-            $this->stmt->execute();
+            $executeResult = $this->stmt->execute();
         }
-
         $this->notifyCacheUpdate();
+        if($executeResult){
+            return $this->dbh->lastInsertId();
+        }else{
+            return $executeResult;
+        }
     }
 
     public function update($data)
@@ -385,8 +389,9 @@ class CatDB
         // bind where
         $this->bindWhere($i);
 
-        $this->stmt->execute();
+        $executeResult = $this->stmt->execute();
         $this->notifyCacheUpdate();
+        return $executeResult;
     }
 
     public function increment($column,$value=1)
@@ -412,8 +417,9 @@ class CatDB
 
         $this->bindWhere();
 
-        $this->stmt->execute();
+        $executeResult = $this->stmt->execute();
         $this->notifyCacheUpdate();
+        return $executeResult;
     }
 
     public function sql($bindParam=false)
@@ -436,7 +442,7 @@ class CatDB
         $this->connect();
         $this->sqlStr[] = $sql;
         $this->stmt = $this->dbh->prepare($sql);
-        $this->stmt->execute($bindParams);
+        return $this->stmt->execute($bindParams);
     }
 
     public function queryOne($sql,$bindParams=[])
