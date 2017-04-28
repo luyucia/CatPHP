@@ -83,14 +83,18 @@ class Web {
 
         // 路由到指定controller的指定action
         $class = $controller_name . 'Controller';
-        // try {
-            $controller = new $class();
-        // } catch (Exception $exc) {
-        //     header("HTTP/1.0 404 Not Found");
-        //     echo "</h2>404</h2>";
-        //     exit();
-        // }
-
+        try {
+            $reflect = new ReflectionClass($class);
+            if($reflect->hasMethod($action_name)) {
+                $controller = $reflect->newInstance();
+            }else{
+                echo "<h1>Error: $action_name Method Not Found!<h1>";
+                exit();
+            }
+        } catch (ReflectionException $e) {
+            header("HTTP/1.0 404 Not Found");
+            exit();
+        }
 
         $controller->setActionName($action_name);
         $controller->setControllerName($controller_name);
