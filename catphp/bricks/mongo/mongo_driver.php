@@ -62,10 +62,10 @@ class MongoDriver
     {
         $db = $this->curr_db;
         // try {
-            $collection_obj = $this->mongo->selectCollection($db,$collection);
-            var_dump($record);
-            $collection_obj->insert($record,array('w' => true));
-            return (string)$record['_id'];
+        $collection_obj = $this->mongo->selectCollection($db,$collection);
+            // var_dump($record);
+        $collection_obj->insert($record,array('w' => true));
+        return $record['_id'];
             // $this->mongo->$db->$collection->insert($record, array('w' => true));
             // return true;
         // } catch (MongoCursorException $e) {
@@ -108,7 +108,7 @@ class MongoDriver
         }
     }
 
-    public function find($collection, $query_condition = array(), $result_condition = array(), $fields = array())
+    public function find($collection, $query_condition = array(), $fields = array(),$result_condition = array() )
     {
         $db = $this->curr_db;
         $cursor = $this->mongo->$db->$collection->find($query_condition, $fields);

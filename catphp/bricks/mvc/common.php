@@ -22,9 +22,9 @@ function P($key, $default = null) {
         if (is_array($_POST[$key])) {
             return $_POST[$key];
         }else{
-            if (!isSqlInject($_POST[$key])) {
+            // if (!isSqlInject($_POST[$key])) {
                 return addslashes($_POST[$key]);
-            }
+            // }
         }
     } else {
         return $default;
@@ -42,9 +42,9 @@ function G($key, $default = null) {
         if (is_array($_GET[$key])) {
             return $_GET[$key];
         }else{
-            if (!isSqlInject($_GET[$key])) {
+            // if (!isSqlInject($_GET[$key])) {
                 return addslashes($_GET[$key]);
-            }
+            // }
         }
 
     } else {
@@ -63,9 +63,9 @@ function R($key, $default = null) {
         if (is_array($_REQUEST[$key])) {
             return $_REQUEST[$key];
         }else{
-            if (!isSqlInject($_REQUEST[$key])) {
+            // if (!isSqlInject($_REQUEST[$key])) {
                 return addslashes($_REQUEST[$key]);
-            }
+            // }
         }
 
     } else {
