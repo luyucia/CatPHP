@@ -2,7 +2,6 @@
 
 namespace PHPImageWorkshop\Core;
 
-use PHPImageWorkshop\Exif\ExifOrientations;
 use PHPImageWorkshop\ImageWorkshop as ImageWorkshop;
 use PHPImageWorkshop\Core\ImageWorkshopLib as ImageWorkshopLib;
 use PHPImageWorkshop\Core\Exception\ImageWorkshopLayerException as ImageWorkshopLayerException;
@@ -85,13 +84,6 @@ class ImageWorkshopLayer
      * Background Image
      */
     protected $image;
-
-    /**
-     * @var array
-     *
-     * Exif data
-     */
-    protected $exif;
     
     /**
      * @var string
@@ -127,21 +119,6 @@ class ImageWorkshopLayer
      * @var integer
      */
     const ERROR_NEGATIVE_NUMBER_USED = 5;
-
-    /**
-     * @var integer
-     */
-    const ERROR_NOT_WRITABLE_FOLDER = 6;
-
-    /**
-     * @var integer
-     */
-    const ERROR_NOT_SUPPORTED_FORMAT = 7;
-
-    /**
-     * @var integer
-     */
-    const ERROR_UNKNOW = 8;
     
     // ===================================================================================
     // Methods
@@ -155,7 +132,7 @@ class ImageWorkshopLayer
      *
      * @param \resource $image
      */
-    public function __construct($image, array $exif = array())
+    public function __construct($image)
     {
         if (!extension_loaded('gd')) {
             throw new ImageWorkshopLayerException('PHPImageWorkshop requires the GD extension to be loaded.', static::ERROR_GD_NOT_INSTALLED);
@@ -168,7 +145,6 @@ class ImageWorkshopLayer
         $this->width = imagesx($image);
         $this->height = imagesy($image);
         $this->image = $image;
-        $this->exif = $exif;
         $this->layers = $this->layerLevels = $this->layerPositions = array();
         $this->clearStack();
     }
@@ -194,7 +170,7 @@ class ImageWorkshopLayer
      * $position: http://phpimageworkshop.com/doc/22/corners-positions-schema-of-an-image.html
      *
      * @param integer $layerLevel
-     * @param ImageWorkshopLayer $layer
+     * @param ImageWorkshop $layer
      * @param integer $positionX
      * @param integer $positionY
      * @param string $position
@@ -213,7 +189,7 @@ class ImageWorkshopLayer
      *
      * $position: http://phpimageworkshop.com/doc/22/corners-positions-schema-of-an-image.html
      *
-     * @param ImageWorkshopLayer $layer
+     * @param ImageWorkshop $layer
      * @param integer $positionX
      * @param integer $positionY
      * @param string $position
@@ -232,7 +208,7 @@ class ImageWorkshopLayer
      *
      * $position: http://phpimageworkshop.com/doc/22/corners-positions-schema-of-an-image.html
      *
-     * @param ImageWorkshopLayer $layer
+     * @param ImageWorkshop $layer
      * @param integer $positionX
      * @param integer $positionY
      * @param string $position
@@ -1214,11 +1190,8 @@ class ImageWorkshopLayer
                 $degrees = 360 + $degrees;
             }
 
-            $transparentColor = imageColorAllocateAlpha($this->image, 0, 0, 0, 127);
-            $rotationDegrees = ($degrees > 0) ? intval(360 * (1 - $degrees / 360)) : $degrees; // Used to fixed PHP >= 5.5 rotation with base angle 90°, 180°
-
-            // Rotate the layer background image
-            $imageRotated = imagerotate($this->image, $rotationDegrees, $transparentColor);
+			// Rotate the layer background image
+            $imageRotated = imagerotate($this->image, -$degrees, -1);
             imagealphablending($imageRotated, true);
             imagesavealpha($imageRotated, true);
 
@@ -1512,68 +1485,51 @@ class ImageWorkshopLayer
      */
     public function save($folder, $imageName, $createFolders = true, $backgroundColor = null, $imageQuality = 75, $interlace = false)
     {
-        if (is_file($folder)) {
-            throw new ImageWorkshopLayerException(sprintf('Destination folder "%s" is a file.', $folder), self::ERROR_NOT_WRITABLE_FOLDER);
-        }
+        if (!is_file($folder)) {
 
-        if ((!is_dir($folder) && !$createFolders)) {
-            throw new ImageWorkshopLayerException(sprintf('Destination folder "%s" not exists.', $folder), self::ERROR_NOT_WRITABLE_FOLDER);
-        }
+            if (is_dir($folder) || $createFolders) {
 
-        if (is_dir($folder) && !is_writable($folder)) {
-            throw new ImageWorkshopLayerException(sprintf('Destination folder "%s" not writable.', $folder), self::ERROR_NOT_WRITABLE_FOLDER);
-        }
+                // Creating the folders if they don't exist
+                if (!is_dir($folder) && $createFolders) {
+                    $oldUmask = umask(0);
+                    mkdir($folder, 0777, true);
+                    umask($oldUmask);
+                    chmod($folder, 0777);
+                }
 
-        // Creating the folders if they don't exist
-        if (!is_dir($folder) && $createFolders) {
-            if (!mkdir($folder, 0777, true)) {
-                throw new ImageWorkshopLayerException(sprintf('Unable to create destination folder "%s".', $folder), self::ERROR_NOT_WRITABLE_FOLDER);
+                $extension = explode('.', $imageName);
+                $extension = strtolower($extension[count($extension) - 1]);
+
+                $filename = $folder.'/'.$imageName;
+
+                if (($extension == 'jpg' || $extension == 'jpeg' || $extension == 'gif') && (!$backgroundColor || $backgroundColor == 'transparent')) {
+                    $backgroundColor = 'ffffff';
+                }
+
+                $image = $this->getResult($backgroundColor);
+
+                imageinterlace($image, (int) $interlace);
+
+                if ($extension == 'jpg' || $extension == 'jpeg') {
+
+                    imagejpeg($image, $filename, $imageQuality);
+                    unset($image);
+
+                } elseif ($extension == 'gif') {
+
+                    imagegif($image, $filename);
+                    unset($image);
+
+                } elseif ($extension == 'png') {
+
+                    $imageQuality = $imageQuality / 10;
+                    $imageQuality -= 1;
+
+                    imagepng($image, $filename, $imageQuality);
+                    unset($image);
+                }
             }
-
-            $oldUmask = umask(0);
-            umask($oldUmask);
-            chmod($folder, 0777);
         }
-
-        $extension = explode('.', $imageName);
-        $extension = strtolower($extension[count($extension) - 1]);
-
-        $filename = $folder.'/'.$imageName;
-
-        if (($extension == 'jpg' || $extension == 'jpeg' || $extension == 'gif') && (!$backgroundColor || $backgroundColor == 'transparent')) {
-            $backgroundColor = 'ffffff';
-        }
-
-        $image = $this->getResult($backgroundColor);
-
-        imageinterlace($image, (int) $interlace);
-
-        if ($extension == 'jpg' || $extension == 'jpeg') {
-
-            $isSaved = imagejpeg($image, $filename, $imageQuality);
-
-        } elseif ($extension == 'gif') {
-
-            $isSaved = imagegif($image, $filename);
-
-        } elseif ($extension == 'png') {
-
-            $imageQuality = $imageQuality / 10;
-            $imageQuality -= 1;
-
-            $isSaved = imagepng($image, $filename, intval($imageQuality));
-
-        } else {
-
-            throw new ImageWorkshopLayerException(sprintf('Image format "%s" not supported.', $extension), self::ERROR_NOT_SUPPORTED_FORMAT);
-
-        }
-
-        if (!$isSaved) {
-            throw new ImageWorkshopLayerException(sprintf('Error occurs when save image "%s".', $folder), self::ERROR_UNKNOW);
-        }
-
-        unset($image);
     }
 
     // Checkers
@@ -1901,50 +1857,6 @@ class ImageWorkshopLayer
 
         unset($this->image);
         $this->image = $virginLayoutImage;
-    }
-
-    /**
-     * Fix image orientation based on exif data
-     */
-    public function fixOrientation()
-    {
-        if (!isset($this->exif['Orientation']) || 0 == $this->exif['Orientation']) {
-            return;
-        }
-
-        switch ($this->exif['Orientation']) {
-            case ExifOrientations::TOP_RIGHT:
-                $this->flip('horizontal');
-            break;
-
-            case ExifOrientations::BOTTOM_RIGHT:
-                $this->rotate(180);
-            break;
-
-            case ExifOrientations::BOTTOM_LEFT:
-                $this->flip('vertical');
-            break;
-
-            case ExifOrientations::LEFT_TOP:
-                $this->rotate(-90);
-                $this->flip('vertical');
-            break;
-
-            case ExifOrientations::RIGHT_TOP:
-                $this->rotate(90);
-            break;
-
-            case ExifOrientations::RIGHT_BOTTOM:
-                $this->rotate(90);
-                $this->flip('horizontal');
-            break;
-
-            case ExifOrientations::LEFT_BOTTOM:
-                $this->rotate(-90);
-            break;
-        }
-
-        $this->exif['Orientation'] = ExifOrientations::TOP_LEFT;
     }
     
     // Deprecated, don't use anymore

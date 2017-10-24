@@ -6,7 +6,6 @@
 require 'common.php';
 require 'router.php';
 
-
 class Web {
 
     static $rout_rules;

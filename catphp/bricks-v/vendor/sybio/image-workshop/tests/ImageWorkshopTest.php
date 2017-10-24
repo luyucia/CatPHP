@@ -21,8 +21,7 @@ class ImageWorkshopTest extends \PHPUnit_Framework_TestCase
     // ===================================================================================
     
     const IMAGE_SAMPLE_PATH = '/Resources/images/sample1.jpg';
-    const FONT_SAMPLE_PATH  = '/Resources/fonts/arial.ttf';
-    const WEB_PATH          = 'http://localhost:8000';
+    const FONT_SAMPLE_PATH = '/Resources/fonts/arial.ttf';
     
     // Tests
     // ===================================================================================
@@ -38,26 +37,10 @@ class ImageWorkshopTest extends \PHPUnit_Framework_TestCase
         
         $this->assertTrue(is_object($layer) === true, 'Expect $layer to be an object');
         $this->assertTrue(get_class($layer) === 'PHPImageWorkshop\Core\ImageWorkshopLayer', 'Expect $layer to be an ImageWorkshopLayer object');
-
+    
         // test 2
-
-        $layer = ImageWorkshop::initFromPath('file://'.__DIR__.static::IMAGE_SAMPLE_PATH);
-
-        $this->assertTrue(is_object($layer) === true, 'Expect $layer to be an object');
-        $this->assertTrue(get_class($layer) === 'PHPImageWorkshop\Core\ImageWorkshopLayer', 'Expect $layer to be an ImageWorkshopLayer object');
-
-        // test 3
-
-        if (version_compare(PHP_VERSION, '5.4', '>=')) {
-            $layer = ImageWorkshop::initFromPath(static::WEB_PATH.'/sample1.jpg');
-
-            $this->assertTrue(is_object($layer) === true, 'Expect $layer to be an object');
-            $this->assertTrue(get_class($layer) === 'PHPImageWorkshop\Core\ImageWorkshopLayer', 'Expect $layer to be an ImageWorkshopLayer object');
-        }
-
-        // test 4
         
-        $this->setExpectedException('PHPImageWorkshop\Exception\ImageWorkshopException', '', ImageWorkshop::ERROR_IMAGE_NOT_FOUND);
+        $this->setExpectedException('PHPImageWorkshop\Exception\ImageWorkshopException');
         $layer = ImageWorkshop::initFromPath('fakePath');
     }
     

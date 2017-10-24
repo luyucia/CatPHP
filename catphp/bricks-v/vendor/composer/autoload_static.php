@@ -33,6 +33,10 @@ class ComposerStaticInita17908cfe998440f5846c86cf5a32b68
     );
 
     public static $prefixLengthsPsr4 = array (
+        'W' => 
+        array (
+            'Whoops\\' => 7,
+        ),
         'R' => 
         array (
             'React\\Promise\\' => 14,
@@ -58,13 +62,13 @@ class ComposerStaticInita17908cfe998440f5846c86cf5a32b68
         array (
             'Elasticsearch\\' => 14,
         ),
-        'D' => 
-        array (
-            'Doctrine\\Common\\Cache\\' => 22,
-        ),
     );
 
     public static $prefixDirsPsr4 = array (
+        'Whoops\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/filp/whoops/src/Whoops',
+        ),
         'React\\Promise\\' => 
         array (
             0 => __DIR__ . '/..' . '/react/promise/src',
@@ -104,10 +108,6 @@ class ComposerStaticInita17908cfe998440f5846c86cf5a32b68
         'Elasticsearch\\' => 
         array (
             0 => __DIR__ . '/..' . '/elasticsearch/elasticsearch/src/Elasticsearch',
-        ),
-        'Doctrine\\Common\\Cache\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/doctrine/cache/lib/Doctrine/Common/Cache',
         ),
     );
 
